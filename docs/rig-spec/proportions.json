@@ -1,0 +1,25 @@
+{
+  "shared": {
+    "master_rig": "src/data/hero-c3-B7.rig.json",
+    "fullbody": "docs/rig-spec/pose-arms-out-male.png",
+    "profile_note": "Production body/outfit profile shared by characters of every sex; character heads are separate assets.",
+    "source": "assets/rigs/hero-c3/",
+    "sizes": {
+      "head width": 580,
+      "head height": 465,
+      "near arm upper arm": 87,
+      "near arm forearm": 104,
+      "near arm wrist": 120,
+      "near arm fist": 134,
+      "far arm upper arm": 98,
+      "far arm forearm": 96,
+      "far arm wrist": 98,
+      "far arm fist": 128,
+      "leg thigh": 122,
+      "leg knee": 141,
+      "leg shin": 155,
+      "leg boot": 212
+    },
+    "far_arm_note": "Recorded for diagnosis only. The far arm is a separate opposite-view drawing and is judged in the renderer, not forced to a numeric ratio."
+  }
+}

@@ -1,0 +1,20 @@
+node_modules/
+dist/
+.env
+.env.*
+*.log
+.DS_Store
+Thumbs.db
+__pycache__/
+*.py[cod]
+.venv/
+
+# Machine-local installed agent skills and their installer state.
+.agents/
+.claude/skills/
+skills-lock.json
+
+# Generated candidates and renderer captures. Promote accepted files to a
+# permanent directory under assets/ before committing them.
+assets/drafts/*
+!assets/drafts/.gitkeep
