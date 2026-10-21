@@ -43,36 +43,36 @@
     {
       "name": "arm_B_1",
       "parent": "chest",
-      "x": 155,
-      "y": 75.8,
-      "rotation": 161.3,
-      "length": 150.0,
-      "drawnRotation": 147.81
+      "x": 129.00489464306452,
+      "y": 84.46473407860859,
+      "rotation": 151.21045854050266,
+      "length": 105.01904589168578,
+      "drawnRotation": 151.21045854050266
     },
     {
       "name": "arm_B_2",
       "parent": "arm_B_1",
-      "x": 150.0,
+      "x": 105.01904589168578,
       "y": 0,
-      "rotation": 0,
-      "length": 150.0
+      "rotation": -9.617963447731668,
+      "length": 141.64216389330102
     },
     {
       "name": "arm_F_1",
       "parent": "chest",
       "x": 135,
       "y": -94.2,
-      "rotation": 196.5,
-      "length": 137.7,
-      "drawnRotation": 205.37
+      "rotation": 204.6724039320563,
+      "length": 122.17444129348563,
+      "drawnRotation": 204.6724039320563
     },
     {
       "name": "arm_F_2",
       "parent": "arm_F_1",
-      "x": 137.7,
+      "x": 122.17444129348563,
       "y": 0,
-      "rotation": 0,
-      "length": 137.7
+      "rotation": 0.5694501556907028,
+      "length": 136.02183617114935
     },
     {
       "name": "leg_F_1",
@@ -127,14 +127,14 @@
     {
       "name": "ik_leg_F",
       "x": -53.2,
-      "y": 191.0,
+      "y": 191,
       "rotation": 0,
       "length": 0
     },
     {
       "name": "ik_leg_B",
       "x": 68.2,
-      "y": 191.0,
+      "y": 191,
       "rotation": 0,
       "length": 0
     }
@@ -169,16 +169,16 @@
       "bone": "arm_B_1",
       "originX": 0.5696,
       "originY": 0.0775,
-      "rotation": -90.0,
+      "rotation": -79.91045854050265,
       "mesh": {
         "child": "arm_B_2",
-        "blend": 8,
-        "cols": 8,
-        "rows": 24,
+        "blend": 40,
+        "cols": 16,
+        "rows": 64,
         "front": "child"
       },
-      "x": -0.0,
-      "y": 0.0
+      "x": -26.3415647753377,
+      "y": -18.503702671267916
     },
     {
       "name": "arm_F",
@@ -186,16 +186,16 @@
       "bone": "arm_F_1",
       "originX": 0.5062,
       "originY": 0.1501,
-      "rotation": -90.0,
+      "rotation": -98.17240393205631,
       "mesh": {
         "child": "arm_F_2",
-        "blend": 8,
-        "cols": 8,
-        "rows": 24,
+        "blend": 40,
+        "cols": 16,
+        "rows": 64,
         "front": "child"
       },
-      "x": 0.0,
-      "y": 0.0
+      "x": -5.959630850833507e-14,
+      "y": -2.207369128421727e-14
     },
     {
       "name": "leg_F",
@@ -252,7 +252,7 @@
     {
       "name": "idle",
       "type": "idle",
-      "duration": 2.0,
+      "duration": 2,
       "loop": true,
       "bones": {
         "root": {
@@ -263,12 +263,12 @@
               "easing": "easeInOut"
             },
             {
-              "time": 1.0,
+              "time": 1,
               "value": 10,
               "easing": "easeInOut"
             },
             {
-              "time": 2.0,
+              "time": 2,
               "value": 0,
               "easing": "easeInOut"
             }
@@ -282,12 +282,12 @@
               "easing": "easeInOut"
             },
             {
-              "time": 1.0,
+              "time": 1,
               "value": 2.5,
               "easing": "easeInOut"
             },
             {
-              "time": 2.0,
+              "time": 2,
               "value": 0,
               "easing": "easeInOut"
             }
@@ -301,12 +301,12 @@
               "easing": "easeInOut"
             },
             {
-              "time": 1.0,
+              "time": 1,
               "value": -2,
               "easing": "easeInOut"
             },
             {
-              "time": 2.0,
+              "time": 2,
               "value": 0,
               "easing": "easeInOut"
             }
@@ -320,12 +320,12 @@
               "easing": "easeInOut"
             },
             {
-              "time": 1.0,
+              "time": 1,
               "value": -3,
               "easing": "easeInOut"
             },
             {
-              "time": 2.0,
+              "time": 2,
               "value": 0,
               "easing": "easeInOut"
             }
@@ -339,12 +339,12 @@
               "easing": "easeInOut"
             },
             {
-              "time": 1.0,
+              "time": 1,
               "value": -6,
               "easing": "easeInOut"
             },
             {
-              "time": 2.0,
+              "time": 2,
               "value": 0,
               "easing": "easeInOut"
             }
@@ -358,12 +358,12 @@
               "easing": "easeInOut"
             },
             {
-              "time": 1.0,
+              "time": 1,
               "value": 3,
               "easing": "easeInOut"
             },
             {
-              "time": 2.0,
+              "time": 2,
               "value": 0,
               "easing": "easeInOut"
             }
@@ -377,12 +377,12 @@
               "easing": "easeInOut"
             },
             {
-              "time": 1.0,
+              "time": 1,
               "value": -5,
               "easing": "easeInOut"
             },
             {
-              "time": 2.0,
+              "time": 2,
               "value": 0,
               "easing": "easeInOut"
             }
@@ -412,5 +412,6 @@
       "bend": 1,
       "mix": 1
     }
-  ]
+  ],
+  "skeletonVersion": "neutral-c-v4"
 }

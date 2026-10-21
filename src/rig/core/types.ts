@@ -116,6 +116,8 @@ export interface ClipData {
 
 export interface RigData {
   name: string;
+  /** Shared setup-geometry contract; absent on archived pre-neutral rigs. */
+  skeletonVersion?: string;
   /** Rig-space y of the ground line in the setup pose. */
   groundY: number;
   /** Texture key → image path relative to the project root. */
@@ -139,6 +141,7 @@ export const CLIP_TYPES = ['idle', 'walk', 'run', 'attack', 'hit', 'die', 'other
 export function normalizeRig(raw: Partial<RigData> & Pick<RigData, 'name' | 'bones' | 'parts'>): RigData {
   const rig: RigData = {
     name: raw.name,
+    ...(raw.skeletonVersion ? { skeletonVersion: raw.skeletonVersion } : {}),
     groundY: raw.groundY ?? 0,
     textures: raw.textures ?? {},
     bones: raw.bones,

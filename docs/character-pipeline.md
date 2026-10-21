@@ -7,10 +7,54 @@ identity changes through the head texture (face, hair and optional head size), n
 torso, arm or leg textures. Each outfit is drawn as **one full body in the arms-out rest pose**,
 and every piece is reconstructed from that one image.
 
+**Shared C promotion (2026-10-21):** `hero-c3-B7.rig.json` now carries
+`skeletonVersion: neutral-c-v1`. Its arm geometry is the user-selected C chain;
+arm meshes default to 16×64, blend 40, lower-over-upper. The matching neutral rig is
+`src/data/neutral-skeleton-c-v1.rig.json`. Pre-promotion backups and validation live
+in `assets/drafts/shared-skeleton-c-v1/`. Historical draft rigs are not mass-migrated.
+Root, torso pivot and leg geometry were not changed by this promotion.
+
+**Placement lock v2 (2026-10-21, historical):** `neutral-c-v2` supersedes the initial C
+placement. The user's accepted Time Travel arm_B position is the shared far-arm
+anchor, full-body (447.195347, 553.998233), +12.195347 right / -6.001767 up from the
+old anchor. Authoritative values are in `docs/rig-spec/shared-arm-placement.json`.
+Current Time Travel artwork is preserved exactly. Neutral's arm images are restored
+to their actual original drawn slants using raw-to-upright PNG registration, not
+the legacy fixed arms-down angles. New v2 builds map the arm_B source shoulder
+pivot to this shared anchor; never paste an old costume's local x/y into a new one.
+The legacy drawn-pose toggle and rest-arm script have since been removed.
+
+**Shared elbow v3 (2026-10-21):** `neutral-c-v3` promotes the accepted
+Neutral/Time Travel trial's near elbow, 14 rig units left of C-v2. Shoulder and
+palm endpoints stay fixed; arm attachments are rebound so setup artwork stays
+unchanged. Master, Neutral and current Time Travel share this geometry; future
+builds preserve it. Both trial rigs were archived and removed from the picker.
+Backups: `assets/drafts/shared-elbow-center-v3/`. Neutral currently uses the saved
+Time Travel attachment placement for comparison, not its original generated angle.
+Far-arm bones and artwork were not changed by v3. The v2 far-arm lock moved the
+bone anchor to the accepted artwork pivot; these are coincident by construction,
+not an independent anatomical validation of that far-shoulder joint.
+
+**Shared far-arm v4 (2026-10-22, current):** `neutral-c-v4` promotes the accepted
+blue-arm center-joint trial to master, Neutral and current Time Travel. Near-arm
+geometry remains C-v3. Far shoulder and elbow now use the trial geometry, with
+the far palm endpoint preserved. All setup artwork stays exactly in place.
+The shared far-arm artwork anchor still includes the user's +12.195347 right /
+-6.001767 up placement; it is NOT the far bone origin. The builder reads
+`arm_B_artwork_anchor_rig` from the shared spec and computes a local attachment
+offset instead of snapping art to the bone. Future builds preserve the C-v4 chain.
+Backups: `assets/drafts/shared-armb-center-v4/`. Historical drafts remain unchanged.
+
 - **Production body master:** hero c3 v1, full body
   `docs/rig-spec/pose-arms-out-male.png`, rig `src/data/hero-c3-B7.rig.json`.
   Its five runtime textures are in `assets/rigs/hero-c3/`. The only profile is `shared`;
   the historical `male` filename does not define a separate body type.
+- **Saved neutral full-body base (2026-10-20):**
+  `assets/approved/neutral-body-v1/fullbody.png`. The user accepted this as the
+  visual/anatomy reference for the next neutral-parts study. See its adjacent
+  `README.md` for measurements and approval scope. Neutral parts and their rig
+  assembly history is recorded in `docs/neutral-pipeline.md`. The promoted shared
+  C neutral binding is now `neutral-skeleton-c-v1`; runtime textures were not redrawn.
 - Rig Lab's character picker (list in `src/editor/characters.ts`) contains the maintained
   master. New rigs open with `?rig=<name>`; add reviewed rigs to that list as needed.
 - Draft work belongs in `assets/drafts/<outfit>-v<n>/`, which is ignored by Git. Promote
@@ -24,38 +68,60 @@ Art rules live in `docs/art-direction/README.md` ("Rig parts requirements"). Ima
 goes through the Art session / Codex as described in `AGENTS.md`.
 
 Three rules that matter more than any other:
-- **The approved full body is the only shape source.** Each piece is reconstructed faithfully
-  from it: same silhouette, widths, details and scale, with only the hidden area completed.
-  Nothing is drawn from c3's pieces, with one exception: the master's arm pieces
-  (`docs/rig-spec/master-arm_F.png`, `master-arm_B.png`) are a reference for the mass of the
-  hidden upper arm only (step 2). In prompts, avoid the vague instruction "copy this";
-  name the geometry that must stay unchanged and say that the other references supply costume
-  design only, never body proportions or pose.
+- **The approved full body is the authority for visible costume art.** The part-generation recipe
+  is named separately from the end-to-end pipeline. `Traveler pipeline` means one call per part
+  editing the matching master runtime texture (`torso`, `arm_F`, `arm_B`, `leg_F`, and an optional
+  separate `leg_B`); the master
+  supplies the already-rigged canvas, endpoints, anatomical mass and hidden continuation.
+  `Fresh reconstruction` means drawing an isolated part from the approved full body/crop while the
+  master is only a reference. Do not silently substitute one recipe for the other. Neither recipe
+  is a pixel-exact lock, so every result still needs fitting and renderer QA.
 - **Never re-edit a whole image to fix one part.** Every round the AI redraws everything, and
   parts that were already good drift. Fix single pieces, and lock approved ones.
 - **AI is bad at numbers.** Fix positions with scripts, not by re-generating.
 
 ## What is fixed (the rig spec)
 
-In full-body pixels (canvas 671×1164, 1 px = 1 rig unit, rig origin at (359.2, 888)), within
-about ±5 px:
+In full-body pixels (canvas 671×1164, 1 px = 1 rig unit, rig origin at (359.2, 888)), these
+are inspection anchors for the shared skeleton:
 
 | Joint | Where |
 |---|---|
 | neck | (340, 490) |
-| shoulders | near (265, 580), far (435, 560) |
+| shoulders | near (265, 580), far (447.195347, 553.998233) |
 | hips (leg dome centres) | near (306, 781), far (427, 781) |
+| elbows (C, placement v2) | near (228.001, 691.021), far (490.212, 665.012) |
+| palm anchors | near (155.996, 814.055), far (582.237, 789.026) |
 | knees | 169 px below the hips |
 | soles / ground | y 1119 |
 
+**Height is a normalized hard gate:** after `align_fullbody.py` registers the head and torso,
+the generated sole line must be within **±1% of the master's canonical height**. On the
+current 1164 px master canvas this is about ±11.6 px. This is the only tolerance for
+small generation/registration drift; it is not permission
+to accept a visibly shorter or taller body. A result outside this range fails
+full-body QA and must not proceed to piece generation. Never change the shared
+skeleton or rely on the later leg-fitting step to conceal a height error.
+
+The old “about ±5 px” wording is only a visual inspection warning for individual
+neck/shoulder/hip/knee anchors; it is not a pass range. Investigate visible landmark
+drift, and fail the full body when the anatomy or joint coverage no longer matches
+even if the soles happen to land within the 1% height gate. Conversely, a hat, wing tip,
+pauldron ornament or other costume overhang may extend the top/side silhouette
+without changing the skeleton, provided the underlying landmarks and sole line stay
+correct.
+
 The script fixes the legs onto the hips and ground (step 4), so the drawn legs may be a little
-off. The arms are NOT fixed: the rig's arm bones follow the arms as drawn (step 5).
+off. In the neutral pipeline the arms also use the frozen neutral shoulder/elbow/wrist/hand
+landmarks; artwork is fitted to that chain rather than creating a new skeleton per outfit.
 
 **Rest pose** (use the shared master `pose-arms-out-male.png`):
 - 3/4 view facing right; near arm on screen-left, far arm on screen-right;
 - both arms held a little out from the body (about 1.5 fist-widths from the tasset/tunic), so
   each whole arm and fist is visible, not tucked behind the body;
-- elbows nearly straight (at most ~15°; the mesh does the bending), shoulder to fist ~265 px;
+- elbows follow the frozen neutral rest chain rather than being forcibly straightened:
+  near about `+11.9°`, far about `-15.4°` at the elbow. Preserve the fixed shoulder,
+  elbow, wrist and hand anchors; visible glove pixels do not define arm length;
 - legs nearly straight;
 - hands: 3 fingers plus a thumb. Near fist: back of the hand. Far fist: the curled fingers face
   the viewer, stacked vertically, the thumb across the front (`refs/construction-arms.png`
@@ -63,8 +129,11 @@ off. The arms are NOT fixed: the rig's arm bones follow the arms as drawn (step 
 - a costume that hides every joint (sleeves or pauldrons over the shoulders, cuffs at the
   wrists and boots, tunic or tasset over the hips).
 
-**Bend zones.** The mesh squashes ±20 px along the limb around the elbow and the knee,
-±15 px around the waist (y ~715) and ±28 px around the ankle (y ~1079, inside the boot).
+**Bend zones.** The default blend bands extend ±20 rig units along the upper-arm axis
+around the elbow (blend 40), ±4 at the knee (blend 8), and ±15 around the waist
+(blend 30). New outfit legs use ±80 at the ankle (blend 160); the historical master
+leg attachment still uses ±28 (blend 56). These are weight-transition widths, not
+joint-position tolerances.
 Soft things there are fine: cloth, chainmail, skin, and soft cuffs or boot tops (c3's own boot
 cuff sits on the knee and bends fine). Avoid hard, sharp-edged things there: plate edges,
 buckles, gems, logos. This is a preference to check on the render (step 6), not a reason to
@@ -82,7 +151,28 @@ torso texture for everyone. If a particular named character needs a visibly shap
 for their design, make a character-specific torso variant only; do not turn it into a required
 female version of every outfit. It must keep the same shoulder, neck, waist and hip coverage.
 
+## Named generation recipes
+
+- `Neutral pipeline` is the separately named **full-body** recipe in
+  [neutral-pipeline.md](neutral-pipeline.md): accepted neutral body as edit target /
+  minimum anatomy, plus the new costume design reference. Draw natural clothing ease
+  outside the body without making the body fatter or tracing the fitted suit. Do not
+  add a clothed volume reference by default. This is an explicit alternative to the
+  original-master full-body route below; it does not select a new part recipe.
+- `Traveler pipeline` remains the **part-generation** master-edit recipe in step 2.
+  Neutral runtime parts have not been approved, so do not silently substitute them.
+- The Time Travel neutral-ease trial is user-accepted full-body visual/design PASS at
+  `assets/approved/time-travel-neutral-ease-v1/`, not a default reference or rig pass.
+  Its recorded +6/+2 px sole offsets are within the current 1% height gate.
+
 ## Making an outfit
+
+`Full pipeline` names the complete sequence in this section: design/full-body review, part
+generation, placement, assembly, rig build and renderer QA. It does **not** select a generation
+recipe by itself. When the user says `Traveler pipeline`, step 2 must use Traveler master-edit.
+`Fresh reconstruction` is a separate explicitly named experiment; do not infer it from phrases
+such as “start again,” “fresh full pipeline” or “not v2.” Those phrases mean not editing a rejected
+generated outfit part, not discarding the stable production master scaffold.
 
 0. **Design on the shared master, then choose a costume.** Make three genuinely different
    costume options, one image_gen call per option, each editing the SAME shared master image.
@@ -101,8 +191,10 @@ female version of every outfit. It must keep the same shoulder, neck, waist and 
    automatically generate another round that reinterprets the selected costume.
    If the user supplies an existing design, transfer it directly onto the shared master and
    review that result instead; it does not need a new three-option concept round.
-   - **Base image:** always the shared master full body
+   - **Base image (original-master route):** the shared master full body
      (`docs/rig-spec/pose-arms-out-male.png`): it has the standard pose, joints and proportions.
+     When the user selects `Neutral pipeline`, use its separately documented neutral
+     edit target and fabric-ease contract instead; all shared geometry checks still apply.
      Edit only the costume. The master head is a placeholder while making the outfit; final
      characters supply their own head texture. Explicitly preserve the head and
      body scale, canvas position, shoulder/hip/knee/sole landmarks, arm and leg widths, arm pose
@@ -119,8 +211,8 @@ female version of every outfit. It must keep the same shoulder, neck, waist and 
      `python tools/align_fullbody.py shared <out>/fullbody <variant.png>…`
      It matches each variant to the master on the head and torso, writes `fullbody-v1.png`…
      and `fullbody-compare.png`, and prints the soles, head size and near-leg widths against the
-     master and the shared standard. Soles more than 15 px off mean the AI scaled the body:
-     prefer another variant. Leg widths outside the range mean thin or bulky legs; they are
+     master and the shared standard. Soles more than 1% of the master height off mean the AI scaled the body:
+     reject or correct that variant before generating any pieces. Leg widths outside the range mean thin or bulky legs; they are
      taken at fixed rows (knee y 950, shin 1010, boot 1080), so a boot cuff or a different boot
      shape there shifts them: judge with the picture.
      Registration is one global transform: matched head/torso features do NOT prove shoulders,
@@ -133,22 +225,25 @@ female version of every outfit. It must keep the same shoulder, neck, waist and 
      fingers plus a thumb, no bare skin at a joint, the bend zones (below), and the printout.
      Get one approved for both design and the reviewed full body before pieces work.
 
-2. **Pieces from the approved full body**: five unique textures map to six runtime parts. The
-   reusable outfit supplies four textures (torso, near arm, far arm and one leg); the character
-   supplies the head. Both runtime legs use the same leg texture at the same size. Use one
-   image_gen call per texture that is new for this character/outfit combination.
-   References: a crop of that piece's area of the full body, plus the whole full body. Ask it to
-   draw ONLY that piece faithfully from the approved image (same shapes, widths, details and fist
-   view) and to complete only what is hidden behind other pieces.
-   **Arms also get the master's arm as a third reference** (rule since 2026-10-19):
-   `docs/rig-spec/master-arm_F.png` for arm_F, `docs/rig-spec/master-arm_B.png` for arm_B. They are
-   the same body in the same pose and scale, so they say how long and thick the upper arm is under
-   a torso edge, collar or capelet. The prompt must say: use it ONLY for the arm's mass and
-   silhouette (upper-arm length from the shoulder top, thickness right below the shoulder, overall
-   width and angle); copy none of its costume (no bare skin, cuff or sleeve shape); every visible
-   material, colour and detail comes from the outfit's full body; the hidden upper arm is a full,
-   thick sleeve reaching the shoulder top, never tapering near it. Without it the far upper arm came
-   out 25–35% too thin and looked cut off (traveler v1, soulbow v1); with it soulbow v2 passed.
+2. **Pieces from the approved full body**: the base contract has five unique textures mapping to
+   six runtime parts. The reusable outfit supplies four textures (torso, near arm, far arm and one
+   shared leg); the character supplies the head. A reviewed separate-leg extension supplies
+   `leg_F` and `leg_B` independently, so the outfit has five textures and the character head makes
+   six. Use one image_gen call per texture that is new for this character/outfit combination.
+   **Traveler pipeline generation recipe — master-edit:** use the matching production master runtime
+   texture as the image being edited for every part, not only as a loose reference and not only for
+   arms. Supply the approved full body and a clean crop of that part as costume authorities. Ask for
+   ONLY that runtime part, preserving the approved visible design and completing only the hidden
+   area. The master edit targets are `assets/rigs/hero-c3/torso.png`, `arm_F.png`, `arm_B.png` and
+   `leg.png`; the arm construction copies also live at `docs/rig-spec/master-arm_F.png` and
+   `master-arm_B.png`. Copy none of the master's costume appearance: it supplies the rig-compatible
+   object boundary, length, mass, endpoints and hidden geometry, while the approved full body/crop
+   supplies every visible material, colour and detail. A clean crop must exclude pixels from the
+   neighbouring leg or garment; Traveler's leg copied a stray far-leg buckle from a contaminated
+   crop even though its geometry passed.
+   This method is not a v2 patch to a rejected outfit part. It is a fresh single-call costume edit
+   on the stable production master part. “Start again from the approved full body” does not mean
+   discarding the master-part scaffold.
    After assembling, run `python tools/check_proportions.py check <out>/pieces.json shared`
    and inspect each arm alone in the renderer, including the first 40–80 px below its shoulder.
    The earlier narrow upper-arm failure is a construction lesson; width is still diagnostic.
@@ -160,7 +255,8 @@ female version of every outfit. It must keep the same shoulder, neck, waist and 
    | torso | (160, 480, 560, 895) |
    | near arm | (60, 500, 330, 900) |
    | far arm | (400, 500, 640, 900) |
-   | leg | (215, 840, 400, 1125) |
+   | near leg (`leg_F`) | (215, 840, 400, 1125) |
+   | far leg (`leg_B`, separate-leg extension) | (360, 840, 590, 1125) |
 
    Only these rules:
    - limbs are one piece each (pauldron or sleeve to fist, leg dome to foot);
@@ -172,9 +268,12 @@ female version of every outfit. It must keep the same shoulder, neck, waist and 
      on top without a gap;
    - record part ownership before generation: a moving sleeve/pauldron belongs to its arm;
      collar, lapels and a body-following folded hood belong to the torso. Complete hidden
-     shoulder/sleeve material back to the fixed anatomical shoulder pivot. A visible sleeve
-     seam below a hood is not a new joint. Never include the hood in the arm merely because it
-     overlaps the arm's reference crop;
+     shoulder/sleeve material back to the fixed anatomical shoulder pivot. Around that pivot,
+     smooth the contour of the existing sleeve/pauldron only; do not add a second dome, ball or
+     outlined ring above it. The accepted near-arm construction reaches the pivot with one
+     continuous sleeve silhouette and does not rise toward the neck. A visible sleeve seam below
+     a hood is not a new joint. Never include the hood in the arm merely because it overlaps the
+     arm's reference crop;
    - far arm: it is a separate opposite-side drawing, not a scaled copy. Keep the same character's
      anatomical mass; it may look subtly narrower because of the 3/4 view, but there is no required
      percentage. Reject only when it looks conspicuously tiny or larger than the near arm;
@@ -183,10 +282,20 @@ female version of every outfit. It must keep the same shoulder, neck, waist and 
      stacked vertically with the thumb across the front. It is not a mirrored near fist. Both
      hands have 3 fingers plus a thumb; count them and reject a twisted wrist.
 
-   Save them as `<out>/raw/<piece>-raw.png` (head, torso, arm_F, arm_B, leg_F). The far leg
-   intentionally reuses `leg_F` without perspective scaling: the two legs have the same texture
-   and size. Perspective is expressed by overlap and draw order. Arms are different because the
-   far hand is seen from the opposite side; their size relationship is judged in the renderer.
+   Save them as `<out>/raw/<piece>-raw.png` (head, torso, arm_F, arm_B, leg_F, plus `leg_B`
+   when the separate-leg extension is selected). In the base contract the far leg intentionally
+   reuses `leg_F` without perspective scaling: the two legs have the same texture and size.
+   In the separate-leg extension, `leg_B` is a genuinely separate opposite-side drawing and must
+   not be a mirrored or scaled copy of `leg_F`; both images get their own complete rounded hip dome,
+   are fitted to their own fixed hip and sole landmarks, and are animated by their existing
+   `leg_F`/`leg_B` bone chains. Perspective is expressed by drawing and overlap, not by a runtime
+   scale hack. Arms are different because the far hand is seen from the opposite side; their size
+   relationship is judged in the renderer.
+   Inspect the duplicated pair against the approved full body in the neutral renderer. If the pair
+   no longer reads like the approved design, reject the result, but do not infer a width or hem edit
+   from that symptom alone. The approved art is the target; knee/shin/boot measurements are only
+   diagnostics. If the mismatch is inherent to duplicating one directional leg, test a separate
+   far-leg texture as an explicit pipeline extension instead of repeatedly reshaping `leg_F`.
    When the character head already exists, do not generate it again: copy the existing head
    texture to `<out>/raw/head-raw.png`. `fit_pieces.py` still needs that file so it can create the
    head placement expected by `assemble_pieces.py`; this is reuse, not a fifth outfit texture.
@@ -197,8 +306,8 @@ female version of every outfit. It must keep the same shoulder, neck, waist and 
    `python tools/fit_pieces.py <fullbody.png> <out>/raw <out>/placed`
    Feature matching understands pixels, not garment ownership. It cannot repair a hood drawn
    into an arm piece. Inspect the isolated piece and its overlay before accepting placement.
-4. **Fit the legs and assemble**: stands the leg upright and matches its width to the full
-   body's near leg at the shin, puts the leg domes on the hips and the soles on the ground,
+4. **Fit the legs and assemble**: stands each supplied leg upright, puts its rounded dome on its
+   own fixed hip and its sole on the ground, without width scaling,
    keeps everything else as placed, writes the final pieces, `pieces.json`, `assembled.png`
    and `preview.png`, and prints the overlap with the full body (IoU ~0.9 is good) and
    whether the leg domes are covered:
@@ -209,27 +318,24 @@ female version of every outfit. It must keep the same shoulder, neck, waist and 
    a usable outfit merely to make these numbers match, and never reorganise an already working
    rig to satisfy a newer checker. Fix or redraw a part only when the real renderer shows a
    visible scale, gap or deformation problem.
-5. **Build the rig**: copies B7's skeleton and settings, turns the arm bones to the arms as
-   drawn, turns each arm image upright (see "Arm images upright" below) and places every piece:
+5. **Build the rig**: copies the shared skeleton/settings, verifies the fixed neutral arm
+   landmarks, turns each arm image upright (see "Arm images upright" below) and places every piece.
+   For locked `neutral-c-v1` / `neutral-c-v2`, bones are copied unchanged from the shared master; piece metadata
+   controls artwork placement only, not new per-outfit joint geometry:
    `python tools/build_rig_from_pieces.py <out>/pieces.json <out> <new-rig-name>`
 6. **Verify** in Rig Lab (below), still in the drawn arms-out pose, so the rest pose can be
    compared with the full body. Fix a bad piece alone (step 2 for that piece, then 3–5).
    Also inspect each arm alone and rotate it away from the torso: the upper arm must remain
    complete, its shoulder must stay connected and torso clothing must not move with it.
-7. **Rest pose, last**: once everything checks out, turn the arms down to the standard rest
-   pose. The arm images turn with the bones about the shoulder; no art changes:
-   `python tools/set_rest_arms.py <new-rig-name>`
-   Every outfit then stands with the same arms (c3's old arms-down angles: near 106.5°, far
-   71.3°, shoulder → fist). Rebuilding the arms later (`--arms-only`) brings back the drawn
-   pose, so run this step again after it.
-   The drawn angles stay in the rig (`drawnRotation` on the upper-arm bones): Rig Lab's
-   **✍ ท่าที่วาด** button in Setup mode shows the drawn pose again, to compare with the full
-   body (view only; the default is the rest pose).
+7. **Rest geometry is shared, not repaired per outfit**: the neutral setup chain already
+   defines shoulder → elbow → hand anchor, including its small setup elbow angles.
+   The legacy rest-arm script and drawn-pose toggle have been removed. Setup shows the
+   saved rig directly; historical `drawnRotation` metadata no longer changes the view.
 
 ## Base outfit scope and occluding garments
 
 The four-outfit-texture / six-runtime-part workflow is the BASE contract, not a promise that
-every costume can fit it. For the current paladin trial, use armour, cuffs and a short hip-covering
+every costume can fit it. For a base-rig armour trial, use armour, cuffs and a short hip-covering
 tasset only: no cape, mantle, long coat tails, hanging banner or other independently layered cloth.
 No new layers/bones or production rig changes are part of that trial.
 
@@ -249,14 +355,15 @@ if an unseen sleeve design is ambiguous, resolve a focused construction referenc
 Keep the automatic checks small. Numbers help locate a problem; the renderer and the approved
 design decide whether the art is good.
 
-**Height is locked, width is free** (user, 2026-10-19). Vertical positions are the same for every
-outfit: head size, neck, shoulders, waist, hips, knees and soles. Costume width may differ
-(bulky fur or armour, slim cloth), so width readings stay diagnostics.
+**Height is locked, width is free** (updated by user, 2026-10-20). Vertical positions are the same for every
+outfit: head size, neck, shoulders, waist, hips, knees and soles. The aligned sole line has a
+hard maximum tolerance of **±1% of the master height** from the master. Costume width may differ (bulky fur or
+armour, slim cloth), so width readings stay diagnostics.
 
 **Must pass:**
-- the full body keeps the shared pose, joint landmarks and overall scale; soles within 15 px of
-  the master (a larger offset means the AI shrank or stretched the body: reject the variant,
-  don't rely on the leg re-fit to hide it);
+- the full body keeps the shared pose, joint landmarks and overall scale; soles must be within
+  **±1% of the master height** after alignment (a larger offset is a hard failure: reject or correct
+  the variant before piece generation, and do not rely on leg re-fit to hide it);
 - both arms and fists are visible, the hand views are correct, and no required part is missing;
 - the rig builds and has no visible gap, tear or broken joint in the standing, elbow-90 and
   planted-feet checks;
@@ -267,6 +374,11 @@ outfit: head size, neck, shoulders, waist, hips, knees and soles. Costume width 
 **Diagnostics to inspect, never gates by themselves:**
 - SIFT match count, silhouette IoU, head/limb/fist/boot differences and far/near arm ratios;
 - busy or hard detail in a bend zone;
+
+Do not turn a diagnostic percentage into an art instruction such as "widen the knee, shin and
+boot." Likewise, do not shorten or reshape an approved torso hem merely to expose more of a leg;
+the hem only needs to cover the hidden leg dome without a gap. Diagnose the rendered mismatch
+from the approved full body before deciding whether any art or runtime contract actually changes.
 - a measurement affected by a cuff, pauldron or unusual costume silhouette.
 
 The check scripts should exit unsuccessfully only for technical failure such as unreadable input,
@@ -284,7 +396,14 @@ All local Python (numpy, Pillow, OpenCV); no network. Install with
   old arms-down pose instead of keeping them as drawn; not used any more.
 - `tools/check_proportions.py`: diagnostic sizes vs the shared reference (`check`), or refresh
   reference measurements (`save`). Use the `shared` profile.
-- `tools/set_rest_arms.py <rig-name>…`: last step; turns the arms to the standard rest pose.
+- `tools/match_palette.py`: optional deterministic post-process for independently generated
+  RGBA parts. It matches neutral/red/brown/yellow/cool colour-family statistics to an approved
+  crop while preserving alpha, geometry and near-black outlines. Run it on raw pieces before
+  `fit_pieces.py`; always compare the assembled before/after result by eye. When a reference
+  crop contains unrelated colours, reduce only that family, for example
+  `--family-weights neutral=1,red=0.15,brown=1,yellow=1,cool=1`. If the piece has already been
+  fitted, apply the matcher to the placed image and reuse its existing `placement.json` so a
+  colour-only pass cannot move a joint.
 - `tools/build_rig_from_pieces.py`: pieces → rig. Refuses to overwrite an existing rig.
 - `tools/pipeline_frame.py`: reads `<fullbody>.frame.json` and shifts fitting coordinates
   for padded references. It is shared by fitting and assembly, not a separate CLI step.
@@ -313,24 +432,52 @@ All local Python (numpy, Pillow, OpenCV); no network. Install with
 - **Arm images upright**: the mesh grid follows the image's rows and columns, not the arm. An
   arm drawn at a slant (the arms-out pose leans 25–35°) gets a grid that crosses the elbow at a
   slant, and the inner elbow pinches when it bends. So the build tool turns each arm image until
-  its shoulder → fist line points straight down (`<piece>-upright.png`) and the rig turns it
+  its shoulder → fixed hand-anchor line points straight down (`<piece>-upright.png`) and the rig turns it
   back; the rest pose doesn't change. It measures each arm's own angle, so arms drawn further
   out or closer in both come out upright, and it warns if an arm still leans more than 5°
   (usually a bent drawn elbow): check that elbow at 90°.
-- **Fist point** (for the arm bones): the middle of the arm pixels farthest from the shoulder,
-  found in the piece, whatever the glove colour.
-- **Arm bones** point from the shoulder to the fist as drawn, with the elbow halfway; step 7
-  then turns them to the shared rest pose (arms down). Animation keys are added on top of it.
+- **Arm anatomical markers**: `elbow`, `wrist_marker` and `hand_anchor` are fixed metadata
+  transferred from the neutral baseline. `wrist_marker` is the centre of the sleeve/skin
+  boundary; `hand_anchor` is an internal palm point. Never replace them with a fist alpha
+  centroid, farthest pixels or a glove bounding box.
+- **Arm bones** follow shoulder → explicit elbow → fixed hand anchor. The lower bone may have
+  a non-zero setup rotation; do not straighten it or split shoulder-to-hand distance in half.
+  Pose keys are offsets on top of this frozen setup chain.
   To redo only the arms of an existing rig:
   `python tools/build_rig_from_pieces.py <pieces.json> <dir> <rig> --arms-only`.
-- **Mesh** (arms and legs): joint at 50% of the limb, `blend` 8 (a sharp bend), 8 cols ×
-  24 rows, `front: child` (the lower part covers the fold).
+- **Arm mesh:** C joints are explicit, not a 50% split; 16 cols × 64 rows, `blend` 40,
+  `front: child` (lower covers upper). **New outfit leg mesh:** 12 × 48, knee blend 8
+  and ankle blend 160; the knee is 169/(169+129) ≈56.7% from hip to ankle.
+  In Setup, the bottom dock has three paired preset dropdowns: elbow, knee and foot.
+  A selection applies to both F/B limbs in one undo step. Its A/B preview renders
+  actual isolated outfit limbs; preview values are not applied until explicitly chosen.
+  Save/Ctrl+S persists settings to this rig only, not other outfits or animation keys.
+  Side/bottom docks resize and collapse; layout preferences stay local to the browser.
 - **Torso mesh**: bends at the waist (`chest`, 173 units above the hip pivot, the belt line,
   full-body y ~715), `blend` 30 (a soft bend), 8 × 24, `front: child`.
 - **Draw order**, back to front: far arm, far leg, near leg, torso, head, near arm. Far parts
   are not tinted (the full body already shows depth; the old `#C9C3DA` tint washed dark
   armour to lavender once the far arm was visible).
 - **`groundY`** 231, so the soles rest on the ground line.
+
+### Standard shoulder interface — no extra connector parts
+
+Every outfit uses the same asymmetric ownership implied by the fixed draw order; this is not
+reinvented per costume:
+
+- `arm_B` is behind the torso. It contains a complete hidden shoulder continuation to the fixed
+  pivot; the torso is allowed to cover the inner root and owns the visible far-side torso edge.
+- `arm_F` is in front of the torso. It owns the visible near sleeve/pauldron cap and contains its
+  complete shoulder continuation. The torso keeps hidden base coverage to the pivot but must not
+  expose a second outlined sleeve/cap beside or beneath the arm.
+- A torso shoulder is body/shirt coverage, not a second moving sleeve. In the overlap zone its
+  concealed edge may be unoutlined; raw runtime textures are not inventory icons. Render item
+  icons from the assembled outfit instead of forcing every raw torso texture to read as a
+  standalone illustration.
+- Do not move pivots, scale an arm, or add a connector sprite to hide a seam. If the fixed rest
+  assembly shows two shoulder outlines, regenerate only the offending torso/arm artwork under
+  this ownership contract. Large independently moving pauldrons or capes remain explicit
+  accessories, not shoulder-gap patches.
 
 ## Verify in Rig Lab at game size
 

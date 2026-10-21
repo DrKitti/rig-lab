@@ -5,6 +5,8 @@ import { mountLeft } from './editor/ui/left';
 import { mountRight } from './editor/ui/right';
 import { mountTimeline } from './editor/ui/timeline';
 import { mountTopbar } from './editor/ui/topbar';
+import { mountLayout } from './editor/ui/layout';
+import { mountBlendDock } from './editor/ui/blendDock';
 import { Viewport } from './editor/viewport';
 import { normalizeRig, type RigData } from './rig/core/types';
 
@@ -46,6 +48,8 @@ async function start(): Promise<void> {
   mountTopbar($('topbar'), state, { save, download });
   mountLeft($('left'), state);
   mountRight($('right'), state, { partSize: (name) => viewport.partSize(name) });
+  mountLayout(state);
+  mountBlendDock($('blend-dock'), state);
   const timeline = mountTimeline($('timeline'), state);
   await viewport.mount($('viewport'));
   viewport.mountToolbar($('viewport'));

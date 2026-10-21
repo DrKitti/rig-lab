@@ -79,10 +79,13 @@ def measure(pieces_json):
         end = float(((xs - sx) * ux + (ys - sy) * uy).max())
         out[f'{label} fist'] = max(width_across(a, sx + ux * t, sy + uy * t, -uy, ux)
                                    for t in np.arange(end * (1 - FIST_SPAN), end, 2))
-    a = opaque(png('leg_F'))
-    dx, dy = pieces['leg_F']['pivot_dome']
-    for name, below in LEG.items():
-        out[f'leg {name}'] = width_across(a, dx, dy + below, 1, 0)
+    for key, label in (('leg_F', 'leg'), ('leg_B', 'far leg')):
+        if key not in pieces:
+            continue
+        a = opaque(png(key))
+        dx, dy = pieces[key]['pivot_dome']
+        for name, below in LEG.items():
+            out[f'{label} {name}'] = width_across(a, dx, dy + below, 1, 0)
     return out
 
 
@@ -118,6 +121,11 @@ def main() -> None:
     for st in ('upper arm', 'forearm', 'wrist', 'fist'):
         ratio = sizes[f'far arm {st}'] / sizes[f'near arm {st}']
         print(f'{"  " + st:22}{ratio:8.0%}')
+    if 'far leg thigh' in sizes:
+        print('far leg vs master leg (diagnostic only):')
+        for st in ('thigh', 'knee', 'shin', 'boot'):
+            got, want = sizes[f'far leg {st}'], master[f'leg {st}']
+            print(f'{"  " + st:22}{got:8}{want:8}{(got - want) / want:+8.0%}')
     print(f'{warns} size(s) differ from the reference range; diagnostic only')
 
 if __name__ == '__main__':

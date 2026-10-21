@@ -1,0 +1,96 @@
+{
+  "version": "neutral-c-v2",
+  "master": "src/data/hero-c3-B7.rig.json",
+  "arm_B_anchor_rig": [
+    87.99534736162651,
+    -334.00176663402283
+  ],
+  "arm_B_anchor_fullbody": [
+    447.1953473616265,
+    553.9982333659772
+  ],
+  "user_delta_world": [
+    12.195347361626489,
+    -6.001766634022829
+  ],
+  "bones": [
+    {
+      "name": "arm_B_1",
+      "parent": "chest",
+      "x": 161.00176663402283,
+      "y": 87.9953473616265,
+      "rotation": 158.81924231524007,
+      "length": 119.05621127419856,
+      "drawnRotation": 158.81924231524007
+    },
+    {
+      "name": "arm_B_2",
+      "parent": "arm_B_1",
+      "x": 119.05621127419856,
+      "y": 0.0,
+      "rotation": -15.39653688005695,
+      "length": 154.42817660875184
+    },
+    {
+      "name": "arm_F_1",
+      "parent": "chest",
+      "x": 135,
+      "y": -94.2,
+      "rotation": 198.431321843556,
+      "length": 117.02399853019183,
+      "drawnRotation": 198.431321843556
+    },
+    {
+      "name": "arm_F_2",
+      "parent": "arm_F_1",
+      "x": 117.02399853019183,
+      "y": 0.0,
+      "rotation": 11.906838309047885,
+      "length": 142.55554960856355
+    }
+  ],
+  "neutral_registration": {
+    "F": {
+      "matches": 14,
+      "inliers": 13,
+      "median_error_px": 0.18543451345094653,
+      "raw_to_upright": [
+        [
+          0.910965674313305,
+          0.41351147010900646,
+          -121.51855764282675
+        ],
+        [
+          -0.41351147010900646,
+          0.910965674313305,
+          77.45453869724555
+        ]
+      ],
+      "raw": "assets\\drafts\\neutral-arm_B-fresh-v7\\assembled\\arm_F.png",
+      "upright": "assets\\drafts\\neutral-arm_B-fresh-v7\\assembled\\arm_F-upright.png",
+      "restore_world_angle": 24.414557478226538
+    },
+    "B": {
+      "matches": 27,
+      "inliers": 24,
+      "median_error_px": 0.12492158424472956,
+      "raw_to_upright": [
+        [
+          0.8555146206015252,
+          -0.5160922344648021,
+          32.390083089741495
+        ],
+        [
+          0.5160922344648021,
+          0.8555146206015252,
+          -21.372609980946734
+        ]
+      ],
+      "raw": "assets\\drafts\\neutral-arm_B-fresh-v7\\assembled\\arm_B.png",
+      "upright": "assets\\drafts\\neutral-arm_B-fresh-v7\\assembled\\arm_B-upright.png",
+      "restore_world_angle": -31.100629548812503
+    }
+  },
+  "placement_policy": "arm_B source shoulder pivot maps to the canonical anchor; undo upright rotation so art retains its drawn slant; no legacy rest-angle override",
+  "scope": "maintained master, Neutral, current Time Travel and all future outfit builds; historical draft rigs are retained"
+}

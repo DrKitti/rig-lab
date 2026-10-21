@@ -14,8 +14,6 @@ export interface ViewFlags {
   flip: boolean;
   /** Wireframe of mesh parts. */
   mesh: boolean;
-  /** Setup mode: show the arms as drawn (bones' drawnRotation) instead of the rest pose. View only. */
-  drawn: boolean;
 }
 
 const HISTORY_LIMIT = 200;
@@ -33,7 +31,7 @@ export class EditorState {
   speed = 1;
   selection: Selection = null;
   selectedKeys: KeyRef[] = [];
-  view: ViewFlags = { bones: true, parts: true, pivots: false, onion: false, rootMotion: false, flip: false, mesh: false, drawn: false };
+  view: ViewFlags = { bones: true, parts: true, pivots: false, onion: false, rootMotion: false, flip: false, mesh: false };
   /** Viewport zoom relative to "fit". */
   zoom = 1;
   dirty = false;
