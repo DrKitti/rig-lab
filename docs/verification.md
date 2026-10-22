@@ -2,6 +2,19 @@
 
 Delivery review: 2026-10-23 (Asia/Bangkok). This records evidence, not a production approval.
 
+## Clean-checkout reproduction
+
+Passed on Windows with Node 24.15.0, using a `git archive` of checkpoint `4ca1cc9` extracted
+into a new empty directory. Dependencies were freshly installed there with
+`npm ci --offline --ignore-scripts --no-audit --no-fund`; no original ignored drafts were copied.
+`npm test` (9 tests), `npm run test:pipeline` (3 tests), `npm run build` and
+`npm run export:runtime` all passed. The export contained 3 resolved rigs and 15 runtime textures.
+The three material recipes also ran from this extracted tree, and all nine final part images
+matched the published runtime pixels exactly.
+
+GitHub Actions runs the same tests/build/export on Ubuntu for future pushes/PRs. Its definition
+is included; this local verification is not a claim that a hosted CI run has already passed.
+
 ## Automated gates
 
 - `npm test`: repository/spec/texture hashes and doc links, plus 9 Node tests covering core,
