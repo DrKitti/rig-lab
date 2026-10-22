@@ -1,0 +1,22 @@
+Use case: stylized-concept.
+Asset type: one-piece rig-ready game sprite, Time Travel near leg_F.
+Generate ONE fresh complete isolated Time Travel near leg_F in ONE SHOT on a genuinely transparent background. This is a new reconstruction from the source references, not an edit of any earlier isolated leg.
+
+REFERENCE ROLES:
+Image 1 is a TECHNICAL ENVELOPE GUIDE. The ORANGE relaxed outline is the required outer trouser silhouette from the rounded hidden hip top to the ankle. Follow that orange contour closely and continuously. Do not expand toward the red ceiling and do not contract toward the teal line. Grey anatomy, coloured bands, white dots, yellow zones and blue sole line are construction information only and must not appear in the result.
+Image 2 is the approved outfit crop and PRIMARY DESIGN reference for the SCREEN-LEFT near trouser leg and boot: plum cloth, broad internal folds, brown leather, gold cuff/strap/buckle and dark sole.
+Image 3 fixes the compact limb length, setup direction and floor contact. Its grey contour is hidden anatomy, not the garment outline.
+Image 4 fixes overall outfit palette, texture and hand-inked style.
+
+OUTER SILHOUETTE — STRICT:
+Use the orange guide as the actual continuous cloth envelope. From thigh to ankle, the outer edge may change direction only once, gently, at the setup knee bend shown by the guide. No extra silhouette notches, points, lobes, scallops or zigzags. The knee remains roomy and is never pinched into an hourglass. The calf is contained inside the same continuous relaxed trouser shape and must not become a separate round bulge. Keep the upper thigh broad and the lower leg softly tapered toward the boot.
+The hidden upper end is one smooth rounded convex cloth dome exactly like the guide, integrated into the same leg. No flat or slanted cut, waistband, flap, cuff, lid, belt, seam band, separate ball or panel.
+
+CLOTH FORM:
+The trousers must still read as full shaped fabric, not a smooth grey master leg recoloured purple. Express weight and tailored form ONLY through two or three broad INTERNAL colour/shadow planes and restrained folds based on Image 2. Internal folds may be angular, but they must not deform the controlled outer contour. Give the cloth moderate relaxed fullness, neither tight leggings nor balloon pants. Add only a small amount of cloth settling immediately above the boot. No muscle tracing, deep knee hollow, heavy gathers, harem pants or jodhpurs.
+
+BOOT:
+Reconstruct the approved near boot from Image 2: compact chunky warm-brown leather ankle boot, broad gold cuff, wrapping brown strap, rectangular gold buckle with dark inset and dark sole. Mild right-facing three-quarter view, short rounded toe, coherent perspective. Preserve ankle height and floor contact from the references. No guide colours, long shoe, tiny shoe, heel, exposed foot or toes.
+
+STYLE AND OUTPUT:
+One continuous rounded-thigh-to-boot part only. Thick tapered dark-brown hand ink. Flat muted plum/brown/gold with one cool hue-shifted angular shadow tone and subtle painted texture matching Image 4. Clean genuine alpha and generous padding. No glow, halo, haze, cast shadow, background, text, guides, dots, bands, bones, torso, coat fragment, second leg or extra object.

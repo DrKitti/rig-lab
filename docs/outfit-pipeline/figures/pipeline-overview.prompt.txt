@@ -1,0 +1,75 @@
+Use case: infographic-diagram.
+Asset type: polished illustrated production-pipeline poster for a Thai indie game character art team.
+Primary request: create a beautiful, genuinely useful infographic explaining the existing "Kolahon Outfit Pipeline". This is an informational poster, not a UI screenshot. Portrait aspect ratio about 2:3, high resolution, highly legible Thai typography with generous spacing. Produce ONE finished poster.
+
+Art direction: sophisticated game-production field guide. Warm off-white paper, deep plum / dark brown ink, muted gold accents, tiny teal QA indicators. Crisp modern Thai sans-serif type paired with restrained technical labels. Illustrations should echo hand-inked compact chibi game art: huge head, orange spiky hair, short limbs, grey neutral mannequin clothing and a plum/gold time-traveler outfit. Simple flat shading and tapered dark outlines, no glossy anime rendering. These characters are explanatory thumbnails, not new costume designs. No unrelated fantasy props. Clean graphic design, beautiful hierarchy, ample whitespace, accurate workflow arrows.
+
+Layout: top title and subtitle; narrow locked-foundation ribbon; seven numbered horizontal bands stacked vertically in ONE unmistakable top-to-bottom sequence. Each band combines a concise text group with a purposeful illustration/mini-diagram. Illustrate refs -> dressed fullbody -> approval -> five separated outfit parts -> overlap/registration -> material swatches -> posed rig. The text must be exactly the copy below, rendered correctly in Thai. Do not add filler paragraphs, random labels, repeated steps, invented pass claims or QR codes. Head is reused and must not be shown as a newly generated sixth outfit part. F is near/front, B is far/back. Show full hip domes hidden beneath torso, not ball-joint caps at the shoulders.
+
+TITLE:
+"KOLAHON"
+"OUTFIT PIPELINE"
+"ชุดใหม่บนโครงเดียว"
+Subtitle: "หนึ่ง skeleton • หลายชุด • animation ร่วมกัน"
+
+FOUNDATION RIBBON (with small lock symbol):
+"ล็อกฐานกลาง"
+"Skeleton v5 • เข่า 52% • Foot load 4%"
+"ตำแหน่งภาพ arm_B แยกจากจุดเริ่ม bone"
+
+STEP 1:
+"01  เตรียมฐานและ refs"
+"Neutral = anatomy ข้างใน"
+"Design ref = เสื้อผ้าข้างนอก"
+Illustration: grey chibi base + simple costume reference card, with clearly distinct roles.
+
+STEP 2:
+"02  เจน full body"
+"วาดชุดทับ Neutral"
+"ผ้าพองได้ • ข้อต่อคงเดิม"
+Illustration: same orange-haired chibi wearing a plum/gold outfit, matching body proportions.
+
+STEP 3:
+"03  ตรวจและเลือกแบบ"
+"ตรวจ pose / landmarks / พื้น"
+"หลัง align: ความสูงคลาดได้ไม่เกิน ±1%"
+Illustration: fullbody against baseline/ruler, small green approval symbol. Do not imply matching height alone proves anatomy.
+
+STEP 4:
+"04  เจนแยก part"
+"Torso • arm_F • arm_B • leg_F • leg_B"
+"Guide คุมทรงผ้า • crop คุมดีไซน์"
+"One shot ต่อ part • เก็บ prompt + refs"
+Illustration: FIVE distinct floating outfit parts plus a small separate reused head icon labeled exactly "ใช้ head เดิม". Arms have integrated sleeves and gloved hands; legs each include trousers and a compact boot, rounded hidden thigh tops. No sixth outfit part and no mirrored pair.
+
+STEP 5:
+"05  Fit และซ้อนรอยต่อ"
+"วางภาพตาม skeleton • ตรวจ alpha"
+"แขน F อยู่หน้า • แขน B อยู่หลัง"
+"Torso เรียบ • ไม่เพิ่มปีกหรือ socket"
+Illustration: torso with near/far arm layering and hidden hip overlap, a tiny close-up of seam coverage. No instruction to move skeleton to fit an outfit.
+
+STEP 6:
+"06  จับคู่สีแยกวัสดุ"
+"ผ้าเทียบผ้า • หนังเทียบหนัง • ผิวเทียบหน้า"
+"ใช้ palette ร่วมกัน • รักษาเงา เส้น และ alpha"
+"กำหนด mask ต่อชุด • ไม่ย้อมรวมทั้งภาพ"
+Illustration: corresponding material swatches linking torso, sleeves, trousers, gloves and boots, retain dark/light shade pairs.
+
+STEP 7:
+"07  Rig QA และ animation"
+"Setup • งอศอก/เข่า • ยกขา • ย่อ • เอียงตัว"
+"ตรวจรอยต่อ สี และเท้าติดพื้น"
+"เซฟท่าที่คลังกลาง • ใช้ร่วมทุกชุด"
+Illustration: three small poses of the same outfit, plant feet on visible baseline.
+
+BOTTOM NEXT-STEPS STRIP, clearly differentiated from the main seven production steps, no checkmarks implying completed:
+"ด่านถัดไป"
+"ทดสอบอีก 1 ชุดโดยห้ามเปลี่ยน skeleton"
+"ผ่านแล้ว → จัด runtime assets ถาวร → ทดลอง accessory layers"
+
+Small footer:
+"Prompt ที่ผ่าน = กรณีศึกษา ไม่ใช่สูตรสำเร็จ"
+"รายละเอียด: docs/current-character-standard.md"
+
+Keep all text readable at typical poster zoom. Use short lines exactly supplied. Clearly show the seven-step order with fine connecting arrows. Balanced professional infographic, not dense decorative concept art. Opaque paper background; no watermark.

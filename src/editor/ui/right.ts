@@ -1,6 +1,7 @@
 import { CHANNEL_DEFAULT, sampleClip } from '../../rig/core/animation';
 import { CLIP_TYPES, EASINGS, type BoneData, type Channel, type MeshDef, type PartData } from '../../rig/core/types';
 import { keyAt, renameClip, setEasing, setKey } from '../animEdit';
+import { jointBlend, setJointBlend } from '../meshSettings';
 import { findBone, findPart, isDescendant, renameBone, renamePart, reparentBone, setPartBone, snapPivotToBone } from '../rigEdit';
 import type { EditorState } from '../state';
 import { Bindings, h, value } from './dom';
@@ -116,6 +117,7 @@ export function mountRight(root: HTMLElement, state: EditorState, actions: Right
   const meshControls = (part: PartData) => {
     const kids = rig.bones.filter((b) => b.parent === part.bone).map((b) => b.name);
     const mesh = part.mesh;
+    const pairedLimb = ['arm_F', 'arm_B', 'leg_F', 'leg_B'].includes(part.name);
     const toggle = f.check('งอได้ (mesh)', !!mesh, (on) => {
       if (!on) return void delete part.mesh;
       if (kids.length === 0) throw new Error(`กระดูก "${part.bone}" ไม่มีกระดูกลูก จึงงอไม่ได้`);
@@ -130,17 +132,18 @@ export function mountRight(root: HTMLElement, state: EditorState, actions: Right
         'div',
         { class: 'grid' },
         f.select('งอที่กระดูก', kids.length ? kids : [mesh.child], mesh.child, (v) => (mesh.child = v)),
-        f.number('ช่วงนุ่ม (blend)', () => mesh.blend ?? 40, (v) => (mesh.blend = Math.max(1, v)), 5),
+        pairedLimb ? null : f.number('ช่วงนุ่มข้อแรก (blend)', () => jointBlend(mesh), (v) => setJointBlend(mesh, 0, v), 1),
         f.number('แถว (rows)', () => mesh.rows ?? 16, (v) => (mesh.rows = Math.max(2, Math.round(v))), 1),
         f.number('คอลัมน์ (cols)', () => mesh.cols ?? 3, (v) => (mesh.cols = Math.max(2, Math.round(v))), 1),
-        ...chainControls(mesh),
+        ...chainControls(mesh, !pairedLimb),
       ),
       h('small', { class: 'muted' }, 'จุดงอคือจุดเริ่มของกระดูกลูก — ย้ายได้ที่ □ ของกระดูกนั้น'),
+      pairedLimb ? h('small', { class: 'muted' }, 'ปรับความนุ่มของศอก / เข่า / เท้าที่แถบล่าง — ใช้กับสองข้างพร้อมกัน') : null,
     );
   };
 
   /** Extra joints further down the limb (wrist, ankle): one picker per level, plus its blend. */
-  const chainControls = (mesh: MeshDef) => {
+  const chainControls = (mesh: MeshDef, showBlend = true) => {
     const NONE = '— ไม่งอต่อ';
     const chain = mesh.chain ?? [];
     const out: HTMLElement[] = [];
@@ -158,15 +161,10 @@ export function mountRight(root: HTMLElement, state: EditorState, actions: Right
           if (mesh.blends) mesh.blends = mesh.blends.slice(0, next.length + 1);
         }),
       );
-      if (level < chain.length) {
+      if (showBlend && level < chain.length) {
         const joint = level + 1;
         out.push(
-          f.number(`blend ข้อ ${level + 2}`, () => mesh.blends?.[joint] ?? mesh.blend ?? 40, (v) => {
-            const blends = mesh.blends ?? [];
-            for (let i = 0; i <= joint; i++) blends[i] ??= mesh.blend ?? 40;
-            blends[joint] = Math.max(1, v);
-            mesh.blends = blends;
-          }, 5),
+          f.number(`blend ข้อ ${level + 2}`, () => jointBlend(mesh, joint), (v) => setJointBlend(mesh, joint, v), 1),
         );
       }
     }
@@ -301,6 +299,27 @@ export function mountRight(root: HTMLElement, state: EditorState, actions: Right
     return section('Bones', 'ปรับค่า = ใส่คีย์ที่เวลาปัจจุบัน · ◆ = มีคีย์ตรงนี้', ...body);
   };
 
+  const footPlantCard = () => {
+    if (!rig.footPlants?.length) return null;
+    return section('วางเท้า', 'เลือกสถานะ = ใส่คีย์ ณ เวลานี้ · บันทึกพร้อมท่า',
+      ...rig.footPlants.map(foot => {
+        const select = bindings.bind(h('select', {
+          onchange: (e: Event) => state.edit(() => {
+            setKey(state.clip, foot.bone, 'plant', state.time, Number(value(e)));
+            const key = keyAt(state.clip, foot.bone, 'plant', state.time);
+            if (key) key.easing = 'stepped';
+          }, true),
+        },
+        h('option', {value: '-1'}, 'อัตโนมัติ'),
+        h('option', {value: '1'}, 'ติดพื้น'),
+        h('option', {value: '0'}, 'ยกเท้า')),
+        () => String(sampleClip(state.clip, state.time)[foot.bone]?.plant ?? -1));
+        return h('label', {class: 'field'}, h('span', {}, foot.bone.includes('_F_') ? 'เท้าหน้า' : 'เท้าหลัง'), select);
+      }),
+      h('small', {class: 'muted'}, 'อัตโนมัติ: ยกเป้า IK ขึ้นเพื่อยกเท้า · ติดพื้น: ล็อกเป้าข้อเท้าและมุมรองเท้า'),
+    );
+  };
+
   const render = () => {
     bindings.clear();
     const sel = state.selection;
@@ -311,7 +330,8 @@ export function mountRight(root: HTMLElement, state: EditorState, actions: Right
       else cards.push(section('Inspector', 'คลิกกระดูกหรือภาพบนจอ หรือเลือกจาก Hierarchy', null));
       root.replaceChildren(...cards);
     } else {
-      root.replaceChildren(clipCard(), keyframeCard(), bonesCard());
+      const foot = footPlantCard();
+      root.replaceChildren(clipCard(), ...(foot ? [foot] : []), keyframeCard(), bonesCard());
     }
     bindings.refresh();
   };

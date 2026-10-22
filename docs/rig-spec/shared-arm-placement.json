@@ -1,0 +1,113 @@
+{
+  "version": "neutral-c-v5",
+  "master": "src/data/shared-master.rig.json",
+  "user_delta_world": [
+    12.195347361626489,
+    -6.001766634022829
+  ],
+  "bones": [
+    {
+      "name": "arm_B_1",
+      "parent": "chest",
+      "x": 85.00489464306452,
+      "y": 84.46473407860859,
+      "rotation": 151.21045854050266,
+      "length": 105.01904589168578,
+      "drawnRotation": 151.21045854050266
+    },
+    {
+      "name": "arm_B_2",
+      "parent": "arm_B_1",
+      "x": 105.01904589168578,
+      "y": 0,
+      "rotation": -9.617963447731668,
+      "length": 141.64216389330102
+    },
+    {
+      "name": "arm_F_1",
+      "parent": "chest",
+      "x": 91,
+      "y": -94.2,
+      "rotation": 204.6724039320563,
+      "length": 122.17444129348563,
+      "drawnRotation": 204.6724039320563
+    },
+    {
+      "name": "arm_F_2",
+      "parent": "arm_F_1",
+      "x": 122.17444129348563,
+      "y": 0,
+      "rotation": 0.5694501556907028,
+      "length": 136.02183617114935
+    }
+  ],
+  "neutral_registration": {
+    "F": {
+      "matches": 14,
+      "inliers": 13,
+      "median_error_px": 0.18543451345094653,
+      "raw_to_upright": [
+        [
+          0.910965674313305,
+          0.41351147010900646,
+          -121.51855764282675
+        ],
+        [
+          -0.41351147010900646,
+          0.910965674313305,
+          77.45453869724555
+        ]
+      ],
+      "raw": "assets/pipeline/neutral/arm-f-source.png",
+      "upright": "assets/pipeline/sources/neutral/arm-f.png",
+      "restore_world_angle": 24.414557478226538
+    },
+    "B": {
+      "matches": 27,
+      "inliers": 24,
+      "median_error_px": 0.12492158424472956,
+      "raw_to_upright": [
+        [
+          0.8555146206015252,
+          -0.5160922344648021,
+          32.390083089741495
+        ],
+        [
+          0.5160922344648021,
+          0.8555146206015252,
+          -21.372609980946734
+        ]
+      ],
+      "raw": "assets/pipeline/neutral/arm-b-source.png",
+      "upright": "assets/pipeline/sources/neutral/arm-b.png",
+      "restore_world_angle": -31.100629548812503
+    }
+  },
+  "placement_policy": "arm_B source shoulder pivot maps to arm_B_artwork_anchor_rig, independent of bone origin; keep accepted +12.195347/-6.001767 artwork placement; shared accepted C-v5 bones are frozen",
+  "scope": "maintained master, Neutral, current Time Travel and all future outfit builds; historical draft rigs are retained",
+  "elbow_F_promotion": {
+    "delta_rig": [
+      -14,
+      0
+    ],
+    "preserved": "shoulder, palm endpoint and setup artwork matrices",
+    "backup": "assets/experiments/history/shared-elbow-center-v3/"
+  },
+  "arm_B_artwork_anchor_rig": [
+    87.99534736162651,
+    -334.00176663402283
+  ],
+  "arm_B_artwork_anchor_fullbody": [
+    447.1953473616265,
+    553.9982333659772
+  ],
+  "arm_B_bone_origin_rig": [
+    84.46473407860861,
+    -302.0048946430645
+  ],
+  "arm_B_promotion": {
+    "backup": "assets/experiments/history/shared-armb-center-v4/",
+    "source": "assets/experiments/rigs/time-travel-armb-center-trial-v1.rig.json",
+    "preserved": "all setup artwork, far palm endpoint, near arm and other bones"
+  }
+}

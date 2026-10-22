@@ -1,0 +1,13 @@
+{
+  "defaultRig": "shared-master",
+  "rigs": [
+    { "rig": "shared-master", "label": "Shared Master · skeleton v5" },
+    { "rig": "neutral", "label": "Neutral · anatomy scaffold" },
+    { "rig": "time-travel", "label": "Time Travel · reviewed outfit" }
+  ],
+  "aliases": {
+    "hero-c3-B7": "shared-master",
+    "neutral-skeleton-c-v1": "neutral",
+    "time-travel-torso-fresh-master-v3": "time-travel"
+  }
+}

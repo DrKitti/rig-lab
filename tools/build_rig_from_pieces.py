@@ -1,21 +1,25 @@
 """Build a rig for a new outfit from pieces placed on the full body.
 
-Every outfit uses the shared skeleton of the reference rig (hero-c3-B7). This copies that rig,
+Every outfit uses the shared skeleton of src/data/shared-master.rig.json. This copies that rig,
 points its textures at the new pieces, and sets each part's pivot and offset so the piece
 sits exactly where it was placed on the approved full body.
 
     python tools/build_rig_from_pieces.py <pieces.json> <pieces_dir> <new_rig_name>
 
 pieces.json (written by the piece-fitting step) gives, per piece, in full-body pixels
-(1 px = 1 rig unit, the frame of docs/rig-spec/hero-c3-B7-fullbody.png):
+(1 px = 1 rig unit, the historical frame in docs/archive/rig-spec/hero-c3-B7-fullbody.png):
   "canvas": [w, h], "origin_in_fullbody": [x, y], and the pivot point in piece pixels:
-  head "pivot_neck", torso "pivot_hip", arm_F/arm_B "pivot_shoulder", leg_F "pivot_dome";
-  leg_F may add "far_leg_offset": [dx, dy]; the far leg reuses the near-leg image.
+  head "pivot_neck", torso "pivot_hip", arm_F/arm_B "pivot_shoulder", and each leg
+  "pivot_dome". When leg_B is absent, the legacy path reuses leg_F with its
+  "far_leg_offset": [dx, dy].
 
 Arms:
-- Each upper-arm bone points from the shoulder to the fist as drawn, with the elbow halfway, so
-  the rest pose follows the full body's arms. The fist is found in the piece itself (the middle
-  of the arm's far end), so glove colour doesn't matter. Every other bone stays as in B7.
+- ``neutral-c-*`` rigs copy the shared C arm bones unchanged. Piece metadata places artwork;
+  it must not regenerate a different skeleton for every outfit.
+- Legacy neutral-based metadata supplies fixed ``elbow`` and ``hand_anchor`` points. Those points
+  define the two arm bones directly; the visible fist/glove silhouette does not define anatomy.
+  Legacy piece sets without ``hand_anchor`` retain the old alpha-end fallback so old drafts remain
+  reproducible, but that fallback is not valid for freezing canonical geometry.
 - Each arm image is first turned so the shoulder -> fist line points straight down (saved as
   <piece>-upright.png next to the piece); the part is turned back by the same angle. The mesh
   grid follows the image's rows and columns, so this makes it run along the arm: a grid at a
@@ -37,6 +41,7 @@ Writes src/data/<new_rig_name>.rig.json; refuses to overwrite an existing rig.
 import json
 import math
 import os
+import re
 import sys
 
 import cv2
@@ -44,8 +49,8 @@ import numpy as np
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_RIG = os.path.join(ROOT, 'src', 'data', 'hero-c3-B7.rig.json')
-# Full-body pixel of the rig origin in docs/rig-spec/hero-c3-B7-fullbody.png.
+BASE_RIG = os.path.join(ROOT, 'src', 'data', 'shared-master.rig.json')
+# Full-body pixel of the rig origin in docs/archive/rig-spec/hero-c3-B7-fullbody.png.
 FULLBODY_ORIGIN = (359.2, 888.0)
 
 # part name -> (piece key in pieces.json, pivot key, texture key in the rig)
@@ -55,7 +60,7 @@ PARTS = {
     'arm_F': ('arm_F', 'pivot_shoulder', 'arm_F'),
     'arm_B': ('arm_B', 'pivot_shoulder', 'arm_B'),
     'leg_F': ('leg_F', 'pivot_dome', 'leg_F'),
-    'leg_B': ('leg_F', 'pivot_dome', 'leg_F'),
+    'leg_B': ('leg_B', 'pivot_dome', 'leg_B'),
 }
 
 
@@ -102,14 +107,18 @@ def find_fist(png, shoulder):
 
 
 def arm_fist(info, pieces_dir, key):
-    """Fist in full-body px."""
+    """Arm endpoint in full-body px; prefer the fixed anatomical palm anchor."""
     ox, oy = info['origin_in_fullbody']
-    fx, fy = find_fist(piece_png(info, pieces_dir, key), info['pivot_shoulder'])
+    if 'hand_anchor' in info:
+        fx, fy = info['hand_anchor']
+    else:
+        fx, fy = find_fist(piece_png(info, pieces_dir, key), info['pivot_shoulder'])
+        print(f'{key}: WARNING using legacy alpha-derived fist endpoint; add hand_anchor')
     return ox + fx, oy + fy
 
 
 def pose_arms(rig, pieces, pieces_dir):
-    """Turns each upper-arm bone to point from the shoulder to the fist as drawn; elbow halfway."""
+    """Pose arm chains from fixed landmarks, with a legacy straight-chain fallback."""
     bones = {b['name']: b for b in rig['bones']}
     parent_rot = sum(bones[n]['rotation'] for n in ('torso', 'chest') if n in bones)
     for side in ('F', 'B'):
@@ -118,12 +127,24 @@ def pose_arms(rig, pieces, pieces_dir):
         ox, oy = info['origin_in_fullbody']
         sx, sy = ox + info['pivot_shoulder'][0], oy + info['pivot_shoulder'][1]
         fx, fy = arm_fist(info, pieces_dir, key)
-        half = math.hypot(fx - sx, fy - sy) / 2
         upper, lower = bones[f'arm_{side}_1'], bones[f'arm_{side}_2']
-        upper['rotation'] = round(math.degrees(math.atan2(fy - sy, fx - sx)) - parent_rot, 2)
+        if 'hand_anchor' in info and 'elbow' in info:
+            ex, ey = ox + info['elbow'][0], oy + info['elbow'][1]
+            upper_world = math.degrees(math.atan2(ey - sy, ex - sx))
+            lower_world = math.degrees(math.atan2(fy - ey, fx - ex))
+            upper_length = math.hypot(ex - sx, ey - sy)
+            lower_length = math.hypot(fx - ex, fy - ey)
+            upper['rotation'] = round(upper_world - parent_rot, 2)
+            upper['length'] = lower['x'] = round(upper_length, 1)
+            lower['length'] = round(lower_length, 1)
+            lower['rotation'] = round(lower_world - upper_world, 2)
+        else:
+            half = math.hypot(fx - sx, fy - sy) / 2
+            upper['rotation'] = round(math.degrees(math.atan2(fy - sy, fx - sx)) - parent_rot, 2)
+            upper['length'] = lower['x'] = lower['length'] = round(half, 1)
+            lower['rotation'] = 0
         upper['drawnRotation'] = upper['rotation']
-        upper['length'] = lower['x'] = lower['length'] = round(half, 1)
-        lower['y'] = lower['rotation'] = 0
+        lower['y'] = 0
 
 
 def upright_arms(pieces, pieces_dir):
@@ -167,8 +188,13 @@ def upright_arms(pieces, pieces_dir):
             row = np.nonzero(a[int(top + (bottom - top) * f)])[0]
             mids.append((row.min() + row.max()) / 2)
         lean = math.degrees(math.atan2(mids[1] - mids[0], (bottom - top) * 0.5))
-        print(f'{key}: turned {angle:+.1f} deg upright, still leans {lean:+.1f} deg'
-              + ('  WARNING: check the elbow bend' if abs(lean) > LEAN_LIMIT else ''))
+        if abs(lean) > LEAN_LIMIT and 'hand_anchor' in info and 'elbow' in info:
+            note = '  INFO: bent canonical chain; verify the 90-degree elbow view'
+        elif abs(lean) > LEAN_LIMIT:
+            note = '  WARNING: check the elbow bend'
+        else:
+            note = ''
+        print(f'{key}: turned {angle:+.1f} deg upright, still leans {lean:+.1f} deg{note}')
         info.update(png=os.path.relpath(out, ROOT).replace(os.sep, '/'), canvas=[int(r.shape[1]), int(r.shape[0])],
                     pivot_shoulder=[round(float(nsx), 2), round(float(nsy), 2)],
                     origin_in_fullbody=[round(ox + sx - nsx, 2), round(oy + sy - nsy, 2)],
@@ -185,14 +211,25 @@ def place_parts(rig, pieces, pieces_dir, names):
         if part['name'] not in names:
             continue
         key, pivot_key, tex = PARTS[part['name']]
+        if part['name'] == 'leg_B' and 'leg_B' not in pieces:
+            key, pivot_key, tex = 'leg_F', 'pivot_dome', 'leg_F'
         info = pieces[key]
         rig['textures'][tex] = info.get('png') or f'{rel}/{key}.png'
         (cw, ch), (ox, oy), pv = info['canvas'], info['origin_in_fullbody'], info[pivot_key]
-        if part['name'] == 'leg_B':
+        if part['name'] == 'leg_B' and key == 'leg_F':
             ox += info.get('far_leg_offset', [0, 0])[0]
             oy += info.get('far_leg_offset', [0, 0])[1]
         # Pivot in rig space, then in the part's bone space.
         px, py = ox + pv[0] - frame_origin[0], oy + pv[1] - frame_origin[1]
+        if rig.get('skeletonVersion') in ('neutral-c-v4', 'neutral-c-v5') and part['name'] == 'arm_B':
+            # Artwork placement is independent of the accepted anatomical bone origin.
+            with open(os.path.join(ROOT, 'docs/rig-spec/shared-arm-placement.json'), encoding='utf-8') as source:
+                placement = json.load(source)
+            px, py = placement['arm_B_artwork_anchor_rig']
+        elif rig.get('skeletonVersion') in ('neutral-c-v2', 'neutral-c-v3') and part['name'] == 'arm_B':
+            # User-locked far shoulder: artwork follows the shared anchor, not an
+            # older full-body/piece pivot. Preserve its drawn orientation below.
+            px, py = W[part['bone']][4:6]
         a, b, c, d, tx, ty = W[part['bone']]
         det = a * d - b * c
         dx, dy = px - tx, py - ty
@@ -203,9 +240,23 @@ def place_parts(rig, pieces, pieces_dir, names):
                     rotation=round(-bone_rot + info.get('image_rotation', 0), 2), x=round(lx, 2), y=round(ly, 2))
 
 
-# Leg mesh for new outfits: B7's ankle blend 56 folded the boot into a point when crouching
-# (traveler v1, soulbow v1); a finer grid and a wide ankle blend keep the boot's shape.
-LEG_MESH = dict(cols=12, rows=48, blends=[8, 160])
+# Shared C-v5 starts the foot bone at the anatomical ankle/malleolus. The foot/shoe
+# can extend rigid weighting above that joint when an outfit cuff needs it.
+LEG_MESH = dict(cols=16, rows=64, blends=[8, 56], rigidFoot=True)
+ARM_MESH = dict(cols=16, rows=64, blend=40)
+
+
+def configure_arm_geometry(rig, pieces, pieces_dir):
+    """Keep the promoted shared chain frozen; retain historical draft reproduction."""
+    if rig.get('skeletonVersion') in ('neutral-c-v1', 'neutral-c-v2', 'neutral-c-v3', 'neutral-c-v4', 'neutral-c-v5'):
+        for part in rig['parts']:
+            if part['name'] in ('arm_F', 'arm_B') and part.get('mesh'):
+                part['mesh'].update(ARM_MESH)
+                if part['mesh'].get('blends'):
+                    part['mesh']['blends'][0] = 40
+        print(f"using shared {rig['skeletonVersion']} arm geometry; piece landmarks do not move bones")
+    else:
+        pose_arms(rig, pieces, pieces_dir)
 
 
 def reuse_base_head(rig, base):
@@ -218,13 +269,17 @@ def reuse_base_head(rig, base):
 
 def main() -> None:
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    if len(args) != 3:
+        raise SystemExit('Usage: build_rig_from_pieces.py PIECES.json PIECES_DIR outfit-name [--arms-only] [--own-head]')
     pieces_json, pieces_dir, name = args
+    if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', name):
+        raise SystemExit('Rig ID must be lowercase kebab-case')
     dst = os.path.join(ROOT, 'src', 'data', f'{name}.rig.json')
     pieces = json.load(open(pieces_json, encoding='utf8'))
     if '--arms-only' in sys.argv:
         # Re-pose and re-place only the arms of an existing rig, keeping everything else.
         rig = json.load(open(dst, encoding='utf8'))
-        pose_arms(rig, pieces, pieces_dir)
+        configure_arm_geometry(rig, pieces, pieces_dir)
         upright_arms(pieces, pieces_dir)
         place_parts(rig, pieces, pieces_dir, {'arm_F', 'arm_B'})
     else:
@@ -233,7 +288,7 @@ def main() -> None:
         rig = json.load(open(BASE_RIG, encoding='utf8'))
         rig['name'] = name
         rig['textures'] = {}
-        pose_arms(rig, pieces, pieces_dir)
+        configure_arm_geometry(rig, pieces, pieces_dir)
         upright_arms(pieces, pieces_dir)
         place_parts(rig, pieces, pieces_dir, set(PARTS))
         if '--own-head' not in sys.argv:

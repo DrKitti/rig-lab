@@ -1,0 +1,62 @@
+{
+  "method": "One common original-master HEAD registration, global similarity only; no body correction.",
+  "master": {
+    "top": 43,
+    "bottom": 1120,
+    "head_width": 588,
+    "head_height_above_neck": 447,
+    "feet": {
+      "near": 1120,
+      "far": 1120
+    }
+  },
+  "time-travel-neutral-v1": {
+    "generation_calls": 1,
+    "metrics": {
+      "top": 41,
+      "bottom": 1132,
+      "head_width": 595,
+      "head_height_above_neck": 449,
+      "feet": {
+        "near": 1132,
+        "far": 1129
+      }
+    },
+    "registration": {
+      "inliers": 89,
+      "matches": 229
+    },
+    "sole_delta": {
+      "near": 12,
+      "far": 9
+    },
+    "height_gate_3px": false
+  },
+  "time-travel-neutral-ease-v1": {
+    "generation_calls": 1,
+    "metrics": {
+      "top": 41,
+      "bottom": 1126,
+      "head_width": 594,
+      "head_height_above_neck": 449,
+      "feet": {
+        "near": 1126,
+        "far": 1122
+      }
+    },
+    "registration": {
+      "inliers": 79,
+      "matches": 219
+    },
+    "sole_delta": {
+      "near": 6,
+      "far": 2
+    },
+    "height_gate_3px": false
+  },
+  "limitations": [
+    "One sample, not proof of one-shot reliability.",
+    "Head/sole checks do not certify hidden joints, widths or animation.",
+    "No parts, rig edits or approved-image changes."
+  ]
+}

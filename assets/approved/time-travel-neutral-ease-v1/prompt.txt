@@ -1,0 +1,16 @@
+Use case: precise-object-edit.
+Asset: full-body costume for the existing Kolahon chibi game character.
+
+Image 1 is the EDIT TARGET: the accepted neutral character. Image 2 is the Time Travel COSTUME DESIGN REFERENCE ONLY; ignore its inventory cards, background, borders and layout.
+
+Dress the exact character in image 1 in the Time Travel outfit from image 2. The neutral figure is an UNDERLYING BODY / minimum anatomical envelope, not a garment template. Clothing is worn OVER this body with visible, natural fabric ease. Keep the body itself unchanged; do not make the character fatter.
+
+Fit and silhouette: a short structured plum coat that hangs away from the abdomen rather than hugging its curves, with a comfortable compact torso and gold-trimmed split tails. Sleeves have a little soft fabric volume over the unchanged arms. Purple trousers are ordinary relaxed-fit woven trousers: fabric falls in a clean continuous shape from thigh to ankle with modest room around the legs and a few restrained angular folds. Do not trace the knee/calf contours of the gray suit. Do not make leggings, skinny pants, balloon pants, jodhpurs, puffed knees, swollen calves or a zigzag lumpy leg silhouette. The trousers should look comfortably worn, not inflated. Avoid a cinched hourglass torso. Match the reference outfit's sensible clothing fullness, not exaggerated bagginess.
+
+Costume design: rich muted plum/burgundy-purple coat, raised dark collar with gold trim, purple upper sleeves with cream shirt sleeves below, brown gloves with gold-buckled wrist straps. Small gold buttons, white-faced round gold pocket-watch brooch on the upper chest, fine gold watch-chain loops and round gold waist fitting. Short gold-edged split coat tails with restrained gold ornamental motifs from the reference. Purple relaxed trousers, rounded brown shoes/short boots, gold ankle straps and rectangular buckles. No extra cape, hat, bag or weapon.
+
+Preserve image 1's exact head, hair, face, expression, head scale, neck, anatomical torso length, shoulder/elbow/wrist locations, fist centers and views, hips/knees/ankles, leg spacing, arm directions and pose. Near hand screen-left shows the back of the hand; far hand screen-right shows curled fingers. Gloves cover the existing fists with only material thickness. Both feet keep exactly the same floor-contact levels: build shoe thickness ABOVE the existing floor, not below it. No taller or shorter character and no moved joints. Garment widths may expand beyond the neutral body; lengths and joint locations may not.
+
+Same hand-inked western indie chibi art style as image 1: thick tapered dark-brown outlines, slightly angular cloth folds, flat restrained color with one cool shadow tone and subtle painted texture. Do not change it to anime, glossy rendered art or vector art.
+One complete uncropped full-body character, same framing and canvas aspect ratio as image 1, genuine transparent background. No text, watermark, UI, ground or comparison sheet.
+Only two inputs are authorities: neutral sets the unchanged BODY INSIDE; costume reference sets CLOTHING OUTSIDE. This is a fresh edit of neutral, not an edit of any earlier dressed result.

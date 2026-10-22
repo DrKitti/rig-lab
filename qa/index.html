@@ -1,0 +1,9 @@
+<!doctype html>
+<html lang="th"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Rig Lab · maintained pose QA</title>
+<style>body{margin:0;background:#201e29;color:#eee;font:15px system-ui}header{padding:14px;position:sticky;top:0;background:#17151e}button,select{padding:8px;margin:4px;background:#34303e;color:#fff;border:1px solid #82748b;border-radius:5px}canvas{width:100%;max-width:1400px;height:auto}#status{display:block;color:#bee4c3}a{color:#cdb4ef}</style></head>
+<body><header><strong>Maintained rig QA · skeleton v5</strong>
+<label>ท่าทดสอบ <select id="pose"><option value="setup">Setup</option><option value="idle">Shared idle</option><option value="elbow">งอศอก 90°</option><option value="knee">งอเข่า 90°</option><option value="plant">ย่อ · เท้าติดพื้น</option><option value="air">ยกเท้าหน้า</option><option value="torso">เอียงลำตัว</option></select></label>
+<label><input id="bones" type="checkbox">แสดง bones</label><button id="save" disabled>บันทึกภาพ QA</button>
+<a href="/">Rig Lab</a><span id="status">Loading…</span></header>
+<script type="module" src="./main.ts"></script></body></html>

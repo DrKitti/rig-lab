@@ -1,0 +1,185 @@
+{
+  "reference": "../../characters/shared-hero/head.png",
+  "parts": [
+    {
+      "source": "../../drafts/neutral-palette-rebuild/torso-gray.png",
+      "output": "../../drafts/neutral-palette-rebuild/torso-matched.png",
+      "materials": [
+        {
+          "name": "skin",
+          "source": {
+            "hsv": [
+              [
+                0,
+                45,
+                100
+              ],
+              [
+                28,
+                255,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              285,
+              412,
+              425,
+              447
+            ],
+            "hsv": [
+              [
+                0,
+                45,
+                140
+              ],
+              [
+                28,
+                255,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.65,
+          "chroma_strength": 0.9
+        }
+      ]
+    },
+    {
+      "source": "../../drafts/neutral-palette-rebuild/arm-f-gray.png",
+      "output": "../../drafts/neutral-palette-rebuild/arm-f-matched.png",
+      "materials": [
+        {
+          "name": "skin",
+          "source": {
+            "hsv": [
+              [
+                0,
+                45,
+                100
+              ],
+              [
+                28,
+                255,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              285,
+              412,
+              425,
+              447
+            ],
+            "hsv": [
+              [
+                0,
+                45,
+                140
+              ],
+              [
+                28,
+                255,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.65,
+          "chroma_strength": 0.9
+        }
+      ]
+    },
+    {
+      "source": "../../drafts/neutral-palette-rebuild/arm-b-gray.png",
+      "output": "../../drafts/neutral-palette-rebuild/arm-b-matched.png",
+      "materials": [
+        {
+          "name": "skin",
+          "source": {
+            "hsv": [
+              [
+                0,
+                45,
+                100
+              ],
+              [
+                28,
+                255,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              285,
+              412,
+              425,
+              447
+            ],
+            "hsv": [
+              [
+                0,
+                45,
+                140
+              ],
+              [
+                28,
+                255,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.65,
+          "chroma_strength": 0.9
+        }
+      ]
+    },
+    {
+      "source": "../../drafts/neutral-palette-rebuild/leg-f-gray.png",
+      "output": "../../drafts/neutral-palette-rebuild/leg-f-matched.png",
+      "materials": [
+        {
+          "name": "skin",
+          "source": {
+            "hsv": [
+              [
+                0,
+                45,
+                100
+              ],
+              [
+                28,
+                255,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              285,
+              412,
+              425,
+              447
+            ],
+            "hsv": [
+              [
+                0,
+                45,
+                140
+              ],
+              [
+                28,
+                255,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.65,
+          "chroma_strength": 0.9
+        }
+      ]
+    }
+  ]
+}

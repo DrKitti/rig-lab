@@ -1,9 +1,10 @@
 {
   "shared": {
-    "master_rig": "src/data/hero-c3-B7.rig.json",
+    "master_rig": "src/data/shared-master.rig.json",
     "fullbody": "docs/rig-spec/pose-arms-out-male.png",
     "profile_note": "Production body/outfit profile shared by characters of every sex; character heads are separate assets.",
-    "source": "assets/rigs/hero-c3/",
+    "source": "assets/experiments/runtime-origins/hero-c3/",
+    "measurement_note": "Historical Hero costume width samples and legacy measurement rows, not newly measured v5 anatomy or mandatory garment widths. Skeleton authority: shared-skeleton-v5.json and shared-arm-placement.json.",
     "sizes": {
       "head width": 580,
       "head height": 465,

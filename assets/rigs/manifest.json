@@ -1,0 +1,113 @@
+{
+  "schemaVersion": 1,
+  "skeletonVersion": "neutral-c-v5",
+  "rigs": [
+    {
+      "id": "shared-master",
+      "path": "src/data/shared-master.rig.json",
+      "animationLibrary": "neutral-c-v5"
+    },
+    {
+      "id": "neutral",
+      "path": "src/data/neutral.rig.json",
+      "animationLibrary": "neutral-c-v5"
+    },
+    {
+      "id": "time-travel",
+      "path": "src/data/time-travel.rig.json",
+      "animationLibrary": "neutral-c-v5"
+    }
+  ],
+  "textures": [
+    {
+      "path": "assets/characters/master-hero/head.png",
+      "width": 591,
+      "height": 475,
+      "sha256": "985337cce3535576939fca7ca8f65806a5c7366de9cb6bdd791c306a0a061899"
+    },
+    {
+      "path": "assets/characters/shared-hero/head.png",
+      "width": 605,
+      "height": 487,
+      "sha256": "ba3b8afac52b2bb06b217ec85da1555a40ca8a29b07e393f67efe0e50e43a431"
+    },
+    {
+      "path": "assets/rigs/neutral/arm-b.png",
+      "width": 121,
+      "height": 347,
+      "sha256": "c3d2fd6403f16896b1e98e1094641cb2a26c6c3d99b7da9975102f79322515d8"
+    },
+    {
+      "path": "assets/rigs/neutral/arm-f.png",
+      "width": 122,
+      "height": 370,
+      "sha256": "df95b9a65d5d60345d6edbdefb53d0ce656bc3f3521afd1eacb47f8dc70284b4"
+    },
+    {
+      "path": "assets/rigs/neutral/leg-f.png",
+      "width": 190,
+      "height": 402,
+      "sha256": "33926a23b8ec9c0a7deb9f58ac428b1b697d2b7c35a0688ef6943202c5851f44"
+    },
+    {
+      "path": "assets/rigs/neutral/torso.png",
+      "width": 240,
+      "height": 304,
+      "sha256": "cf9c45a40af2f033732f634aed6e72177957433e5f34ef0afc32635c182ad819"
+    },
+    {
+      "path": "assets/rigs/shared-master/arm-b.png",
+      "width": 158,
+      "height": 374,
+      "sha256": "e980785dd72bb889a9863c759a8cdca3dbeca450ace9ffd6409ce4c9f1c0443a"
+    },
+    {
+      "path": "assets/rigs/shared-master/arm-f.png",
+      "width": 162,
+      "height": 373,
+      "sha256": "83f173844acbf5c563ed7c80b3496db484732f8310b71079dd32ba47b4656fe3"
+    },
+    {
+      "path": "assets/rigs/shared-master/leg-f.png",
+      "width": 225,
+      "height": 408,
+      "sha256": "4e128f9619a08563008b6fadc0fd15e34d13025ea3756943cdfe30e8eca22c6f"
+    },
+    {
+      "path": "assets/rigs/shared-master/torso.png",
+      "width": 319,
+      "height": 428,
+      "sha256": "1ec50ef35d9e41614e41f2fa5abb6ad723480105d5516b3120ba3a40c292191f"
+    },
+    {
+      "path": "assets/rigs/time-travel/arm-b.png",
+      "width": 139,
+      "height": 345,
+      "sha256": "7cb3adc43827c87a99b4392073990e7d14517ca9fccf82579885cceb4b9548ca"
+    },
+    {
+      "path": "assets/rigs/time-travel/arm-f.png",
+      "width": 138,
+      "height": 361,
+      "sha256": "61ecd0c6741019c3303b86352ac702c4e4eb0a2425477df579d9dce635b4bd60"
+    },
+    {
+      "path": "assets/rigs/time-travel/leg-b.png",
+      "width": 188,
+      "height": 410,
+      "sha256": "d3755141a3ed757de8e0d84071973c767d306a420b1a9ce416ca8556b33e754b"
+    },
+    {
+      "path": "assets/rigs/time-travel/leg-f.png",
+      "width": 181,
+      "height": 413,
+      "sha256": "a42c2057375c2f3c8038f6a7c83f0c8eedb0835428ec2248998505947ec0b09e"
+    },
+    {
+      "path": "assets/rigs/time-travel/torso.png",
+      "width": 318,
+      "height": 388,
+      "sha256": "ac6c4c5a72e37facad21fbdc2944c7fafe395dbffb138b9fb9866394eb2d9d07"
+    }
+  ]
+}

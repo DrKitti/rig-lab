@@ -1,0 +1,13 @@
+Use case: precise-object-edit / infographic-diagram.
+Image 1 is the EDIT TARGET: the existing Kolahon Outfit Pipeline infographic. Keep its dimensions, cream/plum/gold design, all seven step numbers, arrows, hierarchy, and Thai/English wording unchanged except the small swatch labels specified below. Image 2 is the correct torso part CONSTRUCTION REFERENCE ONLY. Image 3 is the accepted character/outfit VISUAL REFERENCE ONLY, not a replacement page layout.
+
+Make two precise informational corrections:
+1. In STEP 04, replace ONLY the illustrated torso sprite with a sleeveless torso matching image 2: neck stub, collar, vest and hip-covering tunic/tasset, smooth side edges with NO upper-arm sleeve tubes/cuffs sticking out. The torso must not contain attached arms or gloves. The separate arm_F and arm_B sprites immediately beside it already own their own sleeves and gloves; retain them. Keep leg_F and leg_B as exactly ONE leg each from rounded hidden hip top to ONE boot, no paired pant legs inside a single part. Keep the separately reused head and all five part labels.
+2. In STEP 06, the material samples currently incorrectly label dark glove leather as skin. Replace ONLY the swatch chart with FOUR clear columns, each containing a base/shadow swatch pair. Correct labels verbatim:
+"ผ้า" with "(เสื้อ/กางเกง)" below, plum/purple fabric swatches;
+"หนัง" with "(ถุงมือ/รองเท้า)" below, brown leather swatches;
+"ทอง" with "(ขอบ/หัวเข็มขัด)" below, warm gold swatches;
+"ผิว" with "(คอ/หน้า)" below, warm peach skin swatches.
+The skin swatch must be peach, not a black glove. Avoid extra materials or duplicated columns. Keep the existing instructional text to the left exactly unchanged.
+
+Do not add QR codes, extra body turnarounds, new steps or watermarks. Preserve all other poster content and wording, especially the title "KOLAHON OUTFIT PIPELINE", "ชุดใหม่บนโครงเดียว", the locked Skeleton v5 / knee52 / footload4 ribbon, and the pending second-outfit test at the bottom. Crisp correct Thai text. Opaque background.

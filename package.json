@@ -1,12 +1,17 @@
 {
   "name": "kolahon-rig-lab",
   "private": true,
+  "engines": { "node": ">=24" },
   "version": "0.1.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
     "typecheck": "tsc",
+    "verify": "node tools/verify_repository.mjs",
+    "test": "npm run verify && node --experimental-transform-types --import ./tests/register-typescript.mjs --test tests/core/*.test.ts tests/editor/*.test.ts tests/server/*.test.mjs",
+    "test:pipeline": "python -m unittest discover -s tests/pipeline -p test_*.py",
+    "export:runtime": "node tools/export_runtime.mjs",
     "preview": "vite preview"
   },
   "devDependencies": {

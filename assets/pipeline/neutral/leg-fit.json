@@ -1,0 +1,21 @@
+{
+  "source": "D:\\Ject\\test2\\assets\\drafts\\neutral-leg-simple-v1\\leg-v1.png",
+  "scale": 0.3181076672104405,
+  "source_pivot": [
+    493.31270056497175,
+    339.3343938461539
+  ],
+  "target_pivot": [
+    66.994,
+    57.003600000000006
+  ],
+  "translation": [
+    -89.9325523820057,
+    -50.94127243066886
+  ],
+  "canvas": [
+    190,
+    402
+  ],
+  "note": "Uniform fit; anatomical joint coverage needs renderer review."
+}

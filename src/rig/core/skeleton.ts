@@ -7,6 +7,8 @@ import type { BoneData, IkData, PartData, Pose, RigData } from './types';
  */
 export class Skeleton {
   readonly world = new Map<string, Mat>();
+  readonly footContacts = new Map<string, 'planted' | 'airborne'>();
+  readonly footSquashes = new Map<string, number>();
   /** Apply the rig's IK constraints after the pose (off for the setup pose meshes bind to). */
   ikEnabled = true;
   private byName = new Map<string, BoneData>();
@@ -20,14 +22,46 @@ export class Skeleton {
   }
 
   update(pose: Pose = {}): void {
+    this.footContacts.clear();
+    this.footSquashes.clear();
     this.byName = new Map(this.data.bones.map((b) => [b.name, b]));
     this.solveAll(pose);
     if (!this.ikEnabled) return;
     // IK: solve each constraint against the posed skeleton, then redo FK with the new angles.
     for (const ik of this.data.ik ?? []) {
       if ((ik.mix ?? 1) <= 0 || !ik.bones.every((n) => this.byName.has(n)) || !this.byName.has(ik.target)) continue;
-      pose = this.solveIk(ik, pose);
+      const contact = this.data.footPlants?.find(f => f.ik === ik.name && this.byName.has(f.bone));
+      let target: { x: number; y: number } | undefined;
+      let footSquash = 1;
+      if (contact) {
+        const at = this.origin(ik.target);
+        const floorAnkle = this.data.groundY - contact.soleHeight;
+        const mode = pose[contact.bone]?.plant ?? -1;
+        const planted = mode < 0 ? at.y >= floorAnkle - 2 : mode >= .5;
+        this.footContacts.set(contact.bone, planted ? 'planted' : 'airborne');
+        if (planted) {
+          const hip = this.origin(ik.bones[0]);
+          const reach = this.bone(ik.bones[0]).length + this.bone(ik.bones[1]).length;
+          const distance = Math.hypot(at.x - hip.x, floorAnkle - hip.y);
+          const compression = Math.max(0, 1 - distance / Math.max(.001, reach));
+          const load = Math.min(1, compression / Math.max(.001, contact.squashAt ?? .2));
+          footSquash = 1 - Math.max(0, Math.min(.25, contact.squash ?? 0)) * load;
+          target = { x: at.x, y: this.data.groundY - contact.soleHeight * footSquash };
+        }
+        this.footSquashes.set(contact.bone, footSquash);
+      }
+      pose = this.solveIk(ik, pose, target);
       this.solveAll(pose);
+      if (contact && target) {
+        const keyed = pose[contact.bone]?.rotate ?? 0;
+        const desired = (contact.rotation ?? 0) + keyed;
+        const delta = ((desired - this.rotation(contact.bone) + 540) % 360) - 180;
+        const keyedScaleY = pose[contact.bone]?.scaleY ?? 1;
+        pose = { ...pose, [contact.bone]: {
+          ...pose[contact.bone], rotate: keyed + delta, scaleY: keyedScaleY * footSquash,
+        } };
+        this.solveAll(pose);
+      }
     }
   }
 
@@ -37,14 +71,14 @@ export class Skeleton {
   }
 
   /** Returns the pose with the IK bones' rotations replaced (blended by mix). */
-  private solveIk(ik: IkData, pose: Pose): Pose {
+  private solveIk(ik: IkData, pose: Pose, target?: { x: number; y: number }): Pose {
     const [upperName, lowerName] = ik.bones;
     const upper = this.bone(upperName);
     const lower = this.bone(lowerName);
     const p = this.origin(upperName);
     const k = this.origin(lowerName);
     const tip = this.tip(lowerName);
-    const t = this.origin(ik.target);
+    const t = target ?? this.origin(ik.target);
     const l1 = Math.hypot(k.x - p.x, k.y - p.y);
     const l2 = Math.hypot(tip.x - k.x, tip.y - k.y);
     if (l1 < 1e-6 || l2 < 1e-6) return pose;

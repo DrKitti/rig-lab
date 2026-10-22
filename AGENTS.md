@@ -23,18 +23,27 @@ Phaser + Vite web game.
 - `src/editor/` — the editor: `viewport.ts` (Pixi canvas + handles), `ui/` (topbar, left,
   right, timeline), `state.ts` (shared state + undo). Edits are plain functions in
   `rigEdit.ts` (skeleton/parts) and `animEdit.ts` (keys/clips).
-- `src/data/<name>.rig.json` — rig definitions (bones, parts, draw order, texture paths, clips).
+- `src/data/{shared-master,neutral,time-travel}.rig.json` — maintained rig definitions.
+  `src/data/animations/` owns shared clips; `src/data/rig-catalog.json` owns picker IDs and aliases.
   The user edits these in the editor and saves through the dev server (`/__rig/<name>`,
   see `vite.config.ts`), so treat them as user data: re-read before changing and never
   overwrite their edits with older values.
-- Making a character or outfit: follow `docs/character-pipeline.md`. All characters share
-  one rig (`src/data/hero-c3-B7.rig.json`, Rig Lab's default), whose joints are specified in
+- Start a handoff by reading `docs/PROJECT_HANDOFF.md`, then `docs/integration.md`.
+- Making a character or outfit: follow `docs/outfit-pipeline/standard.md` and `tooling.md`.
+  All characters share one rig (`src/data/shared-master.rig.json`, Rig Lab's default), whose joints are specified in
   `docs/rig-spec/`. The art rules are in `docs/art-direction/README.md`.
-- `assets/rigs/hero-c3/` — permanent textures used by the production master. Draft output
+- `assets/rigs/<outfit>/` and `assets/characters/` — stable, reviewed runtime textures.
+  `assets/pipeline/` holds reusable inputs/recipes; `assets/experiments/` holds historical evidence.
+  Active rig data and builds must not depend on ignored drafts. Draft output
   belongs in the ignored `assets/drafts/` tree until it is explicitly accepted and promoted.
 - `tools/` — the maintained outfit pipeline (`align_fullbody.py`, `fit_pieces.py`,
   `assemble_pieces.py`, `check_proportions.py`, `build_rig_from_pieces.py`,
-  `set_rest_arms.py`) plus the shared frame helper. Usage is in the pipeline doc.
+  `match_materials.py`) plus the shared frame helper. Usage is in `docs/outfit-pipeline/tooling.md`.
+- `src/server/` — Vite/local filesystem adapters, never imported into the portable core.
+- `tests/` — portable core, editor, server and Python pipeline tests. Run `npm test`,
+  `npm run test:pipeline`, `npm run build`; export with `npm run export:runtime`.
+- `tools/archive/` and `docs/archive/` are historical evidence, not current instructions.
+  One-time migration scripts there may reference old local layouts; do not rerun them on the master.
 
 ## Agent roles
 

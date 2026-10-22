@@ -1,0 +1,37 @@
+{
+  "version": "neutral-c-v2",
+  "spec": "docs\\rig-spec\\shared-arm-placement.json",
+  "user_time_travel_art_unchanged": true,
+  "rigs": [
+    {
+      "rig": "hero-c3-B7",
+      "before_sha256": "6a93b6d6dee7b37a083dde55a452151634c1bea75f4e4eab093869b698da6ee9",
+      "neutral_palm_coverage": null
+    },
+    {
+      "rig": "neutral-skeleton-c-v1",
+      "before_sha256": "b1abbc55f57db608a68b70633604b7d502430006471a51e0313fc680aaee9158",
+      "neutral_palm_coverage": {
+        "F": {
+          "pixel": [
+            54.48462612203829,
+            317.1958612136888
+          ],
+          "alpha": 254
+        },
+        "B": {
+          "pixel": [
+            62.23077541819478,
+            290.015112999684
+          ],
+          "alpha": 254
+        }
+      }
+    },
+    {
+      "rig": "time-travel-torso-fresh-master-v3",
+      "before_sha256": "e5c7e989a51937c9d3dbf55fca769f72df22e472ba9ef4e5416cc006d0f5adfd",
+      "neutral_palm_coverage": null
+    }
+  ]
+}

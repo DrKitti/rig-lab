@@ -1,15 +1,20 @@
-import bundledRig from './data/hero-c3-B7.rig.json';
+import bundledRig from './data/shared-master.rig.json';
+import catalog from './data/rig-catalog.json';
+import bundledAnimations from './data/animations/neutral-c-v5.animations.json';
 import { deleteBone, findBone } from './editor/rigEdit';
 import { EditorState } from './editor/state';
 import { mountLeft } from './editor/ui/left';
 import { mountRight } from './editor/ui/right';
 import { mountTimeline } from './editor/ui/timeline';
 import { mountTopbar } from './editor/ui/topbar';
+import { mountLayout } from './editor/ui/layout';
+import { mountBlendDock } from './editor/ui/blendDock';
 import { Viewport } from './editor/viewport';
 import { normalizeRig, type RigData } from './rig/core/types';
+import { canonicalRigName } from './editor/characters';
 
-/** Which src/data/<name>.rig.json to edit: ?rig=<name>, default hero-c3-B7. */
-const RIG_NAME = new URLSearchParams(location.search).get('rig') ?? 'hero-c3-B7';
+/** Historical links resolve to the canonical current outfit IDs. */
+const RIG_NAME = canonicalRigName(new URLSearchParams(location.search).get('rig') ?? catalog.defaultRig);
 
 /** Loads from the dev server so later saves don't reload the page; falls back to the production master. */
 async function loadRig(name: string): Promise<RigData> {
@@ -19,18 +24,32 @@ async function loadRig(name: string): Promise<RigData> {
   } catch {
     // No dev server (e.g. a static build).
   }
-  return normalizeRig(bundledRig as unknown as RigData);
+  return normalizeRig({ ...bundledRig, clips: bundledAnimations.clips,
+    animationLibraryRevision: bundledAnimations.revision } as unknown as RigData);
 }
 
 async function start(): Promise<void> {
   const rig = await loadRig(RIG_NAME);
   const state = new EditorState(rig);
+  const sharedChannel = new BroadcastChannel('rig-lab-shared-animations');
+  const refreshShared = async () => {
+    if (state.dirty || !rig.animationLibrary) return;
+    const loaded = await loadRig(rig.name);
+    if (state.syncAnimationLibrary(loaded)) {
+      state.toast('อัปเดตคลังท่ากลางจากชุดอื่นแล้ว');
+    }
+  };
+  sharedChannel.onmessage = () => { void refreshShared(); };
+  window.addEventListener('focus', () => { void refreshShared(); });
   const $ = (id: string) => document.getElementById(id)!;
 
   const save = async () => {
     const res = await fetch(`/__rig/${rig.name}`, { method: 'POST', body: JSON.stringify(rig) });
     if (!res.ok) throw new Error(await res.text());
+    const result = await res.json();
+    if (result.animationLibraryRevision !== undefined) rig.animationLibraryRevision = result.animationLibraryRevision;
     state.markSaved();
+    if (rig.animationLibrary) sharedChannel.postMessage(rig.animationLibrary);
   };
   const download = () => {
     const a = document.createElement('a');
@@ -46,6 +65,8 @@ async function start(): Promise<void> {
   mountTopbar($('topbar'), state, { save, download });
   mountLeft($('left'), state);
   mountRight($('right'), state, { partSize: (name) => viewport.partSize(name) });
+  mountLayout(state);
+  mountBlendDock($('blend-dock'), state);
   const timeline = mountTimeline($('timeline'), state);
   await viewport.mount($('viewport'));
   viewport.mountToolbar($('viewport'));
@@ -67,7 +88,7 @@ async function start(): Promise<void> {
     if (ctrl && key === 's') {
       e.preventDefault();
       save().then(
-        () => state.toast(`บันทึกแล้ว → src/data/${rig.name}.rig.json`),
+        () => state.toast(rig.animationLibrary ? 'บันทึกชุดและคลังท่ากลางแล้ว · ทุกชุดใช้ร่วมกัน' : `บันทึกแล้ว → src/data/${rig.name}.rig.json`),
         (err) => state.toast(`บันทึกไม่ได้: ${err}`, true),
       );
       return;

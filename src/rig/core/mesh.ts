@@ -44,11 +44,14 @@ export function bindMesh(part: PartData, size: { width: number; height: number }
   const partM = setup.partMatrix(part);
   const joints = bones.slice(1).map((name, j) => {
     const a = (rotationOf(setup.worldOf(bones[j])) * Math.PI) / 180;
-    return { origin: setup.origin(name), ux: Math.cos(a), uy: Math.sin(a), blend: mesh.blends?.[j] ?? mesh.blend ?? DEFAULT_BLEND };
+    return { origin: setup.origin(name), ux: Math.cos(a), uy: Math.sin(a), blend: mesh.blends?.[j] ?? mesh.blend ?? DEFAULT_BLEND,
+      rigidFoot: !!mesh.rigidFoot && j === bones.length - 2 };
   });
   /** How far (0..1) a point has passed a joint, along the bone above it. */
   const passed = (j: (typeof joints)[number], x: number, y: number) =>
-    smoothstep(-j.blend / 2, j.blend / 2, (x - j.origin.x) * j.ux + (y - j.origin.y) * j.uy);
+    smoothstep(-Math.max(.001, j.blend) / 2,
+      j.rigidFoot ? 0 : Math.max(.001, j.blend) / 2,
+      (x - j.origin.x) * j.ux + (y - j.origin.y) * j.uy);
 
   const n = cols * rows;
   const setupPos = new Float32Array(n * 2);

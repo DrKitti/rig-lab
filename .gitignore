@@ -8,13 +8,17 @@ Thumbs.db
 __pycache__/
 *.py[cod]
 .venv/
+.cache/
 
 # Machine-local installed agent skills and their installer state.
 .agents/
 .claude/skills/
 skills-lock.json
 
-# Generated candidates and renderer captures. Promote accepted files to a
-# permanent directory under assets/ before committing them.
+# Local-only unrelated project notes; never part of the outfit integration handoff.
+nightcamp docs/
+
+# Scratch outputs only. Runtime art, pipeline refs and curated experiments live
+# in their explicit tracked directories and must never depend on this tree.
 assets/drafts/*
 !assets/drafts/.gitkeep

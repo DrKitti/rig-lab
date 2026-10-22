@@ -2,7 +2,6 @@ import { Application, Container, Graphics, Point } from 'pixi.js';
 import { sampleClip } from '../rig/core/animation';
 import { apply, invert, normalizeAngle } from '../rig/core/math';
 import { loadRigTextures, SkeletonView, type RigTextures } from '../rig/pixi/SkeletonView';
-import type { Pose } from '../rig/core/types';
 import { keyTimes, setKey } from './animEdit';
 import { activeIk, aimBone, findPart, moveBone, movePart } from './rigEdit';
 import type { EditorState } from './state';
@@ -44,6 +43,13 @@ export class Viewport {
   async mount(host: HTMLElement): Promise<void> {
     await this.app.init({ resizeTo: host, background: '#14121c', antialias: true, autoDensity: true, resolution: window.devicePixelRatio || 1 });
     host.prepend(this.app.canvas);
+    // Pixi's resizeTo watches the window; dock splitters also resize the host itself.
+    new ResizeObserver(() => {
+      if (host.clientWidth > 0 && host.clientHeight > 0) {
+        this.app.renderer.resize(host.clientWidth, host.clientHeight);
+        this.needsRender = true;
+      }
+    }).observe(host);
     this.assets = await loadRigTextures(this.state.rig, '/', true);
 
     this.ghosts = [new SkeletonView(this.state.rig, this.assets), new SkeletonView(this.state.rig, this.assets)];
@@ -130,7 +136,7 @@ export class Viewport {
     this.view.visible = st.view.parts;
     // IK only while animating; Setup mode edits the bones freely.
     this.view.skeleton.ikEnabled = this.animating;
-    this.view.update(this.animating || !st.view.drawn ? st.pose() : this.drawnPose());
+    this.view.update(st.pose());
 
     // Onion skin: the nearest keyed poses before and after the playhead.
     const times = this.animating && st.view.onion ? keyTimes(clip) : [];
@@ -144,13 +150,6 @@ export class Viewport {
     ghostAt(this.ghosts[1], next);
 
     this.drawOverlay();
-  }
-
-  /** Setup-mode view of the bones turned back to their drawn angles (see BoneData.drawnRotation). */
-  private drawnPose(): Pose {
-    const pose: Pose = {};
-    for (const b of this.state.rig.bones) if (b.drawnRotation !== undefined) pose[b.name] = { rotate: b.drawnRotation - b.rotation };
-    return pose;
   }
 
   /** Rig space → screen. */
@@ -428,6 +427,19 @@ export class Viewport {
   mountToolbar(host: HTMLElement): void {
     const st = this.state;
     const bar = h('div', { class: 'vp-toolbar' });
+    const drawer = h('div', { class: 'vp-tools-drawer' });
+    let toolsOpen = false;
+    const handle = h('button', {
+      class: 'vp-tools-handle', 'aria-label': 'แสดงเครื่องมือบนจอ', 'aria-expanded': 'false',
+      onclick: () => {
+        toolsOpen = !toolsOpen; bar.hidden = !toolsOpen;
+        handle.textContent = toolsOpen ? '▲' : '▼';
+        handle.setAttribute('aria-expanded', String(toolsOpen));
+        handle.setAttribute('aria-label', toolsOpen ? 'ซ่อนเครื่องมือบนจอ' : 'แสดงเครื่องมือบนจอ');
+      },
+    }, '▼');
+    bar.hidden = true;
+    drawer.append(handle, bar);
     const legend = h(
       'div',
       { class: 'vp-legend' },
@@ -479,9 +491,6 @@ export class Viewport {
         toggle('onion', '◌ Onion', 'เห็นท่าของคีย์ก่อนหน้า (ฟ้า) และถัดไป (เขียว)', true),
         toggle('rootMotion', '↦ Root motion', 'ให้ตัวละครเคลื่อนที่ไปข้างหน้าตามค่า root motion ของท่า', true),
         toggle('flip', '⇄ Flip', 'กลับซ้าย-ขวา'),
-        st.mode === 'setup' && st.rig.bones.some((b) => b.drawnRotation !== undefined)
-          ? toggle('drawn', '✍ ท่าที่วาด', 'สลับดูแขนท่ากางตามภาพเต็มตัว (ดูอย่างเดียว) · ปิด = ท่าพักแขนห้อย')
-          : null,
         st.rig.ik.length === 0
           ? null
           : h(
@@ -507,7 +516,7 @@ export class Viewport {
       if (document.activeElement !== zoom) zoom.value = String(st.zoom);
     });
     render();
-    host.append(bar, legend);
+    host.append(drawer, legend);
   }
 }
 

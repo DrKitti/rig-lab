@@ -9,12 +9,24 @@
   <body>
     <div id="app">
       <header id="topbar"></header>
-      <aside id="left" class="column"></aside>
+      <aside id="left-panel" class="dock side-dock">
+        <div class="dock-head"><span>โครงสร้าง</span><button id="toggle-left" aria-label="ย่อแถบซ้าย">◀</button></div>
+        <div id="left" class="column"></div>
+        <div id="resize-left" class="resize-grip vertical" role="separator" aria-label="ปรับความกว้างแถบซ้าย" tabindex="0"></div>
+      </aside>
       <main id="center">
         <div id="viewport"></div>
-        <div id="timeline"></div>
+        <section id="bottom-panel" class="dock">
+          <div id="resize-bottom" class="resize-grip horizontal" role="separator" aria-label="ปรับความสูงแถบล่าง" tabindex="0"></div>
+          <div class="dock-head"><div id="bottom-modes"></div><span class="spacer"></span><span class="dock-help">ลากขอบเพื่อปรับขนาด</span><button id="toggle-bottom" aria-label="ย่อแถบล่าง">▼</button></div>
+          <div id="bottom-content"><div id="blend-dock"></div><div id="timeline"></div></div>
+        </section>
       </main>
-      <aside id="right" class="column"></aside>
+      <aside id="right-panel" class="dock side-dock">
+        <div class="dock-head"><span>รายละเอียด</span><button id="toggle-right" aria-label="ย่อแถบขวา">▶</button></div>
+        <div id="right" class="column"></div>
+        <div id="resize-right" class="resize-grip vertical" role="separator" aria-label="ปรับความกว้างแถบขวา" tabindex="0"></div>
+      </aside>
       <div id="toast" hidden></div>
     </div>
     <script type="module" src="/src/main.ts"></script>

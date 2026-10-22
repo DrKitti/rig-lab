@@ -1,0 +1,292 @@
+{
+  "name": "shared-master",
+  "animationLibrary": "neutral-c-v5",
+  "groundY": 231,
+  "footPlants": [
+    {
+      "bone": "leg_F_3",
+      "ik": "leg_F",
+      "soleHeight": 40,
+      "squash": 0.04,
+      "squashAt": 0.2
+    },
+    {
+      "bone": "leg_B_3",
+      "ik": "leg_B",
+      "soleHeight": 40,
+      "squash": 0.04,
+      "squashAt": 0.2
+    }
+  ],
+  "textures": {
+    "head": "assets/characters/master-hero/head.png",
+    "torso_B": "assets/rigs/shared-master/torso.png",
+    "arm_F": "assets/rigs/shared-master/arm-f.png",
+    "arm_B": "assets/rigs/shared-master/arm-b.png",
+    "leg_F": "assets/rigs/shared-master/leg-f.png"
+  },
+  "bones": [
+    {
+      "name": "root",
+      "x": 0,
+      "y": -107,
+      "rotation": 0,
+      "length": 0
+    },
+    {
+      "name": "torso",
+      "parent": "root",
+      "x": 0,
+      "y": 0,
+      "rotation": -90,
+      "length": 110
+    },
+    {
+      "name": "chest",
+      "parent": "torso",
+      "x": 110,
+      "y": 0,
+      "rotation": 0,
+      "length": 181
+    },
+    {
+      "name": "head",
+      "parent": "chest",
+      "x": 181,
+      "y": -19.2,
+      "rotation": 0,
+      "length": 420
+    },
+    {
+      "name": "arm_B_1",
+      "parent": "chest",
+      "x": 85.00489464306452,
+      "y": 84.46473407860859,
+      "rotation": 151.21045854050266,
+      "length": 105.01904589168578,
+      "drawnRotation": 151.21045854050266
+    },
+    {
+      "name": "arm_B_2",
+      "parent": "arm_B_1",
+      "x": 105.01904589168578,
+      "y": 0,
+      "rotation": -9.617963447731668,
+      "length": 141.64216389330102
+    },
+    {
+      "name": "arm_F_1",
+      "parent": "chest",
+      "x": 91,
+      "y": -94.2,
+      "rotation": 204.6724039320563,
+      "length": 122.17444129348563,
+      "drawnRotation": 204.6724039320563
+    },
+    {
+      "name": "arm_F_2",
+      "parent": "arm_F_1",
+      "x": 122.17444129348563,
+      "y": 0,
+      "rotation": 0.5694501556907028,
+      "length": 136.02183617114935
+    },
+    {
+      "name": "leg_F_1",
+      "parent": "root",
+      "x": -53.2,
+      "y": 0,
+      "rotation": 90,
+      "length": 154.96
+    },
+    {
+      "name": "leg_F_2",
+      "parent": "leg_F_1",
+      "x": 154.96,
+      "y": 0,
+      "rotation": 0,
+      "length": 143.04
+    },
+    {
+      "name": "leg_F_3",
+      "parent": "leg_F_2",
+      "x": 143.04,
+      "y": 0,
+      "rotation": -90,
+      "length": 75
+    },
+    {
+      "name": "leg_B_1",
+      "parent": "root",
+      "x": 68.2,
+      "y": 0,
+      "rotation": 90,
+      "length": 154.96
+    },
+    {
+      "name": "leg_B_2",
+      "parent": "leg_B_1",
+      "x": 154.96,
+      "y": 0,
+      "rotation": 0,
+      "length": 143.04
+    },
+    {
+      "name": "leg_B_3",
+      "parent": "leg_B_2",
+      "x": 143.04,
+      "y": 0,
+      "rotation": -90,
+      "length": 75
+    },
+    {
+      "name": "ik_leg_F",
+      "x": -53.2,
+      "y": 191,
+      "rotation": 0,
+      "length": 0
+    },
+    {
+      "name": "ik_leg_B",
+      "x": 68.2,
+      "y": 191,
+      "rotation": 0,
+      "length": 0
+    }
+  ],
+  "parts": [
+    {
+      "name": "torso",
+      "texture": "torso_B",
+      "bone": "torso",
+      "originX": 0.5306,
+      "originY": 1.0117,
+      "rotation": 90,
+      "mesh": {
+        "child": "chest",
+        "blend": 30,
+        "cols": 8,
+        "rows": 24,
+        "front": "child"
+      },
+      "x": -107
+    },
+    {
+      "name": "head",
+      "texture": "head",
+      "bone": "head",
+      "originX": 0.5076,
+      "originY": 0.9474,
+      "rotation": 90
+    },
+    {
+      "name": "arm_B",
+      "texture": "arm_B",
+      "bone": "arm_B_1",
+      "originX": 0.5696,
+      "originY": 0.0775,
+      "rotation": -79.91045854050265,
+      "mesh": {
+        "child": "arm_B_2",
+        "blend": 40,
+        "cols": 16,
+        "rows": 64,
+        "front": "child"
+      },
+      "x": -26.3415647753377,
+      "y": -18.503702671267916
+    },
+    {
+      "name": "arm_F",
+      "texture": "arm_F",
+      "bone": "arm_F_1",
+      "originX": 0.5062,
+      "originY": 0.1501,
+      "rotation": -98.17240393205631,
+      "mesh": {
+        "child": "arm_F_2",
+        "blend": 40,
+        "cols": 16,
+        "rows": 64,
+        "front": "child"
+      },
+      "x": -5.959630850833507e-14,
+      "y": -2.207369128421727e-14
+    },
+    {
+      "name": "leg_F",
+      "texture": "leg_F",
+      "bone": "leg_F_1",
+      "originX": 0.4178,
+      "originY": 0.1618,
+      "rotation": -90,
+      "mesh": {
+        "child": "leg_F_2",
+        "rigidFoot": true,
+        "blend": 8,
+        "cols": 16,
+        "rows": 64,
+        "chain": [
+          "leg_F_3"
+        ],
+        "blends": [
+          8,
+          56
+        ]
+      }
+    },
+    {
+      "name": "leg_B",
+      "texture": "leg_F",
+      "bone": "leg_B_1",
+      "originX": 0.4178,
+      "originY": 0.1618,
+      "rotation": -90,
+      "mesh": {
+        "child": "leg_B_2",
+        "rigidFoot": true,
+        "blend": 8,
+        "cols": 16,
+        "rows": 64,
+        "chain": [
+          "leg_B_3"
+        ],
+        "blends": [
+          8,
+          56
+        ]
+      }
+    }
+  ],
+  "drawOrder": [
+    "arm_B",
+    "leg_B",
+    "leg_F",
+    "torso",
+    "head",
+    "arm_F"
+  ],
+  "ik": [
+    {
+      "name": "leg_F",
+      "bones": [
+        "leg_F_1",
+        "leg_F_2"
+      ],
+      "target": "ik_leg_F",
+      "bend": 1,
+      "mix": 1
+    },
+    {
+      "name": "leg_B",
+      "bones": [
+        "leg_B_1",
+        "leg_B_2"
+      ],
+      "target": "ik_leg_B",
+      "bend": 1,
+      "mix": 1
+    }
+  ],
+  "skeletonVersion": "neutral-c-v5"
+}

@@ -7,7 +7,8 @@ The production master is docs/rig-spec/pose-arms-out-male.png. Each variant
 (SIFT + RANSAC, one similarity transform) and resampled onto the master's 671x1164 canvas, saved
 as <out_prefix>-v1.png, -v2.png, ... in the order given. Then it reports what step 1's review
 needs, next to the master's values:
-  - soles: lowest opaque row; more than SOLE_LIMIT px off means the body came out scaled
+  - soles: lowest opaque row; more than HEIGHT_LIMIT_RATIO of the master's canonical
+    height is a hard height failure
     (image_gen redraws the whole image) even though the head lines up;
   - head: width and height of everything above the neck;
   - leg widths: the near leg at the knee, shin and boot rows ("-" where the legs touch),
@@ -33,7 +34,7 @@ SOLE_Y = 1119
 KNEE_Y, SHIN_Y, BOOT_Y = 950, 1010, 1080
 NEAR_HIP_X = 306
 LEG_GAP_X = 366  # between the legs
-SOLE_LIMIT = 15
+HEIGHT_LIMIT_RATIO = 0.01  # normalized height gate; 1% of the master canvas height
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 MASTERS = {'shared': 'docs/rig-spec/pose-arms-out-male.png'}
 LEG_RANGE = {'knee': (-0.10, 0.25), 'shin': (-0.10, 0.25), 'boot': (-0.10, 0.20)}
@@ -119,6 +120,7 @@ def main():
     row('master', ref)
     print()
     print(f'{"standard":10}{"":7}{"":>12}{std["knee"]:6}{std["shin"]:6}{std["boot"]:6}')
+    height_limit = H * HEIGHT_LIMIT_RATIO
     padded_master = np.pad(master, ((0, 0), (pad_x, pad_x), (0, 0)))
     tiles = [padded_master]
     for i, path in enumerate(variants, 1):
@@ -133,8 +135,13 @@ def main():
         for k, (lo, hi) in LEG_RANGE.items():
             if m[k] is not None and not lo <= m[k] / std[k] - 1 <= hi:
                 notes.append(f'{k} {m[k] / std[k] - 1:+.0%} vs standard')
-        if abs(m['soles'] - ref['soles']) > SOLE_LIMIT:
-            notes.append(f'soles {m["soles"] - ref["soles"]:+d}px: body scaled, check joints')
+        sole_delta = m['soles'] - ref['soles']
+        if abs(sole_delta) > height_limit:
+            notes.append(
+                f'soles {sole_delta:+d}px: FAIL height '
+                f'(limit +/-{height_limit:.1f}px = {HEIGHT_LIMIT_RATIO:.0%} of master height); '
+                'stop before parts'
+            )
         print('   ' + '; '.join(notes))
         tiles.append(img)
     W += 2 * pad_x

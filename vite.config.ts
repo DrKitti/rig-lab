@@ -2,11 +2,14 @@ import { mkdir, readFile, readdir, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { defineConfig, type Plugin } from 'vite';
+import { animationStore } from './src/server/animation-store.mjs';
+import { canonicalRigName } from './src/server/rig-catalog.mjs';
 
 const RIG_DIR = fileURLToPath(new URL('./src/data', import.meta.url));
 const NAME = /^[a-z0-9-]+$/i;
 const SHOT_DIR = fileURLToPath(new URL('./assets/drafts/shots', import.meta.url));
 const ROOT_DIR = fileURLToPath(new URL('.', import.meta.url));
+const animations = animationStore(resolve(RIG_DIR, 'animations'));
 
 /** Preserve JSON texture paths in static builds as well as in the dev editor. */
 function rigAssets(): Plugin {
@@ -18,10 +21,12 @@ function rigAssets(): Plugin {
       for (const file of await readdir(RIG_DIR)) {
         if (!file.endsWith('.rig.json')) continue;
         const source = await readFile(resolve(RIG_DIR, file), 'utf8');
-        const rig = JSON.parse(source) as { textures: Record<string, string> };
-        this.emitFile({ type: 'asset', fileName: `rigs/${file}`, source });
+        const rig = await animations.hydrate(JSON.parse(source));
+        this.emitFile({ type: 'asset', fileName: `rigs/${file}`, source: JSON.stringify(rig) });
         for (const path of Object.values(rig.textures)) textures.add(path);
       }
+      for (const asset of await animations.assets())
+        this.emitFile({ type: 'asset', fileName: `animations/${asset.name}`, source: asset.source });
       for (const path of textures) {
         if (!path.startsWith('assets/') || path.split('/').includes('..') || path.includes('\\')) {
           throw new Error(`Texture path must be project-relative under assets/: ${path}`);
@@ -43,7 +48,7 @@ function rigFiles(): Plugin {
     configureServer(server) {
       server.middlewares.use('/__rig/', async (req, res) => {
         const url = new URL(req.url ?? '', 'http://x');
-        const name = url.pathname.replace(/^\//, '');
+        const name = canonicalRigName(url.pathname.replace(/^\//, ''));
         if (!NAME.test(name)) {
           res.statusCode = 400;
           res.end('bad rig name');
@@ -53,21 +58,28 @@ function rigFiles(): Plugin {
         try {
           if (req.method === 'GET') {
             res.setHeader('Content-Type', 'application/json');
-            res.end(await readFile(file, 'utf8'));
+            res.end(JSON.stringify(await animations.hydrate(JSON.parse(await readFile(file, 'utf8')))));
             return;
           }
           if (req.method === 'POST') {
             let body = '';
             for await (const chunk of req) body += chunk;
             const rig = JSON.parse(body);
-            await writeFile(file, JSON.stringify(rig, null, 2) + '\n', 'utf8');
-            res.end('ok');
+            if (rig.name !== name) throw new Error('Rig name does not match save target');
+            const existing = JSON.parse(await readFile(file, 'utf8'));
+            if (existing.animationLibrary && rig.animationLibrary !== existing.animationLibrary)
+              throw new Error('Cannot detach this rig from its shared animation library');
+            const result = await animations.save(rig, async stored => {
+              await writeFile(file, JSON.stringify(stored, null, 2) + '\n', 'utf8');
+            });
+            res.setHeader('Content-Type', 'application/json');
+            res.end(JSON.stringify(result));
             return;
           }
           res.statusCode = 405;
           res.end();
         } catch (err) {
-          res.statusCode = 500;
+          res.statusCode = err instanceof Error && 'status' in err ? Number(err.status) : 500;
           res.end(String(err));
         }
       });
@@ -92,8 +104,11 @@ function rigFiles(): Plugin {
 
 export default defineConfig({
   plugins: [rigFiles(), rigAssets()],
+  build: {
+    rollupOptions: { input: { editor: resolve(ROOT_DIR, 'index.html'), qa: resolve(ROOT_DIR, 'qa/index.html') } },
+  },
   server: {
     // Saved rig files must not trigger HMR reloads mid-edit.
-    watch: { ignored: ['**/src/data/*.rig.json'] },
+    watch: { ignored: ['**/src/data/*.rig.json', '**/src/data/animations/**'] },
   },
 });

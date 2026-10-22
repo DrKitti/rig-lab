@@ -1,6 +1,6 @@
 import type { BonePose, Channel, ClipData, Easing, Keyframe, Pose } from './types';
 
-export const CHANNEL_DEFAULT: Record<Channel, number> = { rotate: 0, x: 0, y: 0, scaleX: 1, scaleY: 1 };
+export const CHANNEL_DEFAULT: Record<Channel, number> = { rotate: 0, x: 0, y: 0, scaleX: 1, scaleY: 1, plant: -1 };
 
 export function ease(easing: Easing | undefined, t: number): number {
   switch (easing) {
@@ -43,7 +43,10 @@ export function sampleClip(clip: ClipData, time: number): Pose {
   for (const [bone, timelines] of Object.entries(clip.bones)) {
     const bp: BonePose = {};
     for (const [channel, keys] of Object.entries(timelines) as [Channel, Keyframe[]][]) {
-      const v = sampleChannel(keys, time);
+      // Contact switches are discrete: never interpolate auto (-1) through air (0).
+      const v = channel === 'plant' && keys.length
+        ? (keys.filter(k => k.time <= time).at(-1) ?? keys[0]).value
+        : sampleChannel(keys, time);
       if (v !== undefined) bp[channel] = v;
     }
     pose[bone] = bp;
@@ -61,7 +64,7 @@ export function blendPose(a: Pose, b: Pose, alpha: number): Pose {
     for (const ch of new Set([...Object.keys(pa), ...Object.keys(pb)]) as Set<Channel>) {
       const va = pa[ch] ?? CHANNEL_DEFAULT[ch];
       const vb = pb[ch] ?? CHANNEL_DEFAULT[ch];
-      bp[ch] = va + (vb - va) * alpha;
+      bp[ch] = ch === 'plant' ? (alpha < .5 ? va : vb) : va + (vb - va) * alpha;
     }
     out[bone] = bp;
   }
