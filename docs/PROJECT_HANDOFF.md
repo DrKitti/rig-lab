@@ -8,6 +8,7 @@ there is no evidence yet that these assets render correctly in Phaser or under g
 
 1. This checkpoint and [integration boundaries](integration.md).
 2. [Kolahon Outfit Pipeline — ชุดใหม่บนโครงเดียว](outfit-pipeline/standard.md).
+   Before generating any part, also read [part-specific recipes and actual reference roles](outfit-pipeline/part-recipes.md).
 3. [Experiment lessons and rejected approaches](experiments.md).
 4. [Tooling / regeneration](outfit-pipeline/tooling.md) and [naming/ownership](outfit-pipeline/repository.md).
 5. JSON specifications in `docs/rig-spec/`, then runtime and renderer source as needed.
@@ -78,6 +79,46 @@ Not complete:
   Its old artwork/weights are a compatibility sample, not a newly approved costume deformation.
   Neutral and Time Travel are the relevant outfit-pipeline comparison; inspect their own limits too.
 - Capes, extra front/back garment layers, cloth simulation and further accessory experiments.
+
+## Pipeline authoring update — 2026-10-23
+
+The [part recipes](outfit-pipeline/part-recipes.md) now explicitly separate how arms, torso
+and legs were made. Do not substitute one method for another just because both use Neutral
+and an approved costume image. Exact historical prompts and selected input/output evidence
+are retained in [Time Travel examples](../assets/pipeline/examples/time-travel/README.md),
+outside ignored drafts; the evidence manifest records sizes and hashes. Missing historical
+markup/crop attachment records are disclosed, not presented as a fully reproducible bundle.
+
+- **Arms:** use the corresponding raw Neutral arm as the **edit target**, approved full body
+  as costume authority, and matching master arm as technical reach/hidden-shoulder reference.
+  Preserve the drawn pose and anatomical relationships. F/B are separate calls and hand views,
+  not mirrors. Do not replace the target with an upright runtime PNG as a loose reference.
+- **Torso:** the selected Time Travel construction came from fresh reconstruction followed
+  by targeted edits, not a proven one-shot cross-outfit recipe. Complete hidden torso design
+  under F, while the moving sleeve/pauldron belongs to the arm. No projecting B receiver.
+- **Legs:** F uses a garment envelope, costume crop, Neutral anatomy and full-body authority;
+  B uses selected F for volume/finish plus its own far-side design. This is fresh reconstruction,
+  not the arm edit recipe. Update guides to current frozen landmarks; do not copy old knee values.
+
+The second-outfit dark-armor experiment remains **local draft work, not a promoted outfit**.
+Torso v6/v7 are alternative construction directions awaiting assembly on the same skeleton:
+
+- Both have no projecting arm_B receiver; preserve complete torso overlap over its hidden root.
+- F v6 uses an inward-curving receiving edge; F v7 uses a broader sloping torso armor panel
+  beneath the arm. Both need complete costume detail in occluded areas. Neither F solution
+  is selected as the new standard yet; compare raised arms and torso bends for gaps or a
+  second fixed shoulder/wing silhouette.
+- The front hem must conceal the rear hem across the center **and both side corners**.
+  Shorten/hide rear protrusions, rather than lengthening the front into the knees. Test hip/leg motion.
+- These torso candidates are successive edits, not single-shot outputs from stable source refs.
+  The construction guidance is recorded in the recipe doc; the draft PNGs are not runtime assets.
+- The first armor-arm attempts deviated from the Time Travel recipe (upright loose anatomy
+  reference, missing technical master); they look elongated/overdecorated and have alpha halos.
+  They are not accepted examples and must not be integrated as approved arms.
+
+Before each new call record recipe, generate/edit intent, exact input paths and roles, invariants
+and output review status. Ask before changing a previously selected recipe/pose. The shared
+skeleton and current runtime assets/animations are unchanged by this documentation update.
 
 ## Main-project integration sequence
 

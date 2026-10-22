@@ -112,10 +112,22 @@ Neutral ใช้ขาต้นแบบเดียวในสอง slot ไ
 **Torso รับแขน**: ใช้ทรง Neutral torso v4 ที่ผ่านแล้วเป็นฐาน
 ฝั่ง F ให้เป็นขอบรับแขนที่ต่อเนื่อง ไม่มีปีกหรือ flap ที่เห็นเป็นแขนเสื้ออีกชั้น
 เก็บเนื้อ shirt ที่ซ่อนอยู่ใต้ arm_F ได้ แต่ไม่เพิ่มเส้นปิดรูปใบไม้/ช่อง socket รอบไหล่
+พื้นที่ torso ใต้ arm_F ที่ถูกบังต้องวาดให้ครบทั้งรูปทรงและรายละเอียดชุด เช่น plate seams,
+ขอบวัสดุ ลาย และเงาที่ต่อเนื่อง ไม่ใช่ปล่อยเป็นช่องว่างหรือกำกับให้เป็นพื้นดำเรียบอย่างเดียว
+เส้นแบ่ง arm/torso บน full body บอกเจ้าของชิ้น ไม่ใช่ mask ให้ตัด torso เฉพาะพิกเซลที่มองเห็น
 ฝั่ง B ให้ด้านข้างเรียบตามทรงเสื้อ ไม่ต้องมีปุ่ม/แท็บเชื่อม arm_B แยกออกมา
 ไม่ทำ shoulder disc, ball, ring หรือ connector sprite เพื่อกลบรอยต่อ
 สำหรับ sleeve/pauldron ให้เก็บ contour เดิมรอบ pivot เป็นโค้ง ไม่เพิ่มโดมอีกลูกเหนือแขน
 คอที่เจนมาไม่จำเป็นต้องวาดใหม่เพียงเพราะไม่สวยตอนซูม; ตรวจการซ้อนและสีที่เข้ากับหน้า
+
+แนวทาง torso ชุดเกราะที่ยังรอเทสมี F สองแบบ: **v6 ขอบเว้าเข้า** และ
+**v7 แผ่นเกราะลาดรับใต้แขน**; ทั้งคู่ไม่มีส่วนรับ B ยื่นออกมา และต้องมีรายละเอียด
+torso ใต้แขนครบ ดู [รายละเอียดและเกณฑ์เปรียบเทียบ](part-recipes.md)
+ยังไม่เลือกแบบ F ใดเป็นมาตรฐานสุดท้าย และไม่ถือว่าผ่านจากภาพ part เดี่ยว
+
+**ชายชั้นหน้า–หลัง**: ใน torso ฐานที่ประกอบกับขา ให้ชายชั้นหน้าอยู่ต่ำกว่าและปิดชายชั้นหลัง
+ตลอดบริเวณที่ซ้อนกัน ไม่ใช่แค่ปลายตรงกลางต่ำที่สุด ห้ามมีชายหลัง/ปลายสามเหลี่ยมโผล่ลอดลงมา
+หรือยื่นเลยขอบล่างด้านข้าง ให้ลดความยาว/ซ่อนชั้นหลัง แทนการยืดชั้นหน้าจนบังเข่าหรือเปลี่ยน anatomy
 
 Draw order ฐานจากหลังมาหน้า: arm_B → leg_B → leg_F → torso → head → arm_F
 cape/ผ้าที่ต้องบังแขน F ต้องออกแบบ layer เพิ่ม การใส่ไว้ใน torso ไม่ทำให้บังแขน F อัตโนมัติ
@@ -144,9 +156,16 @@ guide เป็นภาพก่อสร้าง ไม่ใช่ runtime a
 
 ## 5. Prompt และการแนบ refs
 
+**ก่อนสร้าง part ให้อ่าน [สูตรรายชิ้นและหลักฐาน Time Travel](part-recipes.md) ก่อนเสมอ**
+แขนใช้ Neutral เป็น **edit target** + approved full body + matching technical master
+ไม่ใช่แค่ anatomy reference แล้ววาดใหม่ และไม่เปลี่ยนท่าเฉียงเป็น upright ก่อนเจนเอง
+torso ที่เลือกผ่านการแก้หลายรอบ ส่วน leg ใช้ fresh reconstruction + guide/F candidate
+จึงห้ามเหมารวมเป็น recipe เดียวกัน หรืออ้างว่าทุกชิ้นผ่าน one shot ข้ามชุดแล้ว
+หากจะเปลี่ยน recipe/บทบาท refs/pose จากวิธีที่ผ่าน ให้แจ้งและตกลงกับผู้ใช้ก่อนเจน
+
 Full body ใช้ **Neutral pipeline**: ให้เจนแบบสวม/วาดชุดทับ accepted neutral full body
 คง anatomy และ pose; ผ้าพองออกมาตามดีไซน์ได้ ไม่ใช้ neutral เป็นเส้นขอบชุดรัดรูป
-part แต่ละชิ้นใช้ neutral part/technical scaffold ของชิ้นนั้นกับ approved outfit/crop
+part แต่ละชิ้นใช้สูตรเฉพาะชิ้นในเอกสารข้างต้นกับ approved outfit/crop
 ระบุเสมอว่าเป็น edit target หรือ construction reference เพื่อไม่ให้โมเดลสลับหน้าที่ refs
 ชื่อ `Traveler pipeline` ในเอกสารเก่าหมายถึง edit บน master costume part โดยเฉพาะ
 อย่าใช้ชื่อนั้นแทน neutral-based reconstruction โดยไม่บอกว่าเปลี่ยน recipe
@@ -251,6 +270,8 @@ prompt เก่าอาจอ้างตำแหน่งเข่าก่�
 
 | กรณีที่ผ่าน | Prompt / หลักฐาน | สิ่งที่ได้เรียนรู้ |
 |---|---|---|
+| Time Travel arm_F / arm_B | [สูตร/refs และข้อจำกัด](part-recipes.md), [F prompt](../../assets/pipeline/examples/time-travel/arm-f.prompt.txt), [B prompt](../../assets/pipeline/examples/time-travel/arm-b.prompt.txt) | Neutral เป็น edit target, full body คุมชุด, master คุม technical continuation; คง pose |
+| Time Travel torso ที่เลือก | [ลำดับเจนและแก้จริง](part-recipes.md#2-torso-กติกาทรงผ่านแล้ว-แต่ไม่มี-one-shot-recipe-ที่พิสูจน์ข้ามชุด) | fresh construction แล้ว trim/simplify; ไม่ใช่ one-shot success |
 | Time Travel full body บน Neutral | [prompt](../../assets/approved/time-travel-neutral-ease-v1/prompt.txt), [ผลที่เลือก](../../assets/approved/time-travel-neutral-ease-v1/fullbody.png) | ให้ความหนา/ความหลวมเสื้อผ้าอยู่นอก anatomy |
 | Time Travel leg_F primary candidate | [prompt](../../assets/pipeline/examples/time-travel/leg-f.prompt.txt), [ผลที่เลือก](../../assets/pipeline/examples/time-travel/leg-f-source.png) | guide กำกับขอบนอก; fold อยู่ภายใน; full body/crop กำกับดีไซน์ |
 | Time Travel leg_B | [prompt](../../assets/pipeline/examples/time-travel/leg-b.prompt.txt), [ผล](../../assets/pipeline/examples/time-travel/leg-b-source.png) | ใช้ F คุม family/ปริมาตร และ crop B คุม perspective; ไม่ mirror |

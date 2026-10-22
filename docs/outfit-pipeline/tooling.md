@@ -18,6 +18,9 @@ Python tools need `python -m pip install -r requirements.txt` in your own enviro
 Create a new versioned working directory under ignored `assets/drafts/`; keep raw images,
 exact prompt, reference roles and review decisions. Image generation follows AGENTS.md.
 Generated images may need actual landmark fitting; prompt numbers alone are not a geometric lock.
+Read [part-specific recipes](part-recipes.md) before generating: arms use a Neutral edit target,
+approved costume body and technical master; torso and legs have different construction histories.
+Do not silently replace an edit target with a loose reference or change the source pose.
 
 ```sh
 python tools/align_fullbody.py shared assets/drafts/OUTFIT-v1/fullbody VARIANT.png

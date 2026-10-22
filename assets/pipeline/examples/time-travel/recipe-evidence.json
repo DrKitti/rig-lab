@@ -1,0 +1,60 @@
+{
+  "description": "Historical Time Travel arm and torso recipe evidence; not runtime geometry authorities. See docs/outfit-pipeline/part-recipes.md.",
+  "files": [
+    {
+      "file": "arm-f-neutral-edit-target.png",
+      "bytes": 457565,
+      "sha256": "12419ad59f2b302c0964a9deb5a97da08bab59b482f828e874947bc18a57cd5e"
+    },
+    {
+      "file": "arm-b-neutral-edit-target.png",
+      "bytes": 456952,
+      "sha256": "3c693ea81272688450e6a5e539bf5915aa467e42665f3c0c3c8487ad00875b38"
+    },
+    {
+      "file": "arm-f.prompt.txt",
+      "bytes": 2183,
+      "sha256": "bc571eb4d2feae9ec8c26eecb0a509767d7cb654f86e3aa95a09bce2ac8ac19e"
+    },
+    {
+      "file": "arm-b.prompt.txt",
+      "bytes": 2168,
+      "sha256": "7cea79bb86fd9e7a1fdbc500b0f2b2cd368fbffad5a8c5db728fc7838108791c"
+    },
+    {
+      "file": "torso-design-reference.png",
+      "bytes": 1164229,
+      "sha256": "06a608c967bc74a132c578d307720cdad120d7df6a3d74c9c7af044c17da4c6a"
+    },
+    {
+      "file": "torso-initial-source.png",
+      "bytes": 1172387,
+      "sha256": "7ea44500c5f69bb8d12f2658d7accbf9d1f5a43088a3b46827003b8c1c9255dd"
+    },
+    {
+      "file": "torso-trim-source.png",
+      "bytes": 1130241,
+      "sha256": "0dec79beb18a297a422c702664af606d0c51bab6a1324a969b1c50c8bbb51144"
+    },
+    {
+      "file": "torso-selected-source.png",
+      "bytes": 1119173,
+      "sha256": "a1f29090931d5fc51e79e5e31219998c99270932360a4714026651dbbd2266e6"
+    },
+    {
+      "file": "torso-initial.prompt.txt",
+      "bytes": 1868,
+      "sha256": "7a52bab8d492f3428191020bcd10874e528f028bcb42e81b66ec5f2c5115d17d"
+    },
+    {
+      "file": "torso-trim.prompt.txt",
+      "bytes": 1814,
+      "sha256": "7490a072e36448421c946d967bc02e2ad632eebfa67bb81840f745b82b15c835"
+    },
+    {
+      "file": "torso-simplify.prompt.txt",
+      "bytes": 1377,
+      "sha256": "5bafc5cd4c851d0dc7a214c8aab20713603f4575026085fac43a880afcc14049"
+    }
+  ]
+}

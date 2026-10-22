@@ -1,0 +1,12 @@
+Generate one complete freshly drawn isolated Time Travel outfit arm sprite by dressing the neutral arm in Image 1. Genuine transparent background.
+
+REFERENCE ROLES:
+Image 1 is the NEUTRAL ARM EDIT TARGET: underlying anatomical mass, shoulder continuation, length, joint relationships and hand view. The gray body is INSIDE the clothing, not the outer garment silhouette.
+Image 2 is the APPROVED TIME TRAVEL FULL BODY: visible garment design, color, cloth volume, glove appearance and art style.
+Image 3 is the MATCHING PRODUCTION MASTER ARM: technical reach and complete hidden shoulder construction only. Ignore its costume, exposed skin, cuff design and colors.
+
+Dress the unchanged underlying arm with the same plum short upper sleeve and gold hem/quiet small gold motifs, soft cream shirt sleeve below it, dark brown leather wrist strap with rectangular gold buckle, and compact brown glove as Image 2. Give the cloth modest natural ease over the neutral arm. Keep the same shoulder, elbow and wrist relationships and diagonal drawn pose. Complete the purple upper shoulder end with a simple rounded continuous contour that can overlap the torso. No separate extra dome, ring or shoulder ball. The shoulder extension is part of the sleeve itself. Keep the gray base and bare skin fully covered by the outfit.
+
+Match the approved image's thick tapered dark-brown outlines, muted plum/cream/brown/gold, broad angular cool shadow shapes and light painted texture. Keep folds restrained, with no swollen elbow, muscular gray-arm tracing, extra armor or ornaments. Exactly one arm from closed rounded shoulder end to whole glove, uncropped with transparent padding. No torso, collar, chest watch, chains, head, legs, text or comparison panels.
+
+NEAR/FRONT ARM (arm_F): match the SCREEN-LEFT arm in Image 2. Shoulder upper-right and glove lower-left, as in Image 1. The fist shows the BACK of the hand with three compact curled finger lobes and one tucked thumb, covered by the brown glove. Keep finger separations short and rounded, without long pointed slits or a claw-like thumb. Match the chunky glove size in the approved outfit rather than shrinking it to the bare neutral fist.

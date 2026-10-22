@@ -1,0 +1,29 @@
+Use case: stylized-concept
+Asset: complete isolated torso sprite for the Kolahon modular character rig.
+
+Generate a NEW torso drawing from scratch in one pass. Both attached images are
+references, not edit targets. This is a fresh construction experiment.
+
+Image 1 — Time Travel torso: COSTUME DESIGN, body mass, three-quarter view and style.
+Keep its purple coat, gold trim, high collar, white shirt, gold fasteners, pocketwatch,
+chains, brown belt with round buckle, short flared coat tails and gold motifs.
+Its existing shoulder cutouts/backing shapes are not the construction authority.
+
+Image 2 — production master torso: ARMHOLE CONSTRUCTION REFERENCE ONLY.
+Use this image as the sole visual example of how to construct the shoulder joins.
+Do not copy its green costume, hood, pouch, crossed ties, belt or hem design.
+
+Construct the screen-left near armhole like image 2: a tailored inward-curving
+arm opening with a narrow visible inner facing/lining and a shaded fabric return
+that gives the edge a little thickness and depth. Follow the master's actual
+armhole construction rather than drawing a circular connector. The moving sleeve
+belongs to the separate arm, so this torso contains no sleeve or arm.
+Construct the screen-right far shoulder like the master: a simple close torso edge
+descending beneath the collar, with no projecting shoulder flap or receiving ring.
+
+Keep the Time Travel torso's overall body proportions, neck stub, perspective and
+costume detail level. Use the established hand-inked dark tapered outlines, flat
+purple/gold/brown colors and restrained angular cel shadows. Draw all hidden torso
+continuation needed for a complete part. Closed coat hem, no leg or trouser stubs.
+Output ONE complete torso, centered and fully visible, genuine transparent RGBA
+background. No head, hair, arms, hands, legs, extra parts, labels or text.

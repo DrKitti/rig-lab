@@ -1,0 +1,27 @@
+Use case: precise-object-edit
+Asset: Time Travel torso v2, two shoulder corrections only.
+
+Image 1 is the EDIT TARGET: the fresh Time Travel torso v1. Preserve its costume,
+body proportions, neck, collar, shirt, watch, chains, belt, motifs and coat hem.
+Image 2 is the production MASTER: near armhole construction/thickness example only.
+Image 3 is the user's previous red far-shoulder cut guide: use ONLY its marked
+screen-right contour as guidance; ignore every other shape and detail in this crop.
+
+1. Screen-right arm_B: REMOVE THE WHOLE PROJECTING PURPLE SHOULDER FLAP.
+   Cut the outer silhouette inward along the user's red curve, beginning immediately
+   below the raised collar, descending smoothly beside the pocketwatch, and joining
+   the normal torso edge below. In image 1 this cut runs approximately from (836,294)
+   to (897,475). Everything on the outward/right side of that shoulder cut becomes
+   transparent. Preserve the pocketwatch and its top suspension loop. The result is
+   a close, simple torso edge with no shoulder wing, sleeve stump or far arm socket.
+
+2. Screen-left arm_F: make the existing armhole rim MUCH THINNER like image 2.
+   Retain the inward-curving opening and a small shaded cloth return, but reduce the
+   broad layered purple facing to the master's slender inner lining. Reduce the
+   oversized gold border to a very fine accent at most; no broad gold band. The
+   opening should read as the edge of a garment with modest thickness, not a deep
+   tunnel, padded ring or raised socket. Keep its location and general curve.
+
+Preserve the remaining artwork and overall canvas/framing. Established dark tapered
+ink, purple/gold/brown palette, angular cel shading. Complete isolated torso with
+genuine transparent RGBA background. No red annotation, UI, head, arms or legs.

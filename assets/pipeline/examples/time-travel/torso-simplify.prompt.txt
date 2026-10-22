@@ -1,0 +1,21 @@
+Use case: precise-object-edit
+Asset: Time Travel torso v3, simplify the near armhole edge only.
+
+Image 1 is the EDIT TARGET: Time Travel fresh torso v2.
+Image 2 is the master torso: reference ONLY for its simple slender armhole facing.
+
+Change only the screen-left near armhole rim. Replace the broad raised multilayer
+ring with an ordinary flat inward-curving cloth edge like the master. Remove the
+gold stripe around this opening completely. Remove the extra parallel purple rim
+and stacked black borders. Keep ONE clean dark curved edge, with only a narrow
+strip of inner purple lining and a small flat shadow to suggest the fabric return.
+Match the master's restrained cloth construction. The opening is a garment edge,
+not a padded socket, rigid frame, deep tunnel, or decorative ring. Keep the opening
+in its current location with its general inward curve, and keep the torso's mass.
+
+Preserve the already-trimmed screen-right arm_B edge exactly in appearance. Preserve
+neck, high collar and its gold trim, white shirt, fasteners, watch, chains, belt,
+coat panels and motifs. The gold to remove is ONLY the near armhole gold stripe.
+Keep the existing ink treatment, colors, angular cel shadows, framing and canvas.
+Output one complete isolated torso, genuine transparent RGBA background. No limbs,
+head, labels, annotation, red line or backdrop. No other design changes.
