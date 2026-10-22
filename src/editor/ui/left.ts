@@ -58,8 +58,8 @@ export function mountLeft(root: HTMLElement, state: EditorState): void {
       ...CLIP_TYPES.map((t) => h('option', { value: t }, t)),
     );
     return section(
-      'ท่า · Clips',
-      'คลิกเพื่อเลือกท่าที่จะแก้',
+      rig.animationLibrary ? 'ท่า · คลังกลาง' : 'ท่า · Clips',
+      rig.animationLibrary ? 'แก้แล้วบันทึก · ทุกชุดใช้ท่าร่วมกัน' : 'คลิกเพื่อเลือกท่าที่จะแก้',
       list,
       h(
         'div',
@@ -82,7 +82,7 @@ export function mountLeft(root: HTMLElement, state: EditorState): void {
             title: 'ลบท่านี้',
             disabled: rig.clips.length <= 1,
             onclick: () => {
-              if (confirm(`ลบท่า "${state.clipName}"?`)) state.edit(() => deleteClip(rig, state.clipName), true);
+              if (confirm(`ลบท่า "${state.clipName}"${rig.animationLibrary ? ' จากคลังกลางของทุกชุด' : ''}?`)) state.edit(() => deleteClip(rig, state.clipName), true);
             },
           },
           '✕',

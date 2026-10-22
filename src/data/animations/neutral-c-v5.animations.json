@@ -1,0 +1,297 @@
+{
+  "skeletonVersion": "neutral-c-v5",
+  "revision": 2,
+  "clips": [
+    {
+      "name": "idle",
+      "type": "idle",
+      "duration": 2,
+      "loop": true,
+      "bones": {
+        "root": {
+          "y": [
+            {
+              "time": 0,
+              "value": 0,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 1,
+              "value": 10,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 2,
+              "value": 0,
+              "easing": "easeInOut"
+            }
+          ]
+        },
+        "chest": {
+          "rotate": [
+            {
+              "time": 0,
+              "value": 0,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 1,
+              "value": 2.5,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 2,
+              "value": 0,
+              "easing": "easeInOut"
+            }
+          ]
+        },
+        "head": {
+          "rotate": [
+            {
+              "time": 0,
+              "value": 0,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 1,
+              "value": -2,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 2,
+              "value": 0,
+              "easing": "easeInOut"
+            }
+          ]
+        },
+        "arm_F_1": {
+          "rotate": [
+            {
+              "time": 0,
+              "value": -8.9,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 1,
+              "value": -3,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 2,
+              "value": 0,
+              "easing": "easeInOut"
+            }
+          ]
+        },
+        "arm_F_2": {
+          "rotate": [
+            {
+              "time": 0,
+              "value": -35.7,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 1,
+              "value": -6,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 2,
+              "value": 0,
+              "easing": "easeInOut"
+            }
+          ]
+        },
+        "arm_B_1": {
+          "rotate": [
+            {
+              "time": 0,
+              "value": 18.3,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 1,
+              "value": 3,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 2,
+              "value": 0,
+              "easing": "easeInOut"
+            }
+          ]
+        },
+        "arm_B_2": {
+          "rotate": [
+            {
+              "time": 0,
+              "value": -12.5,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 1,
+              "value": -5,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 2,
+              "value": 0,
+              "easing": "easeInOut"
+            }
+          ]
+        }
+      }
+    },
+    {
+      "name": "idle-hero-original",
+      "type": "idle",
+      "duration": 2,
+      "loop": true,
+      "bones": {
+        "root": {
+          "y": [
+            {
+              "time": 0,
+              "value": 0,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 1,
+              "value": 10,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 2,
+              "value": 0,
+              "easing": "easeInOut"
+            }
+          ]
+        },
+        "chest": {
+          "rotate": [
+            {
+              "time": 0,
+              "value": 0,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 1,
+              "value": 2.5,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 2,
+              "value": 0,
+              "easing": "easeInOut"
+            }
+          ]
+        },
+        "head": {
+          "rotate": [
+            {
+              "time": 0,
+              "value": 0,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 1,
+              "value": -2,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 2,
+              "value": 0,
+              "easing": "easeInOut"
+            }
+          ]
+        },
+        "arm_F_1": {
+          "rotate": [
+            {
+              "time": 0,
+              "value": 0,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 1,
+              "value": -3,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 2,
+              "value": 0,
+              "easing": "easeInOut"
+            }
+          ]
+        },
+        "arm_F_2": {
+          "rotate": [
+            {
+              "time": 0,
+              "value": 0,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 1,
+              "value": -6,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 2,
+              "value": 0,
+              "easing": "easeInOut"
+            }
+          ]
+        },
+        "arm_B_1": {
+          "rotate": [
+            {
+              "time": 0,
+              "value": 0,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 1,
+              "value": 3,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 2,
+              "value": 0,
+              "easing": "easeInOut"
+            }
+          ]
+        },
+        "arm_B_2": {
+          "rotate": [
+            {
+              "time": 0,
+              "value": 0,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 1,
+              "value": -5,
+              "easing": "easeInOut"
+            },
+            {
+              "time": 2,
+              "value": 0,
+              "easing": "easeInOut"
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "migration": {
+    "sources": [
+      "hero-c3-B7",
+      "neutral-skeleton-c-v1",
+      "time-travel-torso-fresh-master-v3"
+    ],
+    "preferred": "time-travel-torso-fresh-master-v3",
+    "note": "Latest Time Travel idle retained as idle; original Hero idle preserved under idle-hero-original. Original per-rig clips archived."
+  }
+}

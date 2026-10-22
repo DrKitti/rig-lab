@@ -1,0 +1,25 @@
+Use case: stylized-concept.
+Asset type: one-piece rig-ready game sprite, Time Travel far leg_B.
+
+Generate ONE fresh complete isolated Time Travel far leg_B in ONE SHOT on a genuinely transparent background. This is a new reconstruction from the source references, not an edit, crop, flip, or mirror of leg_F.
+
+REFERENCE ROLES:
+Image 1 is the accepted PRIMARY CANDIDATE leg_F and is the authority for overall part height, rounded hidden hip dome, relaxed trouser fullness, knee/ankle landmarks, compact boot mass, line weight, palette and rendering finish. Match its visual family closely, but do not copy or mirror its near-side boot construction.
+Image 2 is the enlarged approved full-body lower crop and PRIMARY DESIGN reference for the SCREEN-RIGHT far trouser leg and boot. Reconstruct that far-side leg: preserve its visible fold direction, gold boot cuff, diagonal wrapping strap, rectangular buckle placement and far-side shoe perspective.
+Image 3 is the complete approved Time Travel full body and fixes outfit identity, palette, material treatment and the relationship between the two legs.
+Image 4 is hidden neutral anatomy. It fixes compact limb length, side-facing setup direction, barely bent knee and floor contact only; do not trace its tight grey contour as the clothing silhouette.
+Image 5 is STYLE REFERENCE ONLY for tapered hand ink, flat colouring, angular shadow shapes and subtle painted texture. Do not copy its character, anatomy, proportions, clothing, pose, palette or objects.
+
+LEG_B CONSTRUCTION — STRICT:
+Draw exactly one complete far leg_B from rounded hidden upper thigh to boot sole. It is a separate opposite-side drawing, not a mirrored leg_F and not two legs. Keep the same fixed hip, knee, ankle and ground landmarks as Image 1 and Image 4. Match leg_F's moderate relaxed cloth volume and part length so the pair assembles naturally, while preserving the screen-right far-side design and perspective from Image 2.
+
+The hidden upper end is one smooth, full rounded convex cloth dome integrated into the leg. No flat or slanted cut, waistband, flap, cuff, lid, belt, seam band, separate ball or panel. The upper dome will hide under the torso.
+
+TROUSER SILHOUETTE:
+Use a continuous shaped trouser envelope: broad upper thigh, roomy but controlled knee, then a soft taper into the boot. Straight or only barely bent. No tight leggings, muscle tracing, deep knee hollow, hourglass pinch, balloon pants, harem shape, jodhpurs, extra side lobes, scallops or silhouette spikes. Preserve useful shaped fabric rather than making a featureless tube. Express cloth weight with two or three broad INTERNAL cool shadow planes and restrained angular folds; internal folds must not break the outer contour. Only a small amount of cloth settling immediately above the boot.
+
+FAR BOOT:
+Reconstruct the SCREEN-RIGHT far boot from Image 2, complete even where the approved full body overlaps it. Compact chunky warm-brown ankle boot, broad gold cuff, diagonal brown wrapping strap, rectangular gold buckle with dark inset, and dark sole. Mild right-facing three-quarter view, short rounded toe and coherent far-side perspective. Do not mirror the near boot. Keep the sole flat on the same ground line and keep the boot mass comparable to leg_F—neither tiny nor elongated. No heel, exposed foot or toes.
+
+STYLE AND OUTPUT:
+Thick confident tapered dark-brown hand ink, thicker on the outer silhouette and thinner on internal details. Flat muted plum/brown/gold fills, one cool hue-shifted angular shadow tone, subtle painted texture. Clean genuine alpha with generous padding. No glow, halo, haze, cast shadow, background, text, guides, dots, bands, bones, torso, coat fragment, second leg or extra object.

@@ -1,0 +1,800 @@
+{
+  "reference": "../../approved/time-travel-neutral-ease-v1/fullbody.png",
+  "parts": [
+    {
+      "source": "../sources/time-travel/torso.png",
+      "output": "../../drafts/time-travel-palette-rebuild/torso-matched.png",
+      "materials": [
+        {
+          "name": "plum_cloth",
+          "source": {
+            "hsv": [
+              [
+                135,
+                35,
+                45
+              ],
+              [
+                179,
+                255,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              240,
+              850,
+              485,
+              1020
+            ],
+            "hsv": [
+              [
+                135,
+                35,
+                45
+              ],
+              [
+                179,
+                255,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.65,
+          "chroma_strength": 0.95
+        },
+        {
+          "name": "brown_leather",
+          "source": {
+            "hsv": [
+              [
+                0,
+                80,
+                45
+              ],
+              [
+                16,
+                255,
+                169
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              232,
+              1060,
+              550,
+              1115
+            ],
+            "hsv": [
+              [
+                0,
+                40,
+                45
+              ],
+              [
+                16,
+                255,
+                169
+              ]
+            ]
+          },
+          "lightness_strength": 0.6,
+          "chroma_strength": 0.95
+        },
+        {
+          "name": "gold_trim",
+          "source": {
+            "hsv": [
+              [
+                17,
+                80,
+                90
+              ],
+              [
+                40,
+                255,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              200,
+              500,
+              540,
+              1090
+            ],
+            "hsv": [
+              [
+                17,
+                80,
+                90
+              ],
+              [
+                40,
+                255,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.6,
+          "chroma_strength": 0.95
+        },
+        {
+          "name": "skin",
+          "source": {
+            "box": [
+              105,
+              0,
+              210,
+              100
+            ],
+            "hsv": [
+              [
+                0,
+                80,
+                170
+              ],
+              [
+                16,
+                180,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              305,
+              440,
+              420,
+              478
+            ],
+            "hsv": [
+              [
+                0,
+                45,
+                170
+              ],
+              [
+                16,
+                180,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.65,
+          "chroma_strength": 0.95
+        },
+        {
+          "name": "ivory_fabric",
+          "source": {
+            "box": [
+              105,
+              80,
+              205,
+              135
+            ],
+            "hsv": [
+              [
+                0,
+                0,
+                120
+              ],
+              [
+                179,
+                79,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              165,
+              635,
+              270,
+              710
+            ],
+            "hsv": [
+              [
+                0,
+                0,
+                120
+              ],
+              [
+                179,
+                79,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.65,
+          "chroma_strength": 0.95
+        }
+      ]
+    },
+    {
+      "source": "../sources/time-travel/arm-f.png",
+      "output": "../../drafts/time-travel-palette-rebuild/arm-f-matched.png",
+      "materials": [
+        {
+          "name": "plum_cloth",
+          "source": {
+            "hsv": [
+              [
+                135,
+                35,
+                45
+              ],
+              [
+                179,
+                255,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              240,
+              850,
+              485,
+              1020
+            ],
+            "hsv": [
+              [
+                135,
+                35,
+                45
+              ],
+              [
+                179,
+                255,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.65,
+          "chroma_strength": 0.95
+        },
+        {
+          "name": "brown_leather",
+          "source": {
+            "hsv": [
+              [
+                0,
+                80,
+                45
+              ],
+              [
+                16,
+                255,
+                169
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              232,
+              1060,
+              550,
+              1115
+            ],
+            "hsv": [
+              [
+                0,
+                40,
+                45
+              ],
+              [
+                16,
+                255,
+                169
+              ]
+            ]
+          },
+          "lightness_strength": 0.6,
+          "chroma_strength": 0.95
+        },
+        {
+          "name": "gold_trim",
+          "source": {
+            "hsv": [
+              [
+                17,
+                80,
+                90
+              ],
+              [
+                40,
+                255,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              200,
+              500,
+              540,
+              1090
+            ],
+            "hsv": [
+              [
+                17,
+                80,
+                90
+              ],
+              [
+                40,
+                255,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.6,
+          "chroma_strength": 0.95
+        },
+        {
+          "name": "ivory_fabric",
+          "source": {
+            "box": [
+              0,
+              105,
+              150,
+              235
+            ],
+            "hsv": [
+              [
+                0,
+                0,
+                120
+              ],
+              [
+                179,
+                79,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              165,
+              635,
+              270,
+              710
+            ],
+            "hsv": [
+              [
+                0,
+                0,
+                120
+              ],
+              [
+                179,
+                79,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.65,
+          "chroma_strength": 0.95
+        }
+      ]
+    },
+    {
+      "source": "../sources/time-travel/arm-b.png",
+      "output": "../../drafts/time-travel-palette-rebuild/arm-b-matched.png",
+      "materials": [
+        {
+          "name": "plum_cloth",
+          "source": {
+            "hsv": [
+              [
+                135,
+                35,
+                45
+              ],
+              [
+                179,
+                255,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              240,
+              850,
+              485,
+              1020
+            ],
+            "hsv": [
+              [
+                135,
+                35,
+                45
+              ],
+              [
+                179,
+                255,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.65,
+          "chroma_strength": 0.95
+        },
+        {
+          "name": "brown_leather",
+          "source": {
+            "hsv": [
+              [
+                0,
+                80,
+                45
+              ],
+              [
+                16,
+                255,
+                169
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              232,
+              1060,
+              550,
+              1115
+            ],
+            "hsv": [
+              [
+                0,
+                40,
+                45
+              ],
+              [
+                16,
+                255,
+                169
+              ]
+            ]
+          },
+          "lightness_strength": 0.6,
+          "chroma_strength": 0.95
+        },
+        {
+          "name": "gold_trim",
+          "source": {
+            "hsv": [
+              [
+                17,
+                80,
+                90
+              ],
+              [
+                40,
+                255,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              200,
+              500,
+              540,
+              1090
+            ],
+            "hsv": [
+              [
+                17,
+                80,
+                90
+              ],
+              [
+                40,
+                255,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.6,
+          "chroma_strength": 0.95
+        },
+        {
+          "name": "ivory_fabric",
+          "source": {
+            "box": [
+              0,
+              105,
+              150,
+              235
+            ],
+            "hsv": [
+              [
+                0,
+                0,
+                120
+              ],
+              [
+                179,
+                79,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              165,
+              635,
+              270,
+              710
+            ],
+            "hsv": [
+              [
+                0,
+                0,
+                120
+              ],
+              [
+                179,
+                79,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.65,
+          "chroma_strength": 0.95
+        }
+      ]
+    },
+    {
+      "source": "../sources/time-travel/leg-f.png",
+      "output": "../../drafts/time-travel-palette-rebuild/leg-f-matched.png",
+      "materials": [
+        {
+          "name": "plum_cloth",
+          "source": {
+            "hsv": [
+              [
+                135,
+                35,
+                45
+              ],
+              [
+                179,
+                255,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              240,
+              850,
+              485,
+              1020
+            ],
+            "hsv": [
+              [
+                135,
+                35,
+                45
+              ],
+              [
+                179,
+                255,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.65,
+          "chroma_strength": 0.95
+        },
+        {
+          "name": "brown_leather",
+          "source": {
+            "hsv": [
+              [
+                0,
+                80,
+                45
+              ],
+              [
+                16,
+                255,
+                169
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              232,
+              1060,
+              550,
+              1115
+            ],
+            "hsv": [
+              [
+                0,
+                40,
+                45
+              ],
+              [
+                16,
+                255,
+                169
+              ]
+            ]
+          },
+          "lightness_strength": 0.6,
+          "chroma_strength": 0.95
+        },
+        {
+          "name": "gold_trim",
+          "source": {
+            "hsv": [
+              [
+                17,
+                80,
+                90
+              ],
+              [
+                40,
+                255,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              200,
+              500,
+              540,
+              1090
+            ],
+            "hsv": [
+              [
+                17,
+                80,
+                90
+              ],
+              [
+                40,
+                255,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.6,
+          "chroma_strength": 0.95
+        }
+      ]
+    },
+    {
+      "source": "../sources/time-travel/leg-b.png",
+      "output": "../../drafts/time-travel-palette-rebuild/leg-b-matched.png",
+      "materials": [
+        {
+          "name": "plum_cloth",
+          "source": {
+            "hsv": [
+              [
+                135,
+                35,
+                45
+              ],
+              [
+                179,
+                255,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              240,
+              850,
+              485,
+              1020
+            ],
+            "hsv": [
+              [
+                135,
+                35,
+                45
+              ],
+              [
+                179,
+                255,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.65,
+          "chroma_strength": 0.95
+        },
+        {
+          "name": "brown_leather",
+          "source": {
+            "hsv": [
+              [
+                0,
+                80,
+                45
+              ],
+              [
+                16,
+                255,
+                169
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              232,
+              1060,
+              550,
+              1115
+            ],
+            "hsv": [
+              [
+                0,
+                40,
+                45
+              ],
+              [
+                16,
+                255,
+                169
+              ]
+            ]
+          },
+          "lightness_strength": 0.6,
+          "chroma_strength": 0.95
+        },
+        {
+          "name": "gold_trim",
+          "source": {
+            "hsv": [
+              [
+                17,
+                80,
+                90
+              ],
+              [
+                40,
+                255,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              200,
+              500,
+              540,
+              1090
+            ],
+            "hsv": [
+              [
+                17,
+                80,
+                90
+              ],
+              [
+                40,
+                255,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.6,
+          "chroma_strength": 0.95
+        }
+      ]
+    }
+  ]
+}

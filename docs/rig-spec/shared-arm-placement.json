@@ -1,6 +1,6 @@
 {
-  "version": "neutral-c-v4",
-  "master": "src/data/hero-c3-B7.rig.json",
+  "version": "neutral-c-v5",
+  "master": "src/data/shared-master.rig.json",
   "user_delta_world": [
     12.195347361626489,
     -6.001766634022829
@@ -9,7 +9,7 @@
     {
       "name": "arm_B_1",
       "parent": "chest",
-      "x": 129.00489464306452,
+      "x": 85.00489464306452,
       "y": 84.46473407860859,
       "rotation": 151.21045854050266,
       "length": 105.01904589168578,
@@ -26,7 +26,7 @@
     {
       "name": "arm_F_1",
       "parent": "chest",
-      "x": 135,
+      "x": 91,
       "y": -94.2,
       "rotation": 204.6724039320563,
       "length": 122.17444129348563,
@@ -58,8 +58,8 @@
           77.45453869724555
         ]
       ],
-      "raw": "assets\\drafts\\neutral-arm_B-fresh-v7\\assembled\\arm_F.png",
-      "upright": "assets\\drafts\\neutral-arm_B-fresh-v7\\assembled\\arm_F-upright.png",
+      "raw": "assets/pipeline/neutral/arm-f-source.png",
+      "upright": "assets/pipeline/sources/neutral/arm-f.png",
       "restore_world_angle": 24.414557478226538
     },
     "B": {
@@ -78,12 +78,12 @@
           -21.372609980946734
         ]
       ],
-      "raw": "assets\\drafts\\neutral-arm_B-fresh-v7\\assembled\\arm_B.png",
-      "upright": "assets\\drafts\\neutral-arm_B-fresh-v7\\assembled\\arm_B-upright.png",
+      "raw": "assets/pipeline/neutral/arm-b-source.png",
+      "upright": "assets/pipeline/sources/neutral/arm-b.png",
       "restore_world_angle": -31.100629548812503
     }
   },
-  "placement_policy": "arm_B source shoulder pivot maps to arm_B_artwork_anchor_rig, independent of bone origin; keep accepted +12.195347/-6.001767 artwork placement; shared accepted C-v4 bones are frozen",
+  "placement_policy": "arm_B source shoulder pivot maps to arm_B_artwork_anchor_rig, independent of bone origin; keep accepted +12.195347/-6.001767 artwork placement; shared accepted C-v5 bones are frozen",
   "scope": "maintained master, Neutral, current Time Travel and all future outfit builds; historical draft rigs are retained",
   "elbow_F_promotion": {
     "delta_rig": [
@@ -91,7 +91,7 @@
       0
     ],
     "preserved": "shoulder, palm endpoint and setup artwork matrices",
-    "backup": "assets/drafts/shared-elbow-center-v3/"
+    "backup": "assets/experiments/history/shared-elbow-center-v3/"
   },
   "arm_B_artwork_anchor_rig": [
     87.99534736162651,
@@ -106,8 +106,8 @@
     -302.0048946430645
   ],
   "arm_B_promotion": {
-    "backup": "assets/drafts/shared-armb-center-v4/",
-    "source": "src/data/time-travel-armb-center-trial-v1.rig.json",
+    "backup": "assets/experiments/history/shared-armb-center-v4/",
+    "source": "assets/experiments/rigs/time-travel-armb-center-trial-v1.rig.json",
     "preserved": "all setup artwork, far palm endpoint, near arm and other bones"
   }
 }

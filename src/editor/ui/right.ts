@@ -299,6 +299,27 @@ export function mountRight(root: HTMLElement, state: EditorState, actions: Right
     return section('Bones', 'ปรับค่า = ใส่คีย์ที่เวลาปัจจุบัน · ◆ = มีคีย์ตรงนี้', ...body);
   };
 
+  const footPlantCard = () => {
+    if (!rig.footPlants?.length) return null;
+    return section('วางเท้า', 'เลือกสถานะ = ใส่คีย์ ณ เวลานี้ · บันทึกพร้อมท่า',
+      ...rig.footPlants.map(foot => {
+        const select = bindings.bind(h('select', {
+          onchange: (e: Event) => state.edit(() => {
+            setKey(state.clip, foot.bone, 'plant', state.time, Number(value(e)));
+            const key = keyAt(state.clip, foot.bone, 'plant', state.time);
+            if (key) key.easing = 'stepped';
+          }, true),
+        },
+        h('option', {value: '-1'}, 'อัตโนมัติ'),
+        h('option', {value: '1'}, 'ติดพื้น'),
+        h('option', {value: '0'}, 'ยกเท้า')),
+        () => String(sampleClip(state.clip, state.time)[foot.bone]?.plant ?? -1));
+        return h('label', {class: 'field'}, h('span', {}, foot.bone.includes('_F_') ? 'เท้าหน้า' : 'เท้าหลัง'), select);
+      }),
+      h('small', {class: 'muted'}, 'อัตโนมัติ: ยกเป้า IK ขึ้นเพื่อยกเท้า · ติดพื้น: ล็อกเป้าข้อเท้าและมุมรองเท้า'),
+    );
+  };
+
   const render = () => {
     bindings.clear();
     const sel = state.selection;
@@ -309,7 +330,8 @@ export function mountRight(root: HTMLElement, state: EditorState, actions: Right
       else cards.push(section('Inspector', 'คลิกกระดูกหรือภาพบนจอ หรือเลือกจาก Hierarchy', null));
       root.replaceChildren(...cards);
     } else {
-      root.replaceChildren(clipCard(), keyframeCard(), bonesCard());
+      const foot = footPlantCard();
+      root.replaceChildren(clipCard(), ...(foot ? [foot] : []), keyframeCard(), bonesCard());
     }
     bindings.refresh();
   };

@@ -66,7 +66,7 @@ export function mountTopbar(root: HTMLElement, state: EditorState, actions: Topb
           title: 'Ctrl+S',
           onclick: () =>
             actions.save().then(
-              () => state.toast(`บันทึกแล้ว → src/data/${state.rig.name}.rig.json`),
+              () => state.toast(state.rig.animationLibrary ? 'บันทึกชุดและคลังท่ากลางแล้ว · ทุกชุดใช้ร่วมกัน' : `บันทึกแล้ว → src/data/${state.rig.name}.rig.json`),
               (err) => state.toast(`บันทึกไม่ได้: ${err}`, true),
             ),
         },

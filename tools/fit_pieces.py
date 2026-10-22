@@ -23,7 +23,7 @@ from PIL import Image
 from pipeline_frame import load_frame, shifted_box
 
 ROOT = Path(__file__).resolve().parent.parent
-BASE_RIG = ROOT / 'src/data/hero-c3-B7.rig.json'
+BASE_RIG = ROOT / 'src/data/shared-master.rig.json'
 BOXES = {'head': (30, 30, 650, 530), 'torso': (160, 480, 560, 895),
          'arm_F': (60, 500, 330, 900), 'arm_B': (400, 500, 640, 900),
          'leg_F': (215, 840, 410, 1125), 'leg_B': (360, 840, 590, 1125)}

@@ -1,0 +1,31 @@
+{
+  "version": "neutral-c-v5",
+  "rootY": -107,
+  "waistWorldY": -217,
+  "torsoLength": 110,
+  "kneeRatio": 0.52,
+  "thighLength": 154.96,
+  "shinLength": 143.04,
+  "ankleWorldY": 191,
+  "footRotation": -90,
+  "footLength": 75,
+  "groundY": 231,
+  "soleHeight": 40,
+  "footLoad": 0.04,
+  "footLoadAt": 0.2,
+  "footPlantModes": {
+    "automatic": -1,
+    "airborne": 0,
+    "planted": 1
+  },
+  "maintainedRigs": [
+    "src/data/shared-master.rig.json",
+    "src/data/neutral.rig.json",
+    "src/data/time-travel.rig.json"
+  ],
+  "notes": [
+    "The waist pivot is the narrowest row of the accepted Neutral torso.",
+    "The ankle pivot is the anatomical ankle/malleolus; the horizontal foot bone starts there and runs toward the toe.",
+    "Setup artwork matrices remain unchanged; only deformation pivots move."
+  ]
+}

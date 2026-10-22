@@ -1,0 +1,185 @@
+{
+  "reference": "../sources/neutral/arm-f.png",
+  "parts": [
+    {
+      "source": "../sources/neutral/torso.png",
+      "output": "../../drafts/neutral-palette-rebuild/torso-gray.png",
+      "materials": [
+        {
+          "name": "neutral_gray",
+          "source": {
+            "hsv": [
+              [
+                60,
+                0,
+                45
+              ],
+              [
+                140,
+                100,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              0,
+              0,
+              122,
+              250
+            ],
+            "hsv": [
+              [
+                60,
+                0,
+                45
+              ],
+              [
+                140,
+                100,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.85,
+          "chroma_strength": 1
+        }
+      ]
+    },
+    {
+      "source": "../sources/neutral/arm-f.png",
+      "output": "../../drafts/neutral-palette-rebuild/arm-f-gray.png",
+      "materials": [
+        {
+          "name": "neutral_gray",
+          "source": {
+            "hsv": [
+              [
+                60,
+                0,
+                45
+              ],
+              [
+                140,
+                100,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              0,
+              0,
+              122,
+              250
+            ],
+            "hsv": [
+              [
+                60,
+                0,
+                45
+              ],
+              [
+                140,
+                100,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.85,
+          "chroma_strength": 1
+        }
+      ]
+    },
+    {
+      "source": "../sources/neutral/arm-b.png",
+      "output": "../../drafts/neutral-palette-rebuild/arm-b-gray.png",
+      "materials": [
+        {
+          "name": "neutral_gray",
+          "source": {
+            "hsv": [
+              [
+                60,
+                0,
+                45
+              ],
+              [
+                140,
+                100,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              0,
+              0,
+              122,
+              250
+            ],
+            "hsv": [
+              [
+                60,
+                0,
+                45
+              ],
+              [
+                140,
+                100,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.85,
+          "chroma_strength": 1
+        }
+      ]
+    },
+    {
+      "source": "../sources/neutral/leg-f.png",
+      "output": "../../drafts/neutral-palette-rebuild/leg-f-gray.png",
+      "materials": [
+        {
+          "name": "neutral_gray",
+          "source": {
+            "hsv": [
+              [
+                60,
+                0,
+                45
+              ],
+              [
+                140,
+                100,
+                255
+              ]
+            ]
+          },
+          "reference": {
+            "box": [
+              0,
+              0,
+              122,
+              250
+            ],
+            "hsv": [
+              [
+                60,
+                0,
+                45
+              ],
+              [
+                140,
+                100,
+                255
+              ]
+            ]
+          },
+          "lightness_strength": 0.85,
+          "chroma_strength": 1
+        }
+      ]
+    }
+  ]
+}

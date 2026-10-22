@@ -1,0 +1,843 @@
+{
+  "checkpoint": "outfit-pipeline-v5",
+  "aliases": {
+    "hero-c3-B7": "shared-master",
+    "neutral-skeleton-c-v1": "neutral",
+    "time-travel-torso-fresh-master-v3": "time-travel"
+  },
+  "notes": [
+    "Runtime copies are byte-identical to selected draft images.",
+    "sha256 records original source bytes at migration time; Git LF normalization or documented text cleanup may change text-file bytes. Runtime PNG hashes are also verified in assets/rigs/manifest.json.",
+    "Archived experiments are not active build inputs; some reference local-only drafts.",
+    "No approved source images were modified or moved."
+  ],
+  "files": [
+    {
+      "source": "src/data/animations/neutral-c-v5.animations.json",
+      "target": "assets/experiments/checkpoint-before-organization/neutral-c-v5.animations.json",
+      "purpose": "shared clips backup",
+      "sha256": "c99bc3881d14080122724039858106dfd58ae8dc2e524d3b803490ae673e0444"
+    },
+    {
+      "source": "assets/rigs/hero-c3/head.png",
+      "target": "assets/characters/master-hero/head.png",
+      "purpose": "runtime character head",
+      "sha256": "985337cce3535576939fca7ca8f65806a5c7366de9cb6bdd791c306a0a061899"
+    },
+    {
+      "source": "assets/rigs/hero-c3/torso.png",
+      "target": "assets/rigs/shared-master/torso.png",
+      "purpose": "active runtime texture",
+      "sha256": "1ec50ef35d9e41614e41f2fa5abb6ad723480105d5516b3120ba3a40c292191f"
+    },
+    {
+      "source": "assets/rigs/hero-c3/arm_F.png",
+      "target": "assets/rigs/shared-master/arm-f.png",
+      "purpose": "active runtime texture",
+      "sha256": "83f173844acbf5c563ed7c80b3496db484732f8310b71079dd32ba47b4656fe3"
+    },
+    {
+      "source": "assets/rigs/hero-c3/arm_B.png",
+      "target": "assets/rigs/shared-master/arm-b.png",
+      "purpose": "active runtime texture",
+      "sha256": "e980785dd72bb889a9863c759a8cdca3dbeca450ace9ffd6409ce4c9f1c0443a"
+    },
+    {
+      "source": "assets/rigs/hero-c3/leg.png",
+      "target": "assets/rigs/shared-master/leg-f.png",
+      "purpose": "active runtime texture",
+      "sha256": "4e128f9619a08563008b6fadc0fd15e34d13025ea3756943cdfe30e8eca22c6f"
+    },
+    {
+      "source": "assets/drafts/neutral-material-match-v1/torso-matched-v1.png",
+      "target": "assets/rigs/neutral/torso.png",
+      "purpose": "active runtime texture",
+      "sha256": "cf9c45a40af2f033732f634aed6e72177957433e5f34ef0afc32635c182ad819"
+    },
+    {
+      "source": "assets/drafts/neutral-arm_B-fresh-v7/assembled/head.png",
+      "target": "assets/characters/shared-hero/head.png",
+      "purpose": "runtime character head",
+      "sha256": "ba3b8afac52b2bb06b217ec85da1555a40ca8a29b07e393f67efe0e50e43a431"
+    },
+    {
+      "source": "assets/drafts/neutral-material-match-v1/arm_B-matched-v1.png",
+      "target": "assets/rigs/neutral/arm-b.png",
+      "purpose": "active runtime texture",
+      "sha256": "c3d2fd6403f16896b1e98e1094641cb2a26c6c3d99b7da9975102f79322515d8"
+    },
+    {
+      "source": "assets/drafts/neutral-material-match-v1/arm_F-matched-v1.png",
+      "target": "assets/rigs/neutral/arm-f.png",
+      "purpose": "active runtime texture",
+      "sha256": "df95b9a65d5d60345d6edbdefb53d0ce656bc3f3521afd1eacb47f8dc70284b4"
+    },
+    {
+      "source": "assets/drafts/neutral-material-match-v1/leg_F-matched-v1.png",
+      "target": "assets/rigs/neutral/leg-f.png",
+      "purpose": "active runtime texture",
+      "sha256": "33926a23b8ec9c0a7deb9f58ac428b1b697d2b7c35a0688ef6943202c5851f44"
+    },
+    {
+      "source": "assets/drafts/time-travel-material-match-v4/torso-matched-v4.png",
+      "target": "assets/rigs/time-travel/torso.png",
+      "purpose": "active runtime texture",
+      "sha256": "ac6c4c5a72e37facad21fbdc2944c7fafe395dbffb138b9fb9866394eb2d9d07"
+    },
+    {
+      "source": "assets/drafts/time-travel-material-match-v4/arm_B-matched-v4.png",
+      "target": "assets/rigs/time-travel/arm-b.png",
+      "purpose": "active runtime texture",
+      "sha256": "7cb3adc43827c87a99b4392073990e7d14517ca9fccf82579885cceb4b9548ca"
+    },
+    {
+      "source": "assets/drafts/time-travel-material-match-v4/arm_F-matched-v4.png",
+      "target": "assets/rigs/time-travel/arm-f.png",
+      "purpose": "active runtime texture",
+      "sha256": "61ecd0c6741019c3303b86352ac702c4e4eb0a2425477df579d9dce635b4bd60"
+    },
+    {
+      "source": "assets/drafts/time-travel-material-match-v4/leg_F-matched-v4.png",
+      "target": "assets/rigs/time-travel/leg-f.png",
+      "purpose": "active runtime texture",
+      "sha256": "a42c2057375c2f3c8038f6a7c83f0c8eedb0835428ec2248998505947ec0b09e"
+    },
+    {
+      "source": "assets/drafts/time-travel-material-match-v4/leg_B-matched-v4.png",
+      "target": "assets/rigs/time-travel/leg-b.png",
+      "purpose": "active runtime texture",
+      "sha256": "d3755141a3ed757de8e0d84071973c767d306a420b1a9ce416ca8556b33e754b"
+    },
+    {
+      "source": "assets/drafts/time-travel-torso-fresh-master-v1/placed-v3/torso.png",
+      "target": "assets/pipeline/sources/time-travel/torso.png",
+      "purpose": "pre-palette source",
+      "sha256": "a0675021bf34352dd8aa233ad658a0c2326d1e002e3fa37cf4b1c4d3bbcc657f"
+    },
+    {
+      "source": "assets/drafts/time-travel-torso-armhole-v1/assembled-v4/arm_F-upright.png",
+      "target": "assets/pipeline/sources/time-travel/arm-f.png",
+      "purpose": "pre-palette source",
+      "sha256": "2092011454f8e86897cf9d89e2d866443f49f24ef7fbba9fd0b26353b04a3489"
+    },
+    {
+      "source": "assets/drafts/time-travel-torso-armhole-v1/assembled-v4/arm_B-upright.png",
+      "target": "assets/pipeline/sources/time-travel/arm-b.png",
+      "purpose": "pre-palette source",
+      "sha256": "e446318122dc9ec2ba9513048dc5a1eacd51296702011612f44c9bb949b5a627"
+    },
+    {
+      "source": "assets/rigs/time-travel/leg_F.png",
+      "target": "assets/pipeline/sources/time-travel/leg-f.png",
+      "purpose": "pre-palette source",
+      "sha256": "52956b618c29485bb9f4665ad7fcf9fba1aeb5c5bfc7ab369fef066e31b1cb16"
+    },
+    {
+      "source": "assets/rigs/time-travel/leg_B.png",
+      "target": "assets/pipeline/sources/time-travel/leg-b.png",
+      "purpose": "pre-palette source",
+      "sha256": "ac387e38ff7a4832574146af3ea25a2a4f53cd12abe9f8b4ad4ca49700b0f095"
+    },
+    {
+      "source": "assets/rigs/neutral-c-v4/torso.png",
+      "target": "assets/pipeline/sources/neutral/torso.png",
+      "purpose": "pre-palette source",
+      "sha256": "12cc3e1d668bcdd6054af9a8aabe121d191b53d6a514ede76c1ddf0d7aec51b8"
+    },
+    {
+      "source": "assets/drafts/neutral-arm_B-fresh-v7/assembled/arm_F-upright.png",
+      "target": "assets/pipeline/sources/neutral/arm-f.png",
+      "purpose": "pre-palette source",
+      "sha256": "addeb4ba3e67df3b8b4d7e358f5a73bee665804bc147df092c01b9758a62780f"
+    },
+    {
+      "source": "assets/drafts/neutral-arm_B-fresh-v7/assembled/arm_B-upright.png",
+      "target": "assets/pipeline/sources/neutral/arm-b.png",
+      "purpose": "pre-palette source",
+      "sha256": "491b215ba534840bcf8bba31d970a64417f23259b922a2b0c278297cb639a216"
+    },
+    {
+      "source": "assets/drafts/neutral-leg-simple-v1/leg-fitted-v1.png",
+      "target": "assets/pipeline/sources/neutral/leg-f.png",
+      "purpose": "pre-palette source",
+      "sha256": "dce2e7223e12766c76a9d920ac6c36742fbacfa995b2477629bbcba352b2234a"
+    },
+    {
+      "source": "assets/drafts/neutral-leg-simple-v1/leg-v1.png",
+      "target": "assets/pipeline/neutral/leg-source.png",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "7101b752ea96c57b62547fc050576a81900829a858a282bef3f868a7d09c5fa9"
+    },
+    {
+      "source": "assets/drafts/neutral-leg-simple-v1/leg-fitted-v1.png",
+      "target": "assets/pipeline/neutral/leg-fitted.png",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "dce2e7223e12766c76a9d920ac6c36742fbacfa995b2477629bbcba352b2234a"
+    },
+    {
+      "source": "assets/drafts/neutral-leg-simple-v1/prompt.txt",
+      "target": "assets/pipeline/neutral/leg.prompt.txt",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "bd0a344aa901d2ac114f309bfe62bf8676389a8dea882e2450a2de9d0ade693d"
+    },
+    {
+      "source": "assets/drafts/neutral-leg-simple-v1/leg-fitted-v1.json",
+      "target": "assets/pipeline/neutral/leg-fit.json",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "5d51a8984a56d0c49e79b0874d032f03c8ff53ec5a97cb26c7c5d21d437eca39"
+    },
+    {
+      "source": "assets/drafts/neutral-parts-refresh-v1/torso-v4.png",
+      "target": "assets/pipeline/neutral/torso-source.png",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "c1b746713d10ceb257174d7e035f4e188ff258e9b7887325c6807f0316d96e81"
+    },
+    {
+      "source": "assets/drafts/neutral-arm_B-fresh-v7/assembled/arm_F.png",
+      "target": "assets/pipeline/neutral/arm-f-source.png",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "9d17e96aa7ec55bb6005a5656500a51296e6478c9942de48e20d2547c944ebfc"
+    },
+    {
+      "source": "assets/drafts/neutral-arm_B-fresh-v7/assembled/arm_B.png",
+      "target": "assets/pipeline/neutral/arm-b-source.png",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "27c34586c1b92f13abc1fcbe464c10ddd986512f7b2921ce1d8d9f4ad84be1bd"
+    },
+    {
+      "source": "assets/drafts/time-travel-leg-guide-v2/leg_F-prompt.txt",
+      "target": "assets/pipeline/examples/time-travel/leg-f.prompt.txt",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "bcf1974c7301c1f5757e7dd7d415dfb92ab65186746f77961778f531923a02ae"
+    },
+    {
+      "source": "assets/drafts/time-travel-leg-guide-v2/leg_B-prompt.txt",
+      "target": "assets/pipeline/examples/time-travel/leg-b.prompt.txt",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "b499099ae9b715f6cc6a168636b91a2f75dd45ffa8a6286dec8a1c6931e46fe3"
+    },
+    {
+      "source": "assets/drafts/time-travel-leg-guide-v2/leg_F-v1.png",
+      "target": "assets/pipeline/examples/time-travel/leg-f-source.png",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "11e7bcd62b7c8db64bcb5465a1f17f4a7be64e1566864840ad2c0497e695450d"
+    },
+    {
+      "source": "assets/drafts/time-travel-leg-guide-v2/leg_B-v1.png",
+      "target": "assets/pipeline/examples/time-travel/leg-b-source.png",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "c926b21725de1626b5f5c6b16c98baa3532b3156e43b523e3906796b54181eb9"
+    },
+    {
+      "source": "assets/drafts/kolahon-outfit-pipeline-infographic-v1/pipeline-v2.png",
+      "target": "docs/outfit-pipeline/figures/pipeline-overview.png",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "09283f72bbc7fd83716c2c254d83752f33a27ac621064bcc1ba9e82e8381d385"
+    },
+    {
+      "source": "assets/drafts/kolahon-outfit-pipeline-infographic-v1/prompt.txt",
+      "target": "docs/outfit-pipeline/figures/pipeline-overview.prompt.txt",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "dff3547ac973736a38a545987ef2f7ed3885f003ae3d72f9797a556987a62381"
+    },
+    {
+      "source": "assets/drafts/kolahon-outfit-pipeline-infographic-v1/edit-prompt-v2.txt",
+      "target": "docs/outfit-pipeline/figures/pipeline-overview.edit-prompt.txt",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "4ae795196ed3c95730379b6b2234cf5a3ac647b52edb50c4c5bc658a8c660a3e"
+    },
+    {
+      "source": "assets/drafts/shots/time-travel-material-match-v4-setup.png",
+      "target": "docs/outfit-pipeline/figures/time-travel-color-before-after.png",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "dda2d40948b2715af2d8794747f474c03d2d4937ace24974a7159affaeaa3d50"
+    },
+    {
+      "source": "assets/drafts/shots/neutral-material-match-v1.png",
+      "target": "docs/outfit-pipeline/figures/neutral-color-before-after.png",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "a65d7b2af4e890ee4de90163bc930cefd900222685663b268297a20f517eed37"
+    },
+    {
+      "source": "assets/drafts/shots/foot-load-knee52-feet.png",
+      "target": "docs/outfit-pipeline/figures/foot-load-comparison.png",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "ba524cb5f40ea8dce9931d774eee9ff6644f83fa1ab0ea6389e3ef2e8f746617"
+    },
+    {
+      "source": "assets/drafts/time-travel-leg-comparison-v1/leg_F-comparison.png",
+      "target": "assets/experiments/evidence/time-travel-leg-iterations.png",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "00d3f73d6d0c0d6fa55c9f2271116096890d002db1ee9542b22d172b6d507355"
+    },
+    {
+      "source": "assets/drafts/time-travel-leg-guide-v2/review/leg_F-v1-annotated.png",
+      "target": "assets/experiments/evidence/time-travel-leg-review.png",
+      "purpose": "accepted reference, recipe or curated experiment evidence",
+      "sha256": "661339214fab692cad8f219888bf573262ec9fc9055886f2741e015119e64e67"
+    },
+    {
+      "source": "assets/drafts/leg-garment-envelope-guide-v1/build_guide.py",
+      "target": "assets/pipeline/guides/leg-envelope-v1/build_guide.py",
+      "purpose": "historical guide example; update landmarks before reuse",
+      "sha256": "973f67756ed7ae094fad369fcd8fb102c4247d128ab96e526523023f276babdc"
+    },
+    {
+      "source": "assets/drafts/leg-garment-envelope-guide-v1/leg-garment-envelope-guide-v1.png",
+      "target": "assets/pipeline/guides/leg-envelope-v1/leg-garment-envelope-guide-v1.png",
+      "purpose": "historical guide example; update landmarks before reuse",
+      "sha256": "9e4f522057b5ee7fc54e3bb4cd56f725b118ae1192cdd21fea1c514ed516f448"
+    },
+    {
+      "source": "assets/drafts/leg-garment-envelope-guide-v1/leg-garment-envelope-ref-v1.png",
+      "target": "assets/pipeline/guides/leg-envelope-v1/leg-garment-envelope-ref-v1.png",
+      "purpose": "historical guide example; update landmarks before reuse",
+      "sha256": "9620c6aa1f74d4b6578e93e162f71bfe5e3a6a34e7230cc1a91a88c5c87bc19d"
+    },
+    {
+      "source": "assets/drafts/leg-garment-envelope-guide-v1/README.md",
+      "target": "assets/pipeline/guides/leg-envelope-v1/README.md",
+      "purpose": "historical guide example; update landmarks before reuse",
+      "sha256": "fb380a47400ea46db545ef2242b5ac34bff618ed0b66309eec453633282944cb"
+    },
+    {
+      "source": "assets/drafts/leg-garment-envelope-guide-v2/build_relaxed_mask.py",
+      "target": "assets/pipeline/guides/leg-envelope-v2/build_relaxed_mask.py",
+      "purpose": "historical guide example; update landmarks before reuse",
+      "sha256": "b433ba1b0f097819873ba6ab41f0d97fd6b2eab47cd648e618a7f55ef97818a1"
+    },
+    {
+      "source": "assets/drafts/leg-garment-envelope-guide-v2/README.md",
+      "target": "assets/pipeline/guides/leg-envelope-v2/README.md",
+      "purpose": "historical guide example; update landmarks before reuse",
+      "sha256": "5b4443b0c16487914e72d07cab3ce298596e9841d48965aa9c721e30f823986a"
+    },
+    {
+      "source": "assets/drafts/leg-garment-envelope-guide-v2/relaxed-silhouette-ref-v1.png",
+      "target": "assets/pipeline/guides/leg-envelope-v2/relaxed-silhouette-ref-v1.png",
+      "purpose": "historical guide example; update landmarks before reuse",
+      "sha256": "d3e52271fce411354e925fb744bf538de987eba4c1c054f8afe8fd79d884c4af"
+    },
+    {
+      "source": "assets/drafts/leg-garment-envelope-guide-v2/relaxed-silhouette-review-v1.png",
+      "target": "assets/pipeline/guides/leg-envelope-v2/relaxed-silhouette-review-v1.png",
+      "purpose": "historical guide example; update landmarks before reuse",
+      "sha256": "e6ac1ef1dda1142fdbe95c49a26ae509337f0857c8928dfee9fbe3f735083a7e"
+    },
+    {
+      "source": "src/data/hero-c3-B7.rig.json",
+      "target": "assets/experiments/rigs/hero-c3-B7.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-armb-center-trial-v1.rig.json",
+      "target": "assets/experiments/rigs/neutral-armb-center-trial-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-armf-fresh-v6.rig.json",
+      "target": "assets/experiments/rigs/neutral-armf-fresh-v6.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-arms-fresh-v7.rig.json",
+      "target": "assets/experiments/rigs/neutral-arms-fresh-v7.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-leg-fv1-shared-trial-v1.rig.json",
+      "target": "assets/experiments/rigs/neutral-leg-fv1-shared-trial-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-parts-armf-extract-v1.rig.json",
+      "target": "assets/experiments/rigs/neutral-parts-armf-extract-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-parts-v1.rig.json",
+      "target": "assets/experiments/rigs/neutral-parts-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-parts-v2.rig.json",
+      "target": "assets/experiments/rigs/neutral-parts-v2.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-parts-v3.rig.json",
+      "target": "assets/experiments/rigs/neutral-parts-v3.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-parts-v4.rig.json",
+      "target": "assets/experiments/rigs/neutral-parts-v4.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-parts-v5.rig.json",
+      "target": "assets/experiments/rigs/neutral-parts-v5.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-skeleton-c-v1.rig.json",
+      "target": "assets/experiments/rigs/neutral-skeleton-c-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-skeleton-candidate-v1.rig.json",
+      "target": "assets/experiments/rigs/neutral-skeleton-candidate-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-skeleton-current-v1.rig.json",
+      "target": "assets/experiments/rigs/neutral-skeleton-current-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-torso-foot-trial-v1.rig.json",
+      "target": "assets/experiments/rigs/neutral-torso-foot-trial-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/neutral-torso-v4-assembly-trial-v1.rig.json",
+      "target": "assets/experiments/rigs/neutral-torso-v4-assembly-trial-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/setup-blend-controls-test-v1.rig.json",
+      "target": "assets/experiments/rigs/setup-blend-controls-test-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/study-body-master-v1.rig.json",
+      "target": "assets/experiments/rigs/study-body-master-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/study-body-master-v2.rig.json",
+      "target": "assets/experiments/rigs/study-body-master-v2.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/study-body-scaffold-v1.rig.json",
+      "target": "assets/experiments/rigs/study-body-scaffold-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/study-dark-gold-clean-v1.rig.json",
+      "target": "assets/experiments/rigs/study-dark-gold-clean-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/study-dark-gold-pipeline-v1.rig.json",
+      "target": "assets/experiments/rigs/study-dark-gold-pipeline-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/study-dark-gold-shoulder-cap-v1.rig.json",
+      "target": "assets/experiments/rigs/study-dark-gold-shoulder-cap-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/study-dark-gold-traveler-original-v1.rig.json",
+      "target": "assets/experiments/rigs/study-dark-gold-traveler-original-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/study-dark-gold-traveler-rounded-v1.rig.json",
+      "target": "assets/experiments/rigs/study-dark-gold-traveler-rounded-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/study-traveler-one-part-color-v1.rig.json",
+      "target": "assets/experiments/rigs/study-traveler-one-part-color-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/study-traveler-one-part-v1.rig.json",
+      "target": "assets/experiments/rigs/study-traveler-one-part-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/study-traveler-sheet-v1.rig.json",
+      "target": "assets/experiments/rigs/study-traveler-sheet-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-armb-center-trial-v1.rig.json",
+      "target": "assets/experiments/rigs/time-travel-armb-center-trial-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-armb-pivot-0.rig.json",
+      "target": "assets/experiments/rigs/time-travel-armb-pivot-0.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-armb-pivot-12.rig.json",
+      "target": "assets/experiments/rigs/time-travel-armb-pivot-12.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-armb-pivot-16p45.rig.json",
+      "target": "assets/experiments/rigs/time-travel-armb-pivot-16p45.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-armb-pivot-20.rig.json",
+      "target": "assets/experiments/rigs/time-travel-armb-pivot-20.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-armb-pivot-8.rig.json",
+      "target": "assets/experiments/rigs/time-travel-armb-pivot-8.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-leg-pair-trial-v1.rig.json",
+      "target": "assets/experiments/rigs/time-travel-leg-pair-trial-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-parts-neutral-v1.rig.json",
+      "target": "assets/experiments/rigs/time-travel-parts-neutral-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-parts-v3.rig.json",
+      "target": "assets/experiments/rigs/time-travel-parts-v3.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-shoulder-b-production.rig.json",
+      "target": "assets/experiments/rigs/time-travel-shoulder-b-production.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-shoulder-c-torso06.rig.json",
+      "target": "assets/experiments/rigs/time-travel-shoulder-c-torso06.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-shoulder-d-concave.rig.json",
+      "target": "assets/experiments/rigs/time-travel-shoulder-d-concave.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-torso-armhole-v1.rig.json",
+      "target": "assets/experiments/rigs/time-travel-torso-armhole-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-torso-armhole-v2.rig.json",
+      "target": "assets/experiments/rigs/time-travel-torso-armhole-v2.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-torso-armhole-v3.rig.json",
+      "target": "assets/experiments/rigs/time-travel-torso-armhole-v3.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-torso-armhole-v4.rig.json",
+      "target": "assets/experiments/rigs/time-travel-torso-armhole-v4.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-torso-armhole-v5f.rig.json",
+      "target": "assets/experiments/rigs/time-travel-torso-armhole-v5f.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-torso-foot-trial-v1.rig.json",
+      "target": "assets/experiments/rigs/time-travel-torso-foot-trial-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-torso-fresh-master-v3.rig.json",
+      "target": "assets/experiments/rigs/time-travel-torso-fresh-master-v3.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-torso-standard-v1.rig.json",
+      "target": "assets/experiments/rigs/time-travel-torso-standard-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-torso-v1.rig.json",
+      "target": "assets/experiments/rigs/time-travel-torso-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/time-travel-torso-v7.rig.json",
+      "target": "assets/experiments/rigs/time-travel-torso-v7.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/tt-joint-study-v1-a.rig.json",
+      "target": "assets/experiments/rigs/tt-joint-study-v1-a.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/tt-joint-study-v1-b.rig.json",
+      "target": "assets/experiments/rigs/tt-joint-study-v1-b.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/tt-joint-study-v1-c.rig.json",
+      "target": "assets/experiments/rigs/tt-joint-study-v1-c.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "src/data/tt-joint-study-v1-d.rig.json",
+      "target": "assets/experiments/rigs/tt-joint-study-v1-d.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/neutral-arm_B-fresh-v7/assembled/arm_B-upright.png",
+      "target": "assets/experiments/history/neutral-arm_B-fresh-v7/assembled/arm_B-upright.png",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/neutral-arm_B-fresh-v7/assembled/arm_B.png",
+      "target": "assets/experiments/history/neutral-arm_B-fresh-v7/assembled/arm_B.png",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/neutral-arm_B-fresh-v7/assembled/arm_F-upright.png",
+      "target": "assets/experiments/history/neutral-arm_B-fresh-v7/assembled/arm_F-upright.png",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/neutral-arm_B-fresh-v7/assembled/arm_F.png",
+      "target": "assets/experiments/history/neutral-arm_B-fresh-v7/assembled/arm_F.png",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/neutral-arm_B-fresh-v7/assembled/head.png",
+      "target": "assets/experiments/history/neutral-arm_B-fresh-v7/assembled/head.png",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/neutral-arm_B-fresh-v7/assembled/leg_F.png",
+      "target": "assets/experiments/history/neutral-arm_B-fresh-v7/assembled/leg_F.png",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/neutral-arm_B-fresh-v7/assembled/torso.png",
+      "target": "assets/experiments/history/neutral-arm_B-fresh-v7/assembled/torso.png",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-arm-placement-v2/README.md",
+      "target": "assets/experiments/history/shared-arm-placement-v2/README.md",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-arm-placement-v2/hero-c3-B7.rig-before.json",
+      "target": "assets/experiments/history/shared-arm-placement-v2/hero-c3-B7.rig-before.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-arm-placement-v2/neutral-before-time-travel-placement.json",
+      "target": "assets/experiments/history/shared-arm-placement-v2/neutral-before-time-travel-placement.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-arm-placement-v2/neutral-skeleton-c-v1.rig-before.json",
+      "target": "assets/experiments/history/shared-arm-placement-v2/neutral-skeleton-c-v1.rig-before.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-arm-placement-v2/report.json",
+      "target": "assets/experiments/history/shared-arm-placement-v2/report.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-arm-placement-v2/time-travel-torso-fresh-master-v3.rig-before.json",
+      "target": "assets/experiments/history/shared-arm-placement-v2/time-travel-torso-fresh-master-v3.rig-before.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-armb-center-v4/hero-c3-B7.rig.json",
+      "target": "assets/experiments/history/shared-armb-center-v4/hero-c3-B7.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-armb-center-v4/neutral-skeleton-c-v1.rig.json",
+      "target": "assets/experiments/history/shared-armb-center-v4/neutral-skeleton-c-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-armb-center-v4/shared-arm-placement.json",
+      "target": "assets/experiments/history/shared-armb-center-v4/shared-arm-placement.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-armb-center-v4/time-travel-armb-center-trial-v1.rig.json",
+      "target": "assets/experiments/history/shared-armb-center-v4/time-travel-armb-center-trial-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-armb-center-v4/time-travel-torso-fresh-master-v3.rig.json",
+      "target": "assets/experiments/history/shared-armb-center-v4/time-travel-torso-fresh-master-v3.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-elbow-center-v3/hero-c3-B7.rig.json",
+      "target": "assets/experiments/history/shared-elbow-center-v3/hero-c3-B7.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-elbow-center-v3/neutral-elbow-center-trial-v1.rig.json",
+      "target": "assets/experiments/history/shared-elbow-center-v3/neutral-elbow-center-trial-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-elbow-center-v3/neutral-skeleton-c-v1.rig.json",
+      "target": "assets/experiments/history/shared-elbow-center-v3/neutral-skeleton-c-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-elbow-center-v3/shared-arm-placement.json",
+      "target": "assets/experiments/history/shared-elbow-center-v3/shared-arm-placement.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-elbow-center-v3/time-travel-elbow-center-trial-v1.rig.json",
+      "target": "assets/experiments/history/shared-elbow-center-v3/time-travel-elbow-center-trial-v1.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/shared-elbow-center-v3/time-travel-torso-fresh-master-v3.rig.json",
+      "target": "assets/experiments/history/shared-elbow-center-v3/time-travel-torso-fresh-master-v3.rig.json",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/time-travel-torso-armhole-v1/assembled-v4/arm_B-upright.png",
+      "target": "assets/experiments/history/time-travel-torso-armhole-v1/assembled-v4/arm_B-upright.png",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/time-travel-torso-armhole-v1/assembled-v4/arm_F-upright.png",
+      "target": "assets/experiments/history/time-travel-torso-armhole-v1/assembled-v4/arm_F-upright.png",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/time-travel-torso-armhole-v1/assembled-v4/head.png",
+      "target": "assets/experiments/history/time-travel-torso-armhole-v1/assembled-v4/head.png",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/time-travel-torso-armhole-v1/assembled-v4/leg_F.png",
+      "target": "assets/experiments/history/time-travel-torso-armhole-v1/assembled-v4/leg_F.png",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/drafts/time-travel-torso-fresh-master-v1/placed-v3/torso.png",
+      "target": "assets/experiments/history/time-travel-torso-fresh-master-v1/placed-v3/torso.png",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/rigs/hero-c3",
+      "target": "assets/experiments/runtime-origins/hero-c3",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/rigs/neutral-c-v4",
+      "target": "assets/experiments/runtime-origins/neutral-c-v4",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/rigs/time-travel/leg_F.png",
+      "target": "assets/experiments/runtime-origins/time-travel/leg_F.png",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/rigs/time-travel/leg_B.png",
+      "target": "assets/experiments/runtime-origins/time-travel/leg_B.png",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "assets/rigs/time-travel/README.md",
+      "target": "assets/experiments/runtime-origins/time-travel/README.md",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "docs/character-pipeline.md",
+      "target": "docs/archive/character-pipeline-history.md",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "docs/neutral-pipeline.md",
+      "target": "docs/archive/neutral-pipeline-history.md",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "docs/handoff.md",
+      "target": "docs/archive/handoff-history.md",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "docs/current-character-standard.md",
+      "target": "docs/outfit-pipeline/standard.md",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "tools/shared_animations.mjs",
+      "target": "src/server/animation-store.mjs",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "tools/test_shared_animations.mjs",
+      "target": "tests/server/animation-store.test.mjs",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "tools/test_match_materials.py",
+      "target": "tests/pipeline/test_match_materials.py",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "tools/test_blend_preview.ts",
+      "target": "tests/editor/blend-preview.test.ts",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "tools/test_mesh_settings.ts",
+      "target": "tests/editor/mesh-settings.test.ts",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "tools/promote_shared_c.py",
+      "target": "tools/archive/promote_shared_c.py",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "tools/lock_shared_arm_placement.py",
+      "target": "tools/archive/lock_shared_arm_placement.py",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "tools/compose_neutral_visible_arm.py",
+      "target": "tools/archive/compose_neutral_visible_arm.py",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "tools/extract_neutral_arms.py",
+      "target": "tools/archive/extract_neutral_arms.py",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "tools/prepare_neutral_leg.py",
+      "target": "tools/archive/prepare_neutral_leg.py",
+      "purpose": "archive/move"
+    },
+    {
+      "source": "tools/verify_shared_c.py",
+      "target": "tools/archive/verify_shared_c_history.py",
+      "purpose": "archive/move"
+    }
+  ]
+}

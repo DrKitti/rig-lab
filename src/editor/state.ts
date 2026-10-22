@@ -145,6 +145,21 @@ export class EditorState {
     this.structureChanged();
   }
 
+  /** Refresh a clean tab's shared clips without making an edit or replacing outfit attachments. */
+  syncAnimationLibrary(data: RigData): boolean {
+    if (this.dirty || !this.rig.animationLibrary || data.animationLibrary !== this.rig.animationLibrary
+      || data.animationLibraryRevision === this.rig.animationLibraryRevision) return false;
+    this.rig.clips = structuredClone(data.clips);
+    this.rig.animationLibraryRevision = data.animationLibraryRevision;
+    this.undoStack = [];
+    this.redoStack = [];
+    if (!this.rig.clips.some(c => c.name === this.clipName)) this.clipName = this.rig.clips[0].name;
+    this.time = Math.min(this.time, this.clip.duration);
+    this.selectedKeys = [];
+    this.structureChanged();
+    return true;
+  }
+
   private restore(snap: string): void {
     Object.assign(this.rig, JSON.parse(snap) as RigData);
     this.dirty = true;

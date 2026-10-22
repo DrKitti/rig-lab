@@ -41,6 +41,7 @@ Writes src/data/<new_rig_name>.rig.json; refuses to overwrite an existing rig.
 import json
 import math
 import os
+import re
 import sys
 
 import cv2
@@ -48,7 +49,7 @@ import numpy as np
 from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BASE_RIG = os.path.join(ROOT, 'src', 'data', 'hero-c3-B7.rig.json')
+BASE_RIG = os.path.join(ROOT, 'src', 'data', 'shared-master.rig.json')
 # Full-body pixel of the rig origin in docs/rig-spec/hero-c3-B7-fullbody.png.
 FULLBODY_ORIGIN = (359.2, 888.0)
 
@@ -220,7 +221,7 @@ def place_parts(rig, pieces, pieces_dir, names):
             oy += info.get('far_leg_offset', [0, 0])[1]
         # Pivot in rig space, then in the part's bone space.
         px, py = ox + pv[0] - frame_origin[0], oy + pv[1] - frame_origin[1]
-        if rig.get('skeletonVersion') == 'neutral-c-v4' and part['name'] == 'arm_B':
+        if rig.get('skeletonVersion') in ('neutral-c-v4', 'neutral-c-v5') and part['name'] == 'arm_B':
             # Artwork placement is independent of the accepted anatomical bone origin.
             with open(os.path.join(ROOT, 'docs/rig-spec/shared-arm-placement.json'), encoding='utf-8') as source:
                 placement = json.load(source)
@@ -239,15 +240,15 @@ def place_parts(rig, pieces, pieces_dir, names):
                     rotation=round(-bone_rot + info.get('image_rotation', 0), 2), x=round(lx, 2), y=round(ly, 2))
 
 
-# Leg mesh for new outfits: B7's ankle blend 56 folded the boot into a point when crouching
-# (traveler v1, soulbow v1); a finer grid and a wide ankle blend keep the boot's shape.
-LEG_MESH = dict(cols=12, rows=48, blends=[8, 160])
+# Shared C-v5 starts the foot bone at the anatomical ankle/malleolus. The foot/shoe
+# can extend rigid weighting above that joint when an outfit cuff needs it.
+LEG_MESH = dict(cols=16, rows=64, blends=[8, 56], rigidFoot=True)
 ARM_MESH = dict(cols=16, rows=64, blend=40)
 
 
 def configure_arm_geometry(rig, pieces, pieces_dir):
     """Keep the promoted shared chain frozen; retain historical draft reproduction."""
-    if rig.get('skeletonVersion') in ('neutral-c-v1', 'neutral-c-v2', 'neutral-c-v3', 'neutral-c-v4'):
+    if rig.get('skeletonVersion') in ('neutral-c-v1', 'neutral-c-v2', 'neutral-c-v3', 'neutral-c-v4', 'neutral-c-v5'):
         for part in rig['parts']:
             if part['name'] in ('arm_F', 'arm_B') and part.get('mesh'):
                 part['mesh'].update(ARM_MESH)
@@ -268,7 +269,11 @@ def reuse_base_head(rig, base):
 
 def main() -> None:
     args = [a for a in sys.argv[1:] if not a.startswith('--')]
+    if len(args) != 3:
+        raise SystemExit('Usage: build_rig_from_pieces.py PIECES.json PIECES_DIR outfit-name [--arms-only] [--own-head]')
     pieces_json, pieces_dir, name = args
+    if not re.fullmatch(r'[a-z0-9]+(?:-[a-z0-9]+)*', name):
+        raise SystemExit('Rig ID must be lowercase kebab-case')
     dst = os.path.join(ROOT, 'src', 'data', f'{name}.rig.json')
     pieces = json.load(open(pieces_json, encoding='utf8'))
     if '--arms-only' in sys.argv:

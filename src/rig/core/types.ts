@@ -66,6 +66,8 @@ export interface MeshDef {
   blend?: number;
   /** Per-joint override of `blend`, in chain order (joint 0 = the `child` origin). */
   blends?: number[];
+  /** End the last joint's blend at the ankle: vertices below it follow the foot fully. */
+  rigidFoot?: boolean;
   /** Which side covers the fold when bent: 'child' (forearm over sleeve, default) or 'parent'. */
   front?: 'child' | 'parent';
 }
@@ -86,8 +88,22 @@ export interface IkData {
   mix?: number;
 }
 
-export type Channel = 'rotate' | 'x' | 'y' | 'scaleX' | 'scaleY';
-export const CHANNELS: readonly Channel[] = ['rotate', 'x', 'y', 'scaleX', 'scaleY'];
+export type Channel = 'rotate' | 'x' | 'y' | 'scaleX' | 'scaleY' | 'plant';
+export const CHANNELS: readonly Channel[] = ['rotate', 'x', 'y', 'scaleX', 'scaleY', 'plant'];
+
+/** Ankle target drives position; the foot bone controls the shoe's orientation. */
+export interface FootPlantData {
+  bone: string;
+  ik: string;
+  /** Distance from ankle to sole on a level floor, in rig units. */
+  soleHeight: number;
+  /** World foot-bone angle when the sole is level. */
+  rotation?: number;
+  /** Maximum planted vertical compression of the foot, as a fraction (e.g. .08 = 8%). */
+  squash?: number;
+  /** Leg shortening fraction that reaches maximum squash. Defaults to .2. */
+  squashAt?: number;
+}
 
 /** Easing from a key to the next one. */
 export type Easing = 'linear' | 'stepped' | 'easeIn' | 'easeOut' | 'easeInOut';
@@ -118,6 +134,9 @@ export interface RigData {
   name: string;
   /** Shared setup-geometry contract; absent on archived pre-neutral rigs. */
   skeletonVersion?: string;
+  /** Shared animation library for this skeleton, resolved by the editor/server. */
+  animationLibrary?: string;
+  animationLibraryRevision?: number;
   /** Rig-space y of the ground line in the setup pose. */
   groundY: number;
   /** Texture key → image path relative to the project root. */
@@ -128,6 +147,8 @@ export interface RigData {
   drawOrder: string[];
   /** IK constraints, applied in order after the pose. */
   ik: IkData[];
+  /** Opt-in foot contacts. Pose channel plant: -1 automatic, 0 airborne, 1 planted. */
+  footPlants?: FootPlantData[];
   clips: ClipData[];
 }
 
@@ -142,12 +163,14 @@ export function normalizeRig(raw: Partial<RigData> & Pick<RigData, 'name' | 'bon
   const rig: RigData = {
     name: raw.name,
     ...(raw.skeletonVersion ? { skeletonVersion: raw.skeletonVersion } : {}),
+    ...(raw.animationLibrary ? { animationLibrary: raw.animationLibrary, animationLibraryRevision: raw.animationLibraryRevision } : {}),
     groundY: raw.groundY ?? 0,
     textures: raw.textures ?? {},
     bones: raw.bones,
     parts: raw.parts,
     drawOrder: raw.drawOrder ?? raw.parts.map((p) => p.name),
     ik: raw.ik ?? [],
+    ...(raw.footPlants ? { footPlants: raw.footPlants } : {}),
     clips: raw.clips ?? [],
   };
   if (rig.clips.length === 0) rig.clips.push({ name: 'idle', type: 'idle', duration: 1, loop: true, bones: {} });

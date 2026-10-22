@@ -21,9 +21,9 @@ export const value = (e: Event) => (e.target as HTMLInputElement | HTMLSelectEle
  * skipping the focused one so typing isn't overwritten.
  */
 export class Bindings {
-  private items: { input: HTMLInputElement; read: () => string }[] = [];
+  private items: { input: HTMLInputElement | HTMLSelectElement; read: () => string }[] = [];
 
-  bind(input: HTMLInputElement, read: () => string): HTMLInputElement {
+  bind<T extends HTMLInputElement | HTMLSelectElement>(input: T, read: () => string): T {
     this.items.push({ input, read });
     input.value = read();
     return input;

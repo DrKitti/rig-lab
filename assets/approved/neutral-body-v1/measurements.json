@@ -1,0 +1,218 @@
+{
+  "master": {
+    "geometry": {
+      "top": 43,
+      "sole": 1120,
+      "height": 1078,
+      "head_width": 588,
+      "head_height_above_neck": 447,
+      "feet": {
+        "near": 1120,
+        "far": 1120
+      },
+      "leg_alpha_runs": {
+        "900": [
+          {
+            "left": 249,
+            "right": 491,
+            "width": 242
+          }
+        ],
+        "950": [
+          {
+            "left": 235,
+            "right": 496,
+            "width": 261
+          }
+        ],
+        "1010": [
+          {
+            "left": 223,
+            "right": 503,
+            "width": 280
+          }
+        ]
+      }
+    },
+    "forearms": {
+      "F": {
+        "width": 78.5,
+        "from": [
+          224,
+          729
+        ],
+        "to": [
+          154,
+          695
+        ]
+      },
+      "B": {
+        "width": 65.5,
+        "from": [
+          544,
+          687
+        ],
+        "to": [
+          489,
+          721
+        ]
+      }
+    }
+  },
+  "before": {
+    "geometry": {
+      "top": 43,
+      "sole": 1124,
+      "height": 1082,
+      "head_width": 593,
+      "head_height_above_neck": 447,
+      "feet": {
+        "near": 1124,
+        "far": 1120
+      },
+      "leg_alpha_runs": {
+        "900": [
+          {
+            "left": 262,
+            "right": 353,
+            "width": 91
+          },
+          {
+            "left": 388,
+            "right": 474,
+            "width": 86
+          }
+        ],
+        "950": [
+          {
+            "left": 240,
+            "right": 343,
+            "width": 103
+          },
+          {
+            "left": 377,
+            "right": 472,
+            "width": 95
+          }
+        ],
+        "1010": [
+          {
+            "left": 246,
+            "right": 328,
+            "width": 82
+          },
+          {
+            "left": 385,
+            "right": 469,
+            "width": 84
+          }
+        ]
+      }
+    },
+    "forearms": {
+      "F": {
+        "width": 94.25,
+        "from": [
+          233,
+          732
+        ],
+        "to": [
+          148,
+          692
+        ]
+      },
+      "B": {
+        "width": 81.0,
+        "from": [
+          539,
+          689
+        ],
+        "to": [
+          471,
+          732
+        ]
+      }
+    }
+  },
+  "after": {
+    "geometry": {
+      "top": 41,
+      "sole": 1119,
+      "height": 1079,
+      "head_width": 594,
+      "head_height_above_neck": 449,
+      "feet": {
+        "near": 1119,
+        "far": 1118
+      },
+      "leg_alpha_runs": {
+        "900": [
+          {
+            "left": 262,
+            "right": 351,
+            "width": 89
+          },
+          {
+            "left": 391,
+            "right": 476,
+            "width": 85
+          }
+        ],
+        "950": [
+          {
+            "left": 241,
+            "right": 344,
+            "width": 103
+          },
+          {
+            "left": 378,
+            "right": 475,
+            "width": 97
+          }
+        ],
+        "1010": [
+          {
+            "left": 250,
+            "right": 329,
+            "width": 79
+          },
+          {
+            "left": 389,
+            "right": 469,
+            "width": 80
+          }
+        ]
+      }
+    },
+    "forearms": {
+      "F": {
+        "width": 75.0,
+        "from": [
+          229,
+          731
+        ],
+        "to": [
+          162,
+          699
+        ]
+      },
+      "B": {
+        "width": 66.0,
+        "from": [
+          531,
+          694
+        ],
+        "to": [
+          476,
+          730
+        ]
+      }
+    }
+  },
+  "notes": [
+    "Cross-sections are at fraction .55 on fixed reference arm rays, matching the last original-master comparison.",
+    "These are forearm width diagnostics, not proofs of shoulder/elbow/wrist joint locations.",
+    "Only global head-feature similarity registration was used; no local limb or foot warping.",
+    "Review draft only; no parts, rig, bones, IK or animations were changed."
+  ]
+}

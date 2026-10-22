@@ -1,56 +1,77 @@
-# Kolahon Rig Lab
+# Kolahon Rig Lab & Outfit Pipeline
 
-Character rig sandbox for Kolahon: a PixiJS 8 editor, an engine-independent TypeScript
-rig runtime, and local Python tools for fitting outfit art. The main Phaser game is
-maintained on another machine.
+Experiment handoff for Kolahon: a PixiJS 8 rig editor, a renderer-independent TypeScript
+runtime, three reviewed rig assemblies and a documented outfit-generation workflow.
+The destination game uses Phaser and is not present in this checkout.
 
-## Run
+**Receiving agent: start with [PROJECT_HANDOFF](docs/PROJECT_HANDOFF.md), then
+[integration](docs/integration.md).** These explain what is usable, what failed and what remains unproven.
+Read the [current outfit standard](docs/outfit-pipeline/standard.md) for art construction and fixed joints.
 
-Use Node.js with npm, then:
+## Run and verify
+
+Node.js 24+ and npm:
 
 ```sh
 npm ci
 npm run dev
+npm test
+npm run build
 ```
 
-Open the local address printed by Vite. The default is the shared production master
-`hero-c3-B7`. The editor saves rig JSON through the local dev server; keep it bound
-to localhost. `Ctrl+S` saves, `Ctrl+Z` undoes, and `Ctrl+Y` redoes.
+Open Vite's localhost URL. `Ctrl+S` saves the outfit and shared animation library.
+Static builds support editing/export; writing back to source files requires the dev server.
+Manual pose QA: `/qa/`. Python colour/fitting tools additionally need `requirements.txt`:
 
 ```sh
-npm run typecheck
-npm run build
-npm run preview
+python -m pip install -r requirements.txt
+npm run test:pipeline
 ```
 
-Build output includes rig JSON and its referenced textures. Static preview supports
-editing and JSON download; saving back to source files requires `npm run dev`.
-For Python outfit tools, install `requirements.txt` in a virtual environment.
+See [verification evidence and known limits](docs/verification.md), including current Pixi renders.
 
-## Layout
+## Take it to the main game
 
-| Path | Purpose |
-| --- | --- |
-| `src/rig/core/` | Engine-independent skeleton, animation, IK and mesh deformation |
-| `src/rig/pixi/` | PixiJS renderer and texture loading |
-| `src/editor/` | Rig and animation editor |
-| `src/data/hero-c3-B7.rig.json` | Maintained production master, including its idle clip |
-| `assets/rigs/hero-c3/` | Five runtime textures for the master |
-| `assets/drafts/` | Ignored generation candidates and renderer captures |
-| `tools/` | Maintained outfit fitting and rig-building pipeline |
-| `docs/rig-spec/` | Joint, pose and size references |
+```sh
+npm run export:runtime
+```
 
-Runtime images use names for their role: `head.png`, `torso.png`, `arm_F.png`,
-`arm_B.png`, `leg.png`. `_F` is near/screen-left and `_B` is far/screen-right.
-Both leg parts share `leg.png`. The master rig ID and internal texture keys retain
-their existing names so saved rig data stays compatible.
+Creates a new `dist/kolahon-outfit-integration/` with core TypeScript, resolved rig JSON,
+all runtime textures, shared clips, specifications, integration docs and a SHA256 inventory.
+The exporter refuses to overwrite an existing export; use a new path under `dist/` for another version.
+This bundle does not need ignored drafts or the Vite server. A Phaser mesh-rendering adapter
+and real game validation are still required; this is not a production-ready Phaser plugin.
 
-## Documentation
+## Repository map
 
-- [Current handoff](docs/handoff.md): project status, cleanup, limitations and Git handoff.
-- [Character pipeline](docs/character-pipeline.md): full body → pieces → rig → renderer review.
-- [Art direction](docs/art-direction/README.md): style and construction references.
-- [Agent instructions](AGENTS.md): canonical working rules.
+| Path | Ownership / use |
+|---|---|
+| `src/rig/core/` | Portable skeleton, animation, two-bone IK and mesh skinning |
+| `src/rig/pixi/` | Pixi renderer; reference implementation for a future Phaser adapter |
+| `src/editor/` | Rig Lab UI, history, handles and preview tools |
+| `src/server/` | Local save/library adapters; not game-runtime code |
+| `src/data/` | `shared-master`, `neutral`, `time-travel`; catalog and shared animations |
+| `assets/rigs/`, `assets/characters/` | Stable runtime textures; verified inventory in `assets/rigs/manifest.json` |
+| `assets/approved/` | User-approved full-body sources, kept intact |
+| `assets/pipeline/` | Reusable guides, source images, example prompts and material recipes |
+| `assets/experiments/` | Archived rig data and curated failures; excluded from runtime/build |
+| `docs/outfit-pipeline/` | Current standard, tooling, naming, infographic and comparisons |
+| `docs/archive/`, `tools/archive/` | Historical records; not current authority |
+| `tests/`, `qa/` | Automated regression checks and real-renderer pose inspection |
+| `assets/drafts/` | Ignored scratch output; never required for clone/build/playback |
 
-No replacement outfit is currently approved. Historical experiments were removed
-during the 2026-10-19 cleanup; see the handoff for the recovery archive location.
+Historical rig URLs still resolve through aliases in `src/data/rig-catalog.json`.
+Bone IDs, `neutral-c-v5`, texture keys and animation channels stay stable for compatibility;
+filenames now use lowercase kebab-case. `_F` / `_B` internally mean near/front and far/back.
+
+## Current checkpoint
+
+- Shared skeleton: two-part torso, accepted arm joints, 52% knee, anatomical ankle,
+  horizontal foot bone and up-to-4% planted-foot compression.
+- Neutral scaffold and complete Time Travel outfit are assembled and material-matched.
+- Saved animations are shared across outfits; only reviewed idle variants exist so far.
+- A second independently generated outfit on the frozen skeleton, Phaser integration,
+  production asset optimization and accessory layers remain future work.
+
+See [experiment lessons](docs/experiments.md), [art direction](docs/art-direction/README.md),
+[tooling](docs/outfit-pipeline/tooling.md) and [agent instructions](AGENTS.md).
