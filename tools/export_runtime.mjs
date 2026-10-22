@@ -34,7 +34,7 @@ for (const { rig: id } of catalog.rigs) {
 }
 for (const path of textures) await copy(path);
 await copy('src/data/animations', 'animations');
-for (const path of ['docs/PROJECT_HANDOFF.md', 'docs/integration.md', 'docs/experiments.md', 'docs/verification.md',
+for (const path of ['docs/PROJECT_HANDOFF.md', 'docs/integration.md', 'docs/experiments.md', 'docs/verification.md', 'docs/repository-audit.md',
   'docs/current-character-standard.md', 'docs/outfit-pipeline', 'docs/rig-spec',
   'assets/rigs/manifest.json']) await copy(path);
 const files = [];

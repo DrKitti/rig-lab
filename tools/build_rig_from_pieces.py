@@ -1,20 +1,20 @@
 """Build a rig for a new outfit from pieces placed on the full body.
 
-Every outfit uses the shared skeleton of the reference rig (hero-c3-B7). This copies that rig,
+Every outfit uses the shared skeleton of src/data/shared-master.rig.json. This copies that rig,
 points its textures at the new pieces, and sets each part's pivot and offset so the piece
 sits exactly where it was placed on the approved full body.
 
     python tools/build_rig_from_pieces.py <pieces.json> <pieces_dir> <new_rig_name>
 
 pieces.json (written by the piece-fitting step) gives, per piece, in full-body pixels
-(1 px = 1 rig unit, the frame of docs/rig-spec/hero-c3-B7-fullbody.png):
+(1 px = 1 rig unit, the historical frame in docs/archive/rig-spec/hero-c3-B7-fullbody.png):
   "canvas": [w, h], "origin_in_fullbody": [x, y], and the pivot point in piece pixels:
   head "pivot_neck", torso "pivot_hip", arm_F/arm_B "pivot_shoulder", and each leg
   "pivot_dome". When leg_B is absent, the legacy path reuses leg_F with its
   "far_leg_offset": [dx, dy].
 
 Arms:
-- ``neutral-c-v1`` rigs copy the shared C arm bones unchanged. Piece metadata places artwork;
+- ``neutral-c-*`` rigs copy the shared C arm bones unchanged. Piece metadata places artwork;
   it must not regenerate a different skeleton for every outfit.
 - Legacy neutral-based metadata supplies fixed ``elbow`` and ``hand_anchor`` points. Those points
   define the two arm bones directly; the visible fist/glove silhouette does not define anatomy.
@@ -50,7 +50,7 @@ from PIL import Image
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE_RIG = os.path.join(ROOT, 'src', 'data', 'shared-master.rig.json')
-# Full-body pixel of the rig origin in docs/rig-spec/hero-c3-B7-fullbody.png.
+# Full-body pixel of the rig origin in docs/archive/rig-spec/hero-c3-B7-fullbody.png.
 FULLBODY_ORIGIN = (359.2, 888.0)
 
 # part name -> (piece key in pieces.json, pivot key, texture key in the rig)

@@ -13,6 +13,7 @@ there is no evidence yet that these assets render correctly in Phaser or under g
 5. JSON specifications in `docs/rig-spec/`, then runtime and renderer source as needed.
 
 See [verification evidence](verification.md) for the delivery checks and current Pixi screenshots.
+The [main-branch file audit](repository-audit.md) explains what was kept, replaced and archived.
 
 `docs/archive/` records old decisions, including contradictory intermediate settings.
 Current specs and maintained rig JSON outrank those historical records. Do not infer a current

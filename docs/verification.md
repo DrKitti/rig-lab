@@ -15,6 +15,11 @@ matched the published runtime pixels exactly.
 GitHub Actions runs the same tests/build/export on Ubuntu for future pushes/PRs. Its definition
 is included; this local verification is not a claim that a hosted CI run has already passed.
 
+The follow-up [main-file audit](repository-audit.md) also passed `npm test`, the 3 Python tests,
+TypeScript with `--noUnusedLocals --noUnusedParameters`, build and runtime export after moving
+the legacy reference diagrams. All four moved PNGs retain identical Git blob hashes. Runtime
+rig data and approved art were unchanged by that follow-up.
+
 ## Automated gates
 
 - `npm test`: repository/spec/texture hashes and doc links, plus 9 Node tests covering core,

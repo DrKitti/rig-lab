@@ -19,6 +19,9 @@ const spec = await read('docs/rig-spec/shared-skeleton-v5.json');
 const arms = await read('docs/rig-spec/shared-arm-placement.json');
 const animations = animationStore(resolve(root, 'src/data/animations'));
 const master = await read('src/data/shared-master.rig.json');
+const proportions = (await read('docs/rig-spec/proportions.json')).shared;
+assert.equal(proportions.master_rig, 'src/data/shared-master.rig.json');
+for (const path of [proportions.master_rig, proportions.fullbody, proportions.source]) await access(safe(path));
 const texturePaths = new Set(), rigs = [];
 for (const entry of catalog.rigs) {
   const path = `src/data/${entry.rig}.rig.json`, rig = await read(path);
